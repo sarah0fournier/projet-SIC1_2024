@@ -21,8 +21,8 @@
     newCube.setAttribute('depth', '0.1'); // Profondeur du nouveau cube
 
     // Animation du nouveau cube
-    newCube.setAttribute('animation__move', 'property: position; to: 5 1.5 0; dur: 5000; easing: linear;');
-    newCube.setAttribute('animation__stay', 'property: position; to: 5 1.5 0; dur: 1; delay: 5000;');
+    newCube.setAttribute('animation__move', 'property: position; to: -0.01 1.5 1.2; dur: 5000; easing: linear;');
+    newCube.setAttribute('animation__stay', 'property: position; to: -0.01 1.5 1.2; dur: 1; delay: 5000;');
     newCube.setAttribute('animation__disappear', 'property: scale; to: 0 0 0; dur: 10; delay: 8000; easing: linear;');
 
     scene.appendChild(newCube); // Ajouter le nouveau cube à la scène
