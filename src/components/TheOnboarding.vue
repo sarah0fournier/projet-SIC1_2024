@@ -4,17 +4,32 @@
   defineProps({
     loaded: Boolean,
   });
-
-  const showOnboarding = ref(true);
-
-  function enterScene() {
-    showOnboarding.value = false;
-    if (AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()) {
-      document.querySelector('a-scene').enterVR();
-    }
-    document.querySelector('a-scene').emit('enter-scene');
-  }
 </script>
+
+<script>
+  const showOnboarding = ref(true);
+  
+  export default {
+    methods: {
+      // Fonction pour entrer dans la scène
+      enterScene() {
+        // this.showOnboarding.value = false;
+        showOnboarding.value = false;
+
+        if (AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()) {
+                // document.querySelector('a-scene').enterVR();
+                this.$router.push({ name: 'Home' }).then(() => {
+                  // Entrer en VR une fois que la navigation est terminée
+                  document.querySelector('a-scene').enterVR();
+                });
+        }
+                // document.querySelector('a-scene').emit('enter-scene');
+                this.$router.push({ name: 'Home' })
+      }
+    }
+  };
+</script>
+
 
 <template>
   <div id="onboarding" v-if="showOnboarding">

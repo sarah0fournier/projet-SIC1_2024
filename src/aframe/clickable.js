@@ -2,15 +2,57 @@ AFRAME.registerComponent('clickable', {
     schema: {
         color : {type : "color",
             default : "yellow"
-        }
-    },
+        },
+        manuallyPlaced: { type: 'boolean', default: 'false'}, 
+        paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
+        isWin: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
+        },
     init: function () {
+        this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
+        this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
         this.onEnter = this.onEnter.bind(this);
         this.el.addEventListener('mouseenter', this.onEnter);
         this.onLeave = this.onLeave.bind(this);
         this.el.addEventListener('mouseleave', this.onLeave);
     },
-    update: function (oldData) {},
+
+    update: function (oldData) {
+      // this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
+      // this.el.addEventListener('mouseenter', this.onEnter);
+      // this.el.addEventListener('mouseleave', this.onLeave);
+    },
+
+    onRaycasterIntersected: function (evt) {
+      // Vérifier si le jeu n'est pas en pause
+      console.log('interaction ' , this.el.getAttribute('isWin'))
+
+      // // N arrive pas a rentrer la dedans 
+      // if(this.el.getAttribute('isWin') == true){
+      //   this.el.emit('nextLevel');
+      //   console.log('tttt')
+
+      // }
+
+      if (this.el.getAttribute('paused') == 'false') { 
+
+        // Rayon emis pas curseur entre en colision avec element de la scene (bloc creer auto) 
+        if (this.el.getAttribute('manuallyPlaced') == 'false') {
+          // Faites disparaître la boîte en ajustant sa propriété `visible` à `false`
+          this.el.setAttribute('visible', 'false');
+          // Émettre un événement pour indiquer qu'un bloc a été supprimé
+          this.el.emit('block-removed');
+        } 
+
+
+          // Pour les blocs placés manuellement, mettre le jeu en pause
+          else {
+            // Emettre un evenement pour ouvrir popup
+            this.el.emit('win');
+            // Pour les blocs placés manuellement, mettre le jeu en pause
+            this.el.emit('pause-game');
+        }
+      }
+    },
 
     onEnter : function (evt) {
         const cursor = evt.detail.cursorEl;
@@ -36,6 +78,8 @@ AFRAME.registerComponent('clickable', {
     remove: function () {
         this.el.removeEventListener('mouseenter', this.onEnter);
         this.el.removeEventListener('mouseleave', this.onLeave);
+        this.el.removeEventListener('raycaster-intersected', this.onRaycasterIntersected);
+        
     },
 
 })

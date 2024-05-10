@@ -1,0 +1,18 @@
+Federal Office of Topography swisstopo | https://www.swisstopo.admin.ch/en/services/3d-visualisations/individual.html
+Derivation from current version of multiple products/services https://www.swisstopo.admin.ch/en/geodata.html
+Coordinate system horizontal EPSG:2056 | CH1903+ / LV95 | https://epsg.io/2056 | https://spatialreference.org/ref/epsg/ch1903-lv95/
+Coordinate system vertical EPSG:5728 | LN02 height | https://epsg.io/5728 | https://spatialreference.org/ref/epsg/5728/
+Timestamp: 2022-11-08 15:54:08.867000
+Graticule: 1166-44
+Building Source: https://www.swisstopo.admin.ch/en/geodata/landscape/buildings3d2.html
+Bridge Source: https://www.swisstopo.admin.ch/en/geodata/landscape/tlm3d.html
+Transport Source: https://www.swisstopo.admin.ch/en/geodata/landscape/tlm3d.html
+Areal Image Source: https://www.swisstopo.admin.ch/en/geodata/images/ortho/swissimage10.html
+Terrain Source: https://api3.geo.admin.ch/services/sdiservices.html#terrain-service
+Bridge Style: Color
+Terrain Style: Areal Image & Transport
+Terrain Socket Height: 480
+Terrain Tolerance: 4 m
+Texture Resolution (GSD): 1 m
+Texture Format: JPEG
+Coordinate Reference System: LV95
