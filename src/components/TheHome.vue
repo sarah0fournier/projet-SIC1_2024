@@ -14,7 +14,7 @@
         // Gérer le démarrage du jeu
         startGame() {
             this.gameStarted = true;
-            this.$router.push({ name: 'Scene1' });
+            this.$router.push({ name: 'InfoLevel', params: { level: ":1" } });
         }
     }};
 </script>
@@ -36,8 +36,7 @@
                 <a-text value="Commencer le jeu !" color="black" position="-1 0 0">
                 </a-text>
             </a-plane>
-
-
+            
             <a-text value="Bienvenue sur notre jeu !" color="black" position="-1 -1 0"></a-text>
         </a-plane>
         </a-entity>

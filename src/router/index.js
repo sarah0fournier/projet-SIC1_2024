@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import TheOnboarding from '../components/TheOnboarding.vue';
 import Home from '../components/TheHome.vue';
-import Scene1 from '../components/TheScene_Wabern.vue';
+import Scene1 from '../components/TheScene_RocherNaye.vue';
 import Scene2 from '../components/TheScene.vue';
+import InfoLevel from '../components/TheInfoLevel.vue';
+
 
 const routes = [
   {
@@ -12,17 +14,22 @@ const routes = [
     props: { loaded: true } // Définissez la valeur de loaded directement ici
     },
   {
-    path: '/',
+    path: '/Home',
     name: 'Home',
     component: Home,
   },
   {
-    path: '/scene1',
+    path: '/scene1',  // Level 1
     name: 'Scene1',
     component: Scene1,
   },
   {
-    path: '/scene2',
+    path: '/InfoLevel:level',
+    name: 'InfoLevel',
+    component: InfoLevel,
+  },
+  {
+    path: '/scene2', // Level 2
     name: 'Scene2',
     component: Scene2,
   },
