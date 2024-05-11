@@ -56,8 +56,8 @@
         <a-entity  v-if="gameStarted" id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable">
             <a-plane v-if="gameStarted" color="white" width="10" height="6" position="0 1.5 -5">
                 <a-text :value="$route.params.level"></a-text>
-                <a-text :value="'Bienvenue sur Level ' + (currentLevel + 1).toString()" color="black" position="0 2 0" align='center'></a-text>
-                <a-text :value="'Recherche : ' + levels[currentLevel].name" color="black" position="0 1 0"align='center'></a-text>
+                <a-text :value="'Level ' + (currentLevel + 1).toString()" color="black" position="0 2 0" align='center' scale="1.5 1.5 1.5"></a-text>
+                <a-text :value="'Emplacement a rechercher : ' + levels[currentLevel].name" color="black" position="0 1 0"align='center'></a-text>
 
                 <a-plane class="clickable" @click="startGame" color="grey" width="5" height="1" align="center" position="0 0 0" opacity="0.5">
                     <a-text value="C'est parti !" color="black" position="0 0 0" align='center'></a-text>
