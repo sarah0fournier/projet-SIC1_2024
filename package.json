@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "aframe-html-shader": "^0.2.0",
+    "axios": "^1.6.8",
     "three": "^0.164.1",
     "vue": "^3.4.5",
     "vue-router": "^4.3.2"

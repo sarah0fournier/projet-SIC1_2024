@@ -13,7 +13,7 @@
             gameStarted: false,
             currentLevel: 0, // Indice du niveau actuel dans le tableau
                 levels: [ // Tableau des niveaux avec leurs noms associés
-                    { name: "Rocher de Naye (VD)", number: 1 },
+                    { name: "Rocher de Naye (VD)", number: 1, position:'46.44124, 6.98694,46.41935, 6.95736' },
                     { name: "Autre lieu du niveau a definir", number: 2 },
                     // Ajoutez d'autres level au besoin
                 ]

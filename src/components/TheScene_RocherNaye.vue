@@ -37,9 +37,13 @@
     <!-- Popup de gagnant v-if="isWin"-->
     <a-box v-if="isWin" code="3" :isWin="isWin" clickable color="grey" width="10" height="6" position="0 1.5 -5" opacity="0.5">
       <!-- Vous pouvez ajouter du texte, des boutons ou d'autres éléments ici --->
-      <a-text value="Felicitiation tu m'as trouver" color="black" align="center" position="0 1.5 0"></a-text>
-      <a-text :value="'Scores : ' + score" color="black" align="center" position="0 1.0 0"></a-text>
+      <a-text value="Felicitiation tu m'as trouver" color="black" align="center" position="0 2.5 0"></a-text>
+      
+      <!-- Texte recuperer de requete API suisse tourisme -->
+      <a-text :value="attractions[0]['name']" color="black" align="center" position="0 2.0 0"></a-text>
+      <a-text :value="attractions[0]['abstract']" color="black" align="center" position="0 1.5 0"></a-text>
 
+      <a-text :value="'Scores : ' + score" color="black" align="center" position="0 1.0 0"></a-text>
       <!-- bouton -->
       <a-box id="box-2" code="3" clickable :isNextLevel="isNextLevel" color="white" width="5" height="1" align="center" position="0 0 0" opacity="0.5">
         <a-text :value="'Prochain level :' + level" color="black" position="0 0 0"  align="center"></a-text>
@@ -132,7 +136,28 @@
 
   const level = ref(1);
 
-</script>
+
+  // API Suisse tourisme
+  import {getDynamicBoundingBox} from '../aframe/requeteAPI.js';
+
+  const attractions = ref([]); // Variable réactive pour stocker les données de réponse
+  //  Idealement dfaudrait recuperer la position du point dans TheInfoLevel.vue
+  async function fetchAttractions() {
+  try {
+    // Récupérer les données '46.44124, 6.98694,46.41935, 6.95736'
+    const data = await getDynamicBoundingBox('46.44124, 6.98694,46.41935, 6.95736');
+    // Mettre à jour la valeur de la variable réactive avec les nouvelles données
+    attractions.value = data;
+    } catch (error) {
+    console.error('Erreur lors de la récupération des données :', error);
+  }
+  }
+
+// Appeler la fonction pour récupérer les données dès que le composant est monté
+fetchAttractions();
+  
+
+</script> 
 
 <!-- script setup new synthaxe dans Vue 3 : Si met si dessous dans script setup j'ai plus accès au curseur (seulement main souris). Script setup permet pas exportemenr directement module ES -->
 <script>
