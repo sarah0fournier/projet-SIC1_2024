@@ -5,7 +5,7 @@
       requiredFeatures: local-floor;
       referenceSpaceType: local-floor;
     `"
-    @block-removed="updateScore"
+    @block-removed="updateScore(1)"
     @pause-game="togglePause"
     @win="affcihePopup"
     @nextPage = "nextPage"
@@ -77,8 +77,8 @@
   // Fonction pour ajouter un nouveau cube à la scène
   function addCube() {   
     // Ajouter un cube si pas encore gagner et si jeu pas en pause
-    if (isWin.value === false & isPaused.value === false) {
-      console.log('Le cube a ete ajouter : ', intervalCounter)
+    if (isWin.value === false && isPaused.value === false) {
+      console.log('Le cube a été ajouté : ', intervalCounter);
       const scene = document.querySelector('a-scene');
       const newCube = document.createElement('a-box');
 
@@ -93,27 +93,53 @@
       newCube.setAttribute('depth', '0.1'); // Profondeur du nouveau cube
 
       // Animation du nouveau cube
-      newCube.setAttribute('animation__move', 'property: position; to: 0 1.3 0; dur: 5000; easing: linear;');
-      newCube.setAttribute('animation__disappear', 'property: scale; to: 0 0 0; dur: 1; delay: 5000; easing: linear;');
-      newCube.setAttribute('clickable', '')
-      newCube.setAttribute('code', '2')
-      newCube.setAttribute('paused', 'false')
-      newCube.setAttribute('id', "box-" + intervalCounter) // Id du cube
+      const t = getRandomNumberInRange(2000, 5000);
+      console.log('Valeur de t :', t);
+      newCube.setAttribute('animation__move', `property: position; to: 0 1.3 0; dur: ${t}; easing: linear;`);
+      newCube.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`);
+      newCube.setAttribute('clickable', '');
+      newCube.setAttribute('code', '2');
+      newCube.setAttribute('paused', 'false');
+      newCube.setAttribute('id', "box-" + intervalCounter); // Id du cube
+      
       
       scene.appendChild(newCube); // Ajouter le nouveau cube à la scène
       intervalCounter ++;
-     }
+
+      // Lancez le délai pour vérifier si le cube est mort après la durée de l'animation
+      const cubeCheckTimeout = setTimeout(() => {
+        isCubeDead(intervalCounter);
+      }, t); 
     }
+  }
 
   // Fonction utilitaire pour générer un nombre aléatoire dans un intervalle donné
   function getRandomNumberInRange(min, max) {
     return Math.random() * (max - min) + min;
   }
 
+
+  // Fonctions pour vérifier si le cube a été supprimé 
+  function isCubeDead(intervalCounter) {
+    const cubeId = "box-" + (intervalCounter - 1); 
+    const cube = document.getElementById(cubeId);
+    if (cube && cube.hasAttribute('clickable')) {
+      updateScore(-1);
+    }
+  }
+
+
+
   let intervalCounter = 100; // Commencer intervalle numerotation a 100
   let intervalId; // Variable pour stocker l'ID de l'intervalle
-  // Appeler la fonction addCube toutes les 10 secondes
-  intervalId = setInterval(addCube, 5000); // 10000 millisecondes = 10 secondes
+  
+  // Appeler la fonction addCube toutes les x secondes
+  let intervalTime = getRandomNumberInRange(3500, 7000)
+  intervalId = setInterval(() => {
+    addCube(); // Appel de la fonction pour ajouter un cube
+  }, intervalTime);
+
+
 
   // Surveiller le changement de isWin (quand niveau reussi veut plus ajouter de cube donc sort ajout cube intervalle)
   watch(isWin, (newValue) => {
@@ -126,8 +152,8 @@
 
   // Gestions score
   const score = ref(0);
-  function updateScore(){
-      score.value += 1;
+  function updateScore(pt){
+      score.value += pt;
   };
 
   // Changer etat du bouton pause
