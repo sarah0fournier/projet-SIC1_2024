@@ -29,14 +29,21 @@
       <!-- <a-asset-item id="Naye-glb" src="../assets/Naye_GLB.glb" ></a-asset-item> -->
       <a-asset-item id="Naye-glb" :src="'../assets/' + this.nameGDB"></a-asset-item>
       <a-asset-item id="Ghost-glb" src="../assets/Ghost.glb"></a-asset-item>
+      <a-asset-item id="HotBalloon-glb" src="../assets/HotBalloon.glb"></a-asset-item>
+      <a-asset-item id="Fire-glb" src="../assets/Fire.glb"></a-asset-item>
+      <a-asset-item id="Cat-glb" src="../assets/Cat.glb"></a-asset-item>
     </a-assets>
+
+    <a-gltf-model src="#HotBalloon-glb" position="0 -0.8 0" gltf-model="../assets/HotBalloon.glb" scale="0.5 0.7 0.5"></a-gltf-model>
+    <a-gltf-model src="#Fire-glb" animation-mixer position="0 3.1 0" gltf-model="../assets/Fire.glb" scale="0.25 0.25 0.25"></a-gltf-model>
+    <a-gltf-model src="#Cat-glb" animation-mixer="" position="0.28564 -0.11067 -0.26652" gltf-model="../assets/Cat.glb" scale="0.02 0.02 0.02" rotation="0 -150 0"></a-gltf-model>
 
     <!-- <a-gltf-model src="#Naye-glb" gltf-model="../assets/Naye_GLB.glb" position="200 -600 0"></a-gltf-model>    -->
     <a-gltf-model v-if="allAssetsLoaded"  src="#Naye-glb" :gltf-model="'../assets/' + this.nameGDB" :position="this.positionGDB"></a-gltf-model> 
   
     <!-- Ajoutez 1 boîte primitive -->
     <a-entity v-if="this.nameGDB">
-      <a-box clickable v-if="this.nameGDB.includes('Naye')" id="box-1" code="1"  :isWin="isWin" :paused="isPaused" color="gray" position="0.0 0.0 0.0"></a-box>
+      <a-box clickable v-if="this.nameGDB.includes('Naye')" id="box-1" code="1"  :isWin="isWin" :paused="isPaused" color="gray" position="3 1 0.0"></a-box>
     </a-entity>
 
     <!-- Popup de gagnant v-if="isWin"-->
@@ -61,6 +68,7 @@
     <!-- Point que les ennemis devront viser -> orientation (ne concerne pas les déplacements) -->
     <a-entity id="POI" position="0 1.5 0" visible="false"></a-entity>
    
+    <a-sky src="../assets/sky.jpeg"  scale="5 5 5"></a-sky>
   </a-scene>
 </template>
   

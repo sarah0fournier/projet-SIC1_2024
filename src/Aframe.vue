@@ -38,13 +38,28 @@
 <!-- Faudrait faire un fichier js pour tout ce qui est déplacement de fantome, NG a pas réussi, je comprends rien à quel lien il faut faire ou? -->
 
 <!-- RESTE A FAIRE  -->
-<!-- faire ukne deuxiéme scène -> NG -->
-<!-- placer le plan à trouver correctement et le mettre en invisible  -->
-<!-- faire le fonds pour que ça soit joli -->
+<!-- faire une deuxiéme scène -> NG  1GLB FME et 1 GLBBlOSM  --> 
+<!-- placer le plan à trouver correctement et le mettre en invisible -> NG -->
+<!-- faire le fonds pour que ça soit joli -> NG-->
+<!-- API compte protomail -> NG -->
+
+<!-- Mettre au propre dans un JS tout ce qui pour le cube  -->
+<!-- cube = FOE -->
+<!-- Mettre au propre le code ? -->
 
 <!-- A DEMANDER  -->
 <!-- Gérer le le clic manette ???? -->
+<!-- Comment ça fontionne pas compris l'exemple  -->
+<!-- Et comment tester avec l'ordi ? -->
+<!-- on a réussi à trouver la doc (librairie Blink control)  -->
+<!-- exemple concret simple ? vide si possible ? -->
+<!-- Mardi après midi dispo -->
+
 <!-- Afficher les scores dans la VR -->
+
+
+
+<!-- Promesses API , et chargemnt des GLB et jpeg -> est- ce que ça les charge en mêm temps ?-->
 
 <!-- FIN TODO - PBL a regler  -->
 
