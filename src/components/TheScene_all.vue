@@ -125,7 +125,7 @@
 
   // Fonctions pour vérifier si le cube a été supprimé 
   function isCubeDead(intervalCounter) {
-    const cubeId = "box-" + (intervalCounter - 1); 
+    const cubeId = "box-" + (intervalCounter-1); 
     const cube = document.getElementById(cubeId);
     if (cube && cube.hasAttribute('clickable')) {
       updateScore(-1);

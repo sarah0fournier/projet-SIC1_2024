@@ -19,13 +19,14 @@
 
 <!-- Animation / Navigation scene -->
 <!-- Possible de gerer le temps avant de passer a une page (eg. curseur doit rester min 2 sec sur le bouton pour que sa change de page)-->
-<!-- Dependant position du box le clique ne fonctionne pas -->
+
 <!-- Score disparait si met en mode VR  -->
-  <!-- -> A essayer en isntallant package  'aframe-html-shader' puis donc three mais sans succes -->
+<!-- -> A essayer en isntallant package  'aframe-html-shader' puis donc three mais sans succes -->
+<!-- Quand on tue un fantome cela nous rajoute 2 pts alors que cela devrait en rajouter que un ? -->
 
 <!-- General -->
 <!-- Router pas sure de faire tout juste et chaque besoin de creer des scripts scripts setup - cheni tous sa -->
-<!-- Mixage entre vue et non vue avec aframe tres cheni -->
+<!-- Mixage entre vue et non vue avec aframe tres cheni --> 
 
 <!-- API Suisse tourimse -->
 <!-- Gestion promesse pas top car faudrait pouvoir jouer et en attente il recuper les donnes et non pas d abord recuper donneer puis jouer -->
@@ -34,6 +35,16 @@
 
 <!-- Scene -->
 <!-- Faudrait deplacer les fonctions dans fichier js et etre coherent dans code entre vue ou non -->
+<!-- Faudrait faire un fichier js pour tout ce qui est déplacement de fantome, NG a pas réussi, je comprends rien à quel lien il faut faire ou? -->
+
+<!-- RESTE A FAIRE  -->
+<!-- faire ukne deuxiéme scène -> NG -->
+<!-- placer le plan à trouver correctement et le mettre en invisible  -->
+<!-- faire le fonds pour que ça soit joli -->
+
+<!-- A DEMANDER  -->
+<!-- Gérer le le clic manette ???? -->
+<!-- Afficher les scores dans la VR -->
 
 <!-- FIN TODO - PBL a regler  -->
 
