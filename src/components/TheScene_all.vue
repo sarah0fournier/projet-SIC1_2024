@@ -28,6 +28,7 @@
     <a-assets @loaded="allAssetsLoaded = true">
       <!-- <a-asset-item id="Naye-glb" src="../assets/Naye_GLB.glb" ></a-asset-item> -->
       <a-asset-item id="Naye-glb" :src="'../assets/' + this.nameGDB"></a-asset-item>
+      <a-asset-item id="Ghost-glb" src="../assets/Ghost.glb"></a-asset-item>
     </a-assets>
 
     <!-- <a-gltf-model src="#Naye-glb" gltf-model="../assets/Naye_GLB.glb" position="200 -600 0"></a-gltf-model>    -->
@@ -57,7 +58,9 @@
       </a-plane>
     </a-plane>
 
-  
+    <!-- Point que les ennemis devront viser -> orientation (ne concerne pas les déplacements) -->
+    <a-entity id="POI" position="0 1.5 0" visible="false"></a-entity>
+   
   </a-scene>
 </template>
   
@@ -80,22 +83,23 @@
     if (isWin.value === false && isPaused.value === false) {
       console.log('Le cube a été ajouté : ', intervalCounter);
       const scene = document.querySelector('a-scene');
-      const newCube = document.createElement('a-box');
+      const newCube = document.createElement('a-gltf-model');
 
       const x = getRandomNumberInRange(-10, 10);
       const y = getRandomNumberInRange(-6, 3); // Garder une hauteur constante
       const z = getRandomNumberInRange(-10, 10);
-
+     
+      newCube.setAttribute('src', '#Ghost-glb')
       newCube.setAttribute('position', `${x} ${y} ${z}`); // Position aléatoire du nouveau cube
-      newCube.setAttribute('color', 'red'); // Couleur du nouveau cube
-      newCube.setAttribute('width', '0.1'); // Largeur du nouveau cube
-      newCube.setAttribute('height', '0.1'); // Hauteur du nouveau cube
-      newCube.setAttribute('depth', '0.1'); // Profondeur du nouveau cube
+      newCube.setAttribute('scale', '0.35 0.35 0.35'); // Couleur du nouveau cube
+      newCube.setAttribute('look-at', '#POI'); // Largeur du nouveau cube
+      // newCube.setAttribute('height', '0.1'); // Hauteur du nouveau cube
+      // newCube.setAttribute('depth', '0.1'); // Profondeur du nouveau cube
 
       // Animation du nouveau cube
       const t = getRandomNumberInRange(2000, 5000);
       console.log('Valeur de t :', t);
-      newCube.setAttribute('animation__move', `property: position; to: 0 1.3 0; dur: ${t}; easing: linear;`);
+      newCube.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`);
       newCube.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`);
       newCube.setAttribute('clickable', '');
       newCube.setAttribute('code', '2');
@@ -109,7 +113,7 @@
       // Lancez le délai pour vérifier si le cube est mort après la durée de l'animation
       const cubeCheckTimeout = setTimeout(() => {
         isCubeDead(intervalCounter);
-      }, t); 
+      }, t-100); 
     }
   }
 
