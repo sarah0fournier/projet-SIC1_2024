@@ -24,7 +24,7 @@
     </div>
   
 
-    <!-- Eg. import obj : https://aframe.io/docs/master/components/obj-model.html#sidebar -->
+    <!-- Import des GLB -->
     <a-assets @loaded="allAssetsLoaded = true">
       <!-- <a-asset-item id="Naye-glb" src="../assets/Naye_GLB.glb" ></a-asset-item> -->
       <a-asset-item id="Naye-glb" :src="'../assets/' + this.nameGDB"></a-asset-item>
@@ -36,7 +36,6 @@
     <!-- Ajoutez 1 boîte primitive -->
     <a-entity v-if="this.nameGDB">
       <a-box clickable v-if="this.nameGDB.includes('Naye')" id="box-1" code="1"  :isWin="isWin" :paused="isPaused" color="gray" position="0.0 0.0 0.0"></a-box>
-      <a-box clickable v-if="this.nameGDB.includes('Villars')" id="box-1" code="1"  :isWin="isWin" :paused="isPaused" color="gray" position="0.0 0.0 0.0"></a-box>
     </a-entity>
 
     <!-- Popup de gagnant v-if="isWin"-->
@@ -58,7 +57,7 @@
       </a-plane>
     </a-plane>
 
-
+  
   </a-scene>
 </template>
   
@@ -83,9 +82,9 @@
       const scene = document.querySelector('a-scene');
       const newCube = document.createElement('a-box');
 
-      const x = getRandomNumberInRange(-5, 5);
-      const y = 1.5; // Garder une hauteur constante
-      const z = getRandomNumberInRange(-5, 5);
+      const x = getRandomNumberInRange(-10, 10);
+      const y = getRandomNumberInRange(-6, 3); // Garder une hauteur constante
+      const z = getRandomNumberInRange(-10, 10);
 
       newCube.setAttribute('position', `${x} ${y} ${z}`); // Position aléatoire du nouveau cube
       newCube.setAttribute('color', 'red'); // Couleur du nouveau cube
@@ -94,9 +93,8 @@
       newCube.setAttribute('depth', '0.1'); // Profondeur du nouveau cube
 
       // Animation du nouveau cube
-      newCube.setAttribute('animation__move', 'property: position; to: -0.01 1.5 1.2; dur: 5000; easing: linear;');
-      newCube.setAttribute('animation__stay', 'property: position; to: -0.01 1.5 1.2; dur: 1; delay: 5000;');
-      newCube.setAttribute('animation__disappear', 'property: scale; to: 0 0 0; dur: 10; delay: 8000; easing: linear;');
+      newCube.setAttribute('animation__move', 'property: position; to: 0 1.3 0; dur: 5000; easing: linear;');
+      newCube.setAttribute('animation__disappear', 'property: scale; to: 0 0 0; dur: 1; delay: 5000; easing: linear;');
       newCube.setAttribute('clickable', '')
       newCube.setAttribute('code', '2')
       newCube.setAttribute('paused', 'false')
