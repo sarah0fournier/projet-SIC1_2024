@@ -73,7 +73,7 @@
     <a-entity id="POI" position="0 1.5 0" visible="false"></a-entity>
    
     <a-sky src="../assets/sky.jpeg"  scale="5 5 5"></a-sky>
-
+    <a-box touchSound code="5" color="green" position="3 1 3" ></a-box>
 
   </a-scene>
 </template>
@@ -84,7 +84,7 @@
   import TheCameraRig from './TheCameraRig.vue';
   import '../aframe/clickable.js';
   import '../aframe/touch.js';
-  // import '../aframe/touchSound.js';
+  import '../aframe/touchSound.js';
 
 
   const allAssetsLoaded = ref(false);

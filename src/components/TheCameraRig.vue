@@ -21,7 +21,7 @@
           geometry="primitive: circle; radius: 0.0005;"
           material="shader: flat; color : blue; "
           cursor
-          raycaster="far: 300; objects: [touch], [clickable]; showLine: false;"
+          raycaster="far: 300; objects: [touch], [clickable], [touchSound]; showLine: false;"
           position="0 0 -0.1"
           disable-in-vr="component: raycaster; disableInAR: false;"
           hide-in-vr="hideInAR: false"

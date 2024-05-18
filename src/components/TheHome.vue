@@ -3,7 +3,7 @@
     import TheCameraRig from './TheCameraRig.vue';
     import '../aframe/clickable.js';
     import '../aframe/touch.js';
-    // import '../aframe/touchSound.js';
+    import '../aframe/touchSound.js';
 
     const loaded = ref(false);
 </script>

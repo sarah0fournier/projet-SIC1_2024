@@ -1,6 +1,6 @@
 AFRAME.registerComponent('touchSound', {
   schema: {
-      color : {type : "color", default : "green"},
+      color : {type : "color", default : "red"},
       code: { type: 'int', default: '0'}, 
       paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
     },
@@ -18,17 +18,11 @@ AFRAME.registerComponent('touchSound', {
   },
 
   onRaycasterIntersected: function (evt) {
- 
-    // Vérifier si le jeu n'est pas en pause (Si en pause veut pas interaction de tuer des bloc, chercher lieu,...)
-    // Si jeu en pause interaction changement couleur curseur fonctionne tjrs mais pas les autres actions 
-    // Mettre paused aussi pour code 3 ??? Si met aussi pour code 3 alors vaut mettre paused dans les autres vue aussi --> faire popup qui est tranmis de vue en vue ?
-    if (this.el.getAttribute('paused') === 'false') { 
- 
-      // Rayon emis par curseur entre en colision avec element de la scene (bloc creer auto) 
-      if (this.el.getAttribute('code') === '2') {
-        console.log('qqqqq')
+    console.log('qqqqq')
 
-      }     
+  // Rayon emis par curseur entre en colision avec element de la scene (bloc creer auto) 
+  if (this.el.getAttribute('code') === '5') {
+    console.log('QQQQ')  
     }
   },
 
@@ -59,3 +53,4 @@ AFRAME.registerComponent('touchSound', {
       
   },
 })
+
