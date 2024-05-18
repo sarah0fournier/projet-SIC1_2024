@@ -36,15 +36,19 @@
 
     <a-gltf-model src="#HotBalloon-glb" position="0 -0.8 0" gltf-model="../assets/HotBalloon.glb" scale="0.5 0.7 0.5"></a-gltf-model>
     <a-gltf-model src="#Fire-glb" animation-mixer position="0 3.1 0" gltf-model="../assets/Fire.glb" scale="0.25 0.25 0.25"></a-gltf-model>
-    <a-gltf-model src="#Cat-glb" animation-mixer="" position="0.28564 -0.11067 -0.26652" gltf-model="../assets/Cat.glb" scale="0.02 0.02 0.02" rotation="0 -150 0"></a-gltf-model>
+    <a-gltf-model src="#Cat-glb" animation-mixer=""  gltf-model="../assets/Cat.glb" 
+    position="0.28564 -0.11067 -0.26652" scale="0.02 0.02 0.02" rotation="0 -150 0" 
+    sound="src: ../assets/Cat.mp3; autoplay:false"></a-gltf-model>
 
     <!-- <a-gltf-model src="#Naye-glb" gltf-model="../assets/Naye_GLB.glb" position="200 -600 0"></a-gltf-model>    -->
     <a-gltf-model v-if="allAssetsLoaded"  src="#Naye-glb" :gltf-model="'../assets/' + this.nameGDB" :position="this.positionGDB"></a-gltf-model> 
   
-    <!-- Ajoutez 1 boîte primitive -->
+    <!-- Ajoutez 1 hit box à trouver-->
     <a-entity v-if="this.nameGDB">
-      <a-box clickable v-if="this.nameGDB.includes('Naye')" id="box-1" code="1"  :isWin="isWin" :paused="isPaused" color="gray" position="3 1 0.0"></a-box>
+      <a-plane clickable v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" color="gray" rotation="0 -140 0" position="132.8 -134.1 121.7" width="40" height="20" visible="false" ></a-plane>
+      <!-- clickable -->
     </a-entity>
+    
 
     <!-- Popup de gagnant v-if="isWin"-->
     <!-- Remarque : Si position met position="0 1.5 -5" au lieu de position="0 1.5 -3" sa ne fonctionne plus -->
@@ -69,6 +73,8 @@
     <a-entity id="POI" position="0 1.5 0" visible="false"></a-entity>
    
     <a-sky src="../assets/sky.jpeg"  scale="5 5 5"></a-sky>
+
+
   </a-scene>
 </template>
   
@@ -77,8 +83,8 @@
   import { ref, watch } from 'vue';
   import TheCameraRig from './TheCameraRig.vue';
   import '../aframe/clickable.js';
-  // import * as THREE from 'three';
-  // import 'aframe-html-shader'; //  Package pour créer une surface sur laquelle afficher notre contenu HTML.
+  import '../aframe/touch.js';
+  // import '../aframe/touchSound.js';
 
 
   const allAssetsLoaded = ref(false);
@@ -100,16 +106,15 @@
       newCube.setAttribute('src', '#Ghost-glb')
       newCube.setAttribute('position', `${x} ${y} ${z}`); // Position aléatoire du nouveau cube
       newCube.setAttribute('scale', '0.35 0.35 0.35'); // Couleur du nouveau cube
-      newCube.setAttribute('look-at', '#POI'); // Largeur du nouveau cube
-      // newCube.setAttribute('height', '0.1'); // Hauteur du nouveau cube
-      // newCube.setAttribute('depth', '0.1'); // Profondeur du nouveau cube
+      newCube.setAttribute('look-at', '#POI'); // orientation des ennemi vers la camera
+
 
       // Animation du nouveau cube
       const t = getRandomNumberInRange(2000, 5000);
       console.log('Valeur de t :', t);
       newCube.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`);
       newCube.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`);
-      newCube.setAttribute('clickable', '');
+      newCube.setAttribute('touch', '');
       newCube.setAttribute('code', '2');
       newCube.setAttribute('paused', 'false');
       newCube.setAttribute('id', "box-" + intervalCounter); // Id du cube
@@ -135,7 +140,7 @@
   function isCubeDead(intervalCounter) {
     const cubeId = "box-" + (intervalCounter-1); 
     const cube = document.getElementById(cubeId);
-    if (cube && cube.hasAttribute('clickable')) {
+    if (cube && cube.hasAttribute('touch')) {
       updateScore(-1);
     }
   }

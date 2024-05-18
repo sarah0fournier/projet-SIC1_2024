@@ -1,6 +1,7 @@
 <script setup>
   import '../aframe/disable-in-vr.js';
   import '../aframe/hide-in-vr.js';
+  
 </script>
 
 <template>
@@ -17,18 +18,20 @@
         position="0 1.65 0"
       >
         <a-entity
-          geometry="primitive: circle; radius: 0.0003;"
-          material="shader: flat; color: white;"
+          geometry="primitive: circle; radius: 0.0005;"
+          material="shader: flat; color : blue; "
           cursor
-          raycaster="far: 15; objects: [clickable]; showLine: false;"
+          raycaster="far: 300; objects: [touch], [clickable]; showLine: false;"
           position="0 0 -0.1"
           disable-in-vr="component: raycaster; disableInAR: false;"
           hide-in-vr="hideInAR: false"
         ></a-entity>
+
         <a-entity
           id="dummy-hand-right"
           position="0.3 -0.4 -0.5"
         ></a-entity>
+
         <a-entity
           id="dummy-hand-left"
           position="-0.3 -0.4 -0.5"
@@ -38,15 +41,17 @@
       <a-entity
         id="hand-left"
         hand-controls="hand: left"
+        laser-controls="hand: left"
+        raycaster="far: 15; objects: [touch]; showLine: true; lineColor: red"
         position="0 1.5 0"
       >
       </a-entity>
-
+      
       <a-entity
         id="hand-right"
         hand-controls="hand: right"
         laser-controls="hand: right"
-        raycaster="far: 15; objects: [clickable]; showLine: true;"
+        raycaster="far: 4000; objects: [clickable] ; showLine: true; lineColor: blue"
         position="0 1.5 0"
       >
       </a-entity>

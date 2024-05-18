@@ -2,6 +2,8 @@
     import { ref } from 'vue';
     import TheCameraRig from './TheCameraRig.vue';
     import '../aframe/clickable.js';
+    import '../aframe/touch.js';
+    // import '../aframe/touchSound.js';
 
     const loaded = ref(false);
 </script>
@@ -33,11 +35,6 @@
 
     <TheCameraRig />
     
-    <!-- Curseur - Ligne inutile ? -->
-    <!-- <a-entity id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity> -->
-    
-    <!-- <a-entity v-if="!gameStarted"> -->
-        <!-- PBL : Pk peut pas mettre eg.  position="0 1.5 -5" au lieu de position="0 1.5 -3 ????-->
         <a-plane color="white"  width="10" height="6" position="0 1.5 -5">
             <a-text value="Bienvenue a la decouverte de la Suisse !" scale="1.5 1.5 1.5" align="center" color="black" position="0 2 0"></a-text>
             <a-text value="But du jeu : Trouver l'emplacement de la location mentionner"  color="black" align="center" position="0 0.5 0"></a-text>
@@ -48,8 +45,6 @@
                 </a-text>
             </a-plane>
         </a-plane>
-
-    <!-- </a-entity> -->
     </a-scene>
 </template>
 

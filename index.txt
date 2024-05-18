@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Frame Interaction Example</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.7/dist/aframe-controller-cursor-component.min.js"></script> 
+</head>
+<body>
+<a-scene>
+    <!-- Camera Rig and Hands -->
+    <a-entity id="camera-rig" movement-controls="camera: #head;">
+        <a-entity id="head" look-controls="pointerLockEnabled: false" camera position="0 1.65 0"></a-entity>
+
+        <a-entity oculus-touch-controls="hand: left" 
+                  id="hand-left"
+                  laser-controls="hand: left"
+                  raycaster="far: 15; showLine: true; lineColor: red"
+                  position="0 1.5 0"
+                  thumbstick-logging></a-entity>
+
+        <a-entity oculus-touch-controls="hand: left" change-color-on-trigger></a-entity>
+    </a-entity>
+
+    <!-- Objects -->
+    <a-sphere id="interactive-sphere"
+              position="0 1 -1"
+              radius="0.1"
+              color="#EF2D5E"
+              shadow></a-sphere>
+
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+</a-scene>
+
+<script>
+  AFRAME.registerComponent('thumbstick-logging', {
+    init: function () {
+      this.el.addEventListener('thumbstickmoved', this.logThumbstick.bind(this));
+    },
+    logThumbstick: function (evt) {
+      console.log('Thumbstick moved:', evt.detail);
+
+      // Create a new sphere entity
+      const newSphere = document.createElement('a-sphere');
+      newSphere.setAttribute('position', '0 2 -1');
+      newSphere.setAttribute('radius', '0.1');
+      newSphere.setAttribute('color', 'green');
+
+      // Add the new sphere to the scene
+      const scene = document.querySelector('a-scene');
+      scene.appendChild(newSphere);
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-AFRAME.registerComponent('clickable', {
+AFRAME.registerComponent('touch', {
   schema: {
       color : {type : "color", default : "red"},
       code: { type: 'int', default: '0'}, 
@@ -30,18 +30,22 @@ AFRAME.registerComponent('clickable', {
     // Mettre paused aussi pour code 3 ??? Si met aussi pour code 3 alors vaut mettre paused dans les autres vue aussi --> faire popup qui est tranmis de vue en vue ?
     if (this.el.getAttribute('paused') === 'false') { 
 
-      if(this.el.getAttribute('code') === '1'){
-        console.log('Bravo vous avez trouver le lieu indiquer')
+      // Rayon emis par curseur entre en colision avec element de la scene (bloc creer auto) 
+      if (this.el.getAttribute('code') === '2') {
+        console.log('Bravo vous supprimer des blocs')
 
-        // Emettre un evenement pour ouvrir popup
-        this.el.emit('win');
-        console.log('etat pause ', this.el.getAttribute('paused'))
-        // Delete interaction clickable - Utiliser l'ID pour sélectionner l'élément dans le DOM
+        // Faites disparaître la boîte en ajustant sa propriété `visible` à `false`
+        this.el.setAttribute('visible', 'false');
+
+        // Émettre un événement pour indiquer qu'un bloc a été supprimé (ajouter score,...)
+        this.el.emit('block-removed');
+
+        // Delete interaction clickable sur bloc qui bougent
         let idElement = this.el.getAttribute('id');
         let monElement = document.querySelector(`#${idElement}`);
-        monElement.removeAttribute('clickable');
+        monElement.removeAttribute('touch');
         console.log('Suppression interaction sur bloc : ', idElement)
-      }
+      }     
     }
   },
 
