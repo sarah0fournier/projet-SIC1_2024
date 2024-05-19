@@ -1,3 +1,5 @@
+// Tue les fantomes
+
 AFRAME.registerComponent('touch', {
   schema: {
       color : {type : "color", default : "red"},
@@ -5,6 +7,8 @@ AFRAME.registerComponent('touch', {
       paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
     },
   init: function () {
+    console.log('initialisation touch')
+
       this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
       this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
       this.onEnter = this.onEnter.bind(this);

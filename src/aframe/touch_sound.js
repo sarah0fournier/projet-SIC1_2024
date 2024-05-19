@@ -1,14 +1,13 @@
-// Passe a la page apres 
+// Tue les fantomes
 
-AFRAME.registerComponent('clickable', {
+AFRAME.registerComponent('touch_sound', {
   schema: {
       color : {type : "color", default : "red"},
       code: { type: 'int', default: '0'}, 
       paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
     },
   init: function () {
-    console.log('initialisation clickable')
-
+    console.log('initialisation touchSound')
       this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
       this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
       this.onEnter = this.onEnter.bind(this);
@@ -18,38 +17,20 @@ AFRAME.registerComponent('clickable', {
   },
 
   update: function (oldData) {
-
+    console.log('touchSound update', oldData, this.data);
   },
 
   onRaycasterIntersected: function (evt) {
+    console.log('qqqqq')
 
-    // Aller dans une prochaine vue via la methode nextPage
-    if(this.el.getAttribute('code') === '3'){
-      this.el.emit('nextPage');
-      console.log('Passage dans une prochaine scene / vue')
-    }
-
-    // Vérifier si le jeu n'est pas en pause (Si en pause veut pas interaction de tuer des bloc, chercher lieu,...)
-    // Si jeu en pause interaction changement couleur curseur fonctionne tjrs mais pas les autres actions 
-    // Mettre paused aussi pour code 3 ??? Si met aussi pour code 3 alors vaut mettre paused dans les autres vue aussi --> faire popup qui est tranmis de vue en vue ?
-    if (this.el.getAttribute('paused') === 'false') { 
-
-      if(this.el.getAttribute('code') === '1'){
-        console.log('Bravo vous avez trouver le lieu indiquer')
-
-        // Emettre un evenement pour ouvrir popup
-        this.el.emit('win');
-        console.log('etat pause ', this.el.getAttribute('paused'))
-        // Delete interaction clickable - Utiliser l'ID pour sélectionner l'élément dans le DOM
-        let idElement = this.el.getAttribute('id');
-        let monElement = document.querySelector(`#${idElement}`);
-        monElement.removeAttribute('clickable');
-        console.log('Suppression interaction sur bloc : ', idElement)
+    // Rayon emis par curseur entre en colision avec element de la scene (bloc creer auto) 
+    if (this.el.getAttribute('code') === '5') {
+      console.log('QQQQ')  
       }
-    }
   },
 
   onEnter : function (evt) {
+    console.log('mouseenter event');
       const cursor = evt.detail.cursorEl;
       if (cursor.getAttribute('raycaster').showLine) {
       this.savedColor = cursor.getAttribute('raycaster').lineColor;
@@ -62,6 +43,7 @@ AFRAME.registerComponent('clickable', {
   },
 
   onLeave : function(evt){
+    console.log('mouseleave event');
       const cursor = evt.detail.cursorEl;
       if (cursor.getAttribute('raycaster').showLine) {
       cursor.setAttribute('raycaster', 'lineColor', this.savedColor);

@@ -38,11 +38,14 @@
     <a-gltf-model src="#Fire-glb" animation-mixer position="0 3.1 0" gltf-model="../assets/Fire.glb" scale="0.25 0.25 0.25"></a-gltf-model>
     <a-gltf-model src="#Cat-glb" animation-mixer=""  gltf-model="../assets/Cat.glb" 
     position="0.28564 -0.11067 -0.26652" scale="0.02 0.02 0.02" rotation="0 -150 0" 
-    sound="src: ../assets/Cat.mp3; autoplay:false"></a-gltf-model>
+    sound="src: ../assets/Cat.mp3; autoplay:false"
+    ></a-gltf-model>
+    <!-- sound="src: ../assets/Cat.mp3; autoplay:false" -->
 
     <!-- <a-gltf-model src="#Naye-glb" gltf-model="../assets/Naye_GLB.glb" position="200 -600 0"></a-gltf-model>    -->
     <a-gltf-model v-if="allAssetsLoaded"  src="#Naye-glb" :gltf-model="'../assets/' + this.nameGDB" :position="this.positionGDB"></a-gltf-model> 
   
+
     <!-- Ajoutez 1 hit box à trouver-->
     <a-entity v-if="this.nameGDB">
       <a-plane clickable v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" color="gray" rotation="0 -140 0" position="132.8 -134.1 121.7" width="40" height="20" visible="false" ></a-plane>
@@ -71,9 +74,9 @@
 
     <!-- Point que les ennemis devront viser -> orientation (ne concerne pas les déplacements) -->
     <a-entity id="POI" position="0 1.5 0" visible="false"></a-entity>
-   
+    <a-plane touch_sound code="5" color="green" position="0 1.5 -3" ></a-plane>
+
     <a-sky src="../assets/sky.jpeg"  scale="5 5 5"></a-sky>
-    <a-box touchSound code="5" color="green" position="3 1 3" ></a-box>
 
   </a-scene>
 </template>
@@ -83,8 +86,8 @@
   import { ref, watch } from 'vue';
   import TheCameraRig from './TheCameraRig.vue';
   import '../aframe/clickable.js';
+  import '../aframe/touch_sound.js';
   import '../aframe/touch.js';
-  import '../aframe/touchSound.js';
 
 
   const allAssetsLoaded = ref(false);
