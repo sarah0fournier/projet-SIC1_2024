@@ -1,4 +1,8 @@
-// Tue les fantomes
+/**
+ * =======================================================================================
+ * Composant A-Frame pour utiliser du sons. 
+ * =======================================================================================
+ */
 
 AFRAME.registerComponent('touch_sound', {
   schema: {
@@ -59,7 +63,6 @@ AFRAME.registerComponent('touch_sound', {
   remove: function () {
       this.el.removeEventListener('mouseenter', this.onEnter);
       this.el.removeEventListener('mouseleave', this.onLeave);
-      
   },
 })
 

@@ -107,7 +107,6 @@ AFRAME.registerComponent('clickable', {
   remove: function () {
       this.el.removeEventListener('mouseenter', this.onEnter);
       this.el.removeEventListener('mouseleave', this.onLeave);
-      this.el.removeEventListener('raycaster-intersected', this.onLeave);
   },
 })
 

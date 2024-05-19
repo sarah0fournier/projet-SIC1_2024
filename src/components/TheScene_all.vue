@@ -40,10 +40,12 @@
       <a-asset-item id="Cat-glb" src="../assets/Cat.glb"></a-asset-item>
     </a-assets>
 
+
     <!-- Initialisation des GLB décoratives -->
     <a-gltf-model v-if="allAssetsLoaded" src="#HotBalloon-glb" gltf-model="../assets/HotBalloon.glb" position="0 -0.8 0" scale="0.5 0.7 0.5"></a-gltf-model>
     
-    <a-gltf-model v-if="allAssetsLoaded" touch_sound code ='5'src="#Fire-glb" animation-mixer position="0 3.1 0" gltf-model="../assets/Fire.glb" scale="0.25 0.25 0.25"
+    <a-gltf-model v-if="allAssetsLoaded" touch_sound code ='5'src="#Fire-glb" animation-mixer position="0 3.1 0" gltf-model="../assets/Fire.glb" 
+      scale="0.25 0.25 0.25"
       sound="src: ../assets/Fire.mp3; autoplay:false"
     ></a-gltf-model>
 
@@ -55,8 +57,12 @@
     <!-- Initialisation des GLB de paysages -->
     <a-gltf-model v-if="allAssetsLoaded"  src="#Naye-glb" :gltf-model="'../assets/' + this.nameGDB" :position="this.positionGDB"></a-gltf-model> 
   
+    <!-- Ciel (echelle à adapté en fonction taille des tuiles) -->
+    <a-sky src="../assets/sky.jpeg"  :scale="this.scaleSky"></a-sky>
+
      <!-- Son global -->
     <a-sound id="touch-sound" src="../assets/touch.mp3" autoplay="false" volume="1.0"></a-sound>
+
 
     <!-- Ajoutez 1 hit box à trouver-->
     <a-entity v-if="this.nameGDB">
@@ -64,30 +70,29 @@
         color="gray" rotation="0 -140 0" position="132.8 -134.1 121.7" width="40" height="20" visible="false" 
       ></a-plane>
     </a-entity>
-    
 
-    <!-- Popup de gagnant v-if="isWin"-->
-    <a-plane v-if="isWin" :isWin="isWin" color="grey" opacity="0.5" width="10" height="6" position="0 1.5 -3">
-      <a-text value="Felicitiation tu m'as trouvé" color="black" align="center" position="0 2.5 0"></a-text>
-          
-      <!-- Texte recuperé de requete API suisse tourisme -->
-      <a-text v-if="this.attractions[0]['name']" :value="this.attractions[0]['name']" color="black" align="center" position="0 2.0 0"></a-text>
-      <a-text v-if="this.attractions[0]['name']" :value="this.attractions[0]['abstract']" color="black" align="center" position="0 1.5 0"></a-text>
-
-      <a-text :value="'Scores : ' + score" color="black" align="center" position="0 1.0 0"></a-text>
-
-      <!-- bouton -->
-      <!-- :paused="isPaused" a mettre si definit dans le if de clikable que jeu peut etre en pause aussi quand on voit info level... -->
-      <a-plane clickable code="3" :paused="isPaused" color="grey" width="5" height="1" align="center" position="0 -1 0" >
-        <a-text :value="'Prochain level :' + this.levelNext" color="black" position="0 0 0"  align="center"></a-text>
-      </a-plane>
-    </a-plane>
 
     <!-- Point que les ennemis devront viser -> orientation (ne concerne pas les déplacements) -->
     <a-entity id="POI" position="0 1.5 0" visible="false"></a-entity>
+    
 
-    <!-- Ciel (echelle à adapté en fonction taille des tuiles) -->
-    <a-sky src="../assets/sky.jpeg"  scale="5 5 5"></a-sky>
+    <!-- Popup de gagnant -->
+    <a-plane v-if="isWin" :isWin="isWin" color="grey" opacity="0.5" width="3" height="2" :position="this.positionPopup">
+      <a-text value="Felicitiation tu m'as trouve" color="black" align="center" position="0 0.75 0" scale="0.5 0.5 0.5"></a-text>
+          
+      <!-- Texte recuperé de requete API suisse tourisme -->
+      <a-text v-if="this.attractions[0]['name']" :value="this.attractions[0]['name']" color="black" align="center" position="0 -0.25 0" scale="0.5 0.5 0.5"></a-text>
+      <a-text v-if="this.attractions[0]['name']" :value="this.attractions[0]['abstract']" color="black" align="center" position="0 -0.5 0" scale="0.5 0.5 0.5"></a-text>
+
+      <a-text :value="'Scores : ' + score" color="black" align="center" position="0 0.0 0" scale="0.5 0.5 0.5"></a-text>
+
+      <!-- Bouton  passage au prochaine level-->
+      <!-- :paused="isPaused" a mettre si definit dans le if de clikable que jeu peut etre en pause aussi quand on voit info level... -->
+      <a-plane clickable code="3" :paused="isPaused" color="grey" width="2" height="0.25" align="center" position="0 -1 0">
+        <a-text :value="'Prochain level :' + this.levelNext" color="black" position="0 0 0"  align="center" scale="0.5 0.5 0.5"></a-text>
+      </a-plane>
+    </a-plane>
+
 
   </a-scene>
 </template>
@@ -107,7 +112,7 @@
   
   // Fonction pour ajouter un nouveau ennemi à la scène
   function addFoe() {   
-    // Ajout d'un cube si pas encore gagner et si jeu pas en pause
+    // Ajout d'un ennemis si pas encore gagner et si jeu pas en pause
     if (isWin.value === false && isPaused.value === false) {
       console.log('Un fantome a été ajouté : ', intervalCounter);
       const scene = document.querySelector('a-scene');
@@ -118,16 +123,16 @@
       const z = getRandomNumberInRange(-10, 10);
      
       newCube.setAttribute('src', '#Ghost-glb')
-      newCube.setAttribute('position', `${x} ${y} ${z}`); // Position aléatoire du nouveau cube
+      newCube.setAttribute('position', `${x} ${y} ${z}`); // Position aléatoire du nouvel ennemi
       newCube.setAttribute('scale', '0.35 0.35 0.35'); // Couleur du nouveau cube
-      newCube.setAttribute('look-at', '#POI'); // orientation des ennemi vers la camera
+      newCube.setAttribute('look-at', '#POI'); // Orientation des ennemis vers la camera
       newCube.setAttribute('sound', 'src: ../assets/Ghost.mp3; autoplay: true;');// Son de l'ennemi
       newCube.setAttribute('touch', ''); 
       newCube.setAttribute('code', '2');
       newCube.setAttribute('paused', 'false');
-      newCube.setAttribute('id', "foe-" + intervalCounter); // Id du cube
+      newCube.setAttribute('id', "foe-" + intervalCounter); // Id de ennemi
 
-      // Animation du nouveau cube
+      // Animation du nouveau ennemi
       const t = getRandomNumberInRange(3500, 6000);
       console.log('Valeur de t :', t);
       newCube.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`);
@@ -144,7 +149,7 @@
       // Ajout événement pour mettre en pause le son après la disparition
   
 
-      // Ajouter le nouveau cube à la scène
+      // Ajouter le nouvel ennemi à la scène
       scene.appendChild(newCube); 
       intervalCounter ++;
 
@@ -220,40 +225,41 @@
 
   export default {
 
-  methods: {
-    // Gérer le démarrage du jeu
-    goHome() {
-      this.$router.push({ name: 'Home' });
+    methods: {
+      // Gérer le démarrage du jeu
+      goHome() {
+        this.$router.push({ name: 'Home' });
+      },
+
+      // Changer de scene (retour a TheInfoLevel.vue mais pour le niveau 2) 
+      nextPage() {
+        console.log("Bienvenue dans InfoLevel ", this.levelNext);
+        this.$router.push({ name: 'InfoLevel', params: { level: ":" + this.levelNext} });        
+      },
+
+      // Faire la requete a swissTourisme en fonction du level en cours
+      async fetchAttractions() {
+        try {
+          // console.log("Boudingbox en cours : " , levels[this.levelIndex]['position'])
+          const data = await fetchDataAttraction(levels[this.levelIndex]['position']);
+          // Mettre à jour la valeur de la variable réactive avec les nouvelles données
+          this.attractions = data;
+          } catch (error) {
+          console.error('Erreur lors de la récupération des données :', error);
+          }
+      }
     },
 
-    // Changer de scene (retour a TheInfoLevel.vue mais pour le niveau 2) 
-    nextPage() {
-      console.log("Bienvenue dans InfoLevel ", this.levelNext);
-      this.$router.push({ name: 'InfoLevel', params: { level: ":" + this.levelNext} });        
-    },
-
-
-    async fetchAttractions() {
-      try {
-        // Récupérer les données '46.44124, 6.98694,46.41935, 6.95736'
-        console.log(levels[this.levelIndex]['position'])
-        const data = await fetchDataAttraction(levels[this.levelIndex]['position']);
-        // Mettre à jour la valeur de la variable réactive avec les nouvelles données
-        this.attractions = data;
-        } catch (error) {
-        console.error('Erreur lors de la récupération des données :', error);
-        }
-    }
-  },
-
-  data(){
-    return {
-      levelParam : null,
-      levelNext : null,
-      levelIndex : null,
-      nameGDB: null,
-      positionGDB:null,
-      attractions:null ,
+    data(){
+      return {
+        levelParam: null,
+        levelNext: null,
+        levelIndex: null,
+        nameGDB: null,
+        positionGDB: null,
+        attractions: null,
+        scaleSky: null,
+        positionPopup: null,
 
       }},
   
@@ -271,7 +277,9 @@
     console.log("Nom de la GDB en cours : " , this.nameGDB)
 
     this.positionGDB = levels[this.levelIndex]['positionGDB']
-
+    this.scaleSky = levels[this.levelIndex]['scaleSky']
+    this.positionPopup = levels[this.levelIndex]['positionPopup']
+    
     // Appeler la fonction pour récupérer les données API swissTourisme dès que le composant est monté
     this.fetchAttractions();
   }
@@ -281,6 +289,5 @@
 </script>
 
 <style scoped>
-
 
 </style>

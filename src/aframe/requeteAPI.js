@@ -109,12 +109,12 @@ export async function parsingData(jsonData) {
  *                        avec les coins N-O et S-E aux format 'latitude_N0, longitude_N0, latitude2_SE, longitude2_SE'
  * @returns {Promise<Object[]>} - Les données des attractions touristiques.
  */
-export async function fetchTours(lang, bbox) {
-  const data = await get(lang, bbox,'tours')
-  return data
-}
+// export async function fetchTours(lang, bbox) {
+//   const data = await get(lang, bbox,'tours')
+//   return data
+// }
 
-export async function getDynamicBoundingBox(bbox){
-  let data_json = await fetchDataAttraction(bbox); 
-  return data_json
-}
+// export async function getDynamicBoundingBox(bbox){
+//   let data_json = await fetchDataAttraction(bbox); 
+//   return data_json
+// }

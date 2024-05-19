@@ -1,4 +1,10 @@
-// Tue les fantomes
+/**
+ * =======================================================================================
+ * Composant A-Frame pour rendre un élément cliquable et réagir aux interactions utilisateur.
+ * Ce composant clikacble est utiliser pour eliminer les fantomes au clicage. 
+ * =======================================================================================
+ */
+
 
 AFRAME.registerComponent('touch', {
   schema: {
@@ -20,17 +26,18 @@ AFRAME.registerComponent('touch', {
     
   },
   
+  // update: function (oldData) {
 
+  // },
 
-  update: function (oldData) {
-
-  },
-
+  /**
+   * Fonction appelée lorsqu'un rayon entre en intersection avec l'élément.
+   * @param {Event} evt - Événement raycaster-intersected.
+   */
   onRaycasterIntersected: function (evt) {
 
     // Récupérez le temps actuel
     var currentTime = performance.now(); 
-    // Temps general pas propre a entiter donc peut pas deleter 2 fantomes en moins de 1 sec ?? 1 sec bon entre deux va pas reussir a tuer 2 fantome en ce temps de toute facon ?
     // console.log('currentTime ', currentTime)
 
     // Vérifiez si suffisamment de temps s'est écoulé depuis le dernier déclenchement (eviter de delete 2 fois le meme fantomes) (intervalle temps entre declenchement)
@@ -51,7 +58,7 @@ AFRAME.registerComponent('touch', {
           // Émettre un événement pour indiquer qu'un bloc a été supprimé (ajouter score,...)
           this.el.emit('block-removed');
 
-          // Delete interaction clickable sur bloc qui bougent
+          // Delete interaction clickable sur le fantome qui bougent
           let idElement = this.el.getAttribute('id');
           let monElement = document.querySelector(`#${idElement}`);
           monElement.removeAttribute('touch');
@@ -73,9 +80,12 @@ AFRAME.registerComponent('touch', {
     }
 
     this.lastRaycasterEventTime = currentTime;
-
   },
 
+  /**
+   * Fonction appelée lorsque le curseur entre dans la zone de l'élément.
+   * @param {Event} evt - Événement mouseenter.
+   */
   onEnter : function (evt) {
       const cursor = evt.detail.cursorEl;
       if (cursor.getAttribute('raycaster').showLine) {
@@ -88,6 +98,10 @@ AFRAME.registerComponent('touch', {
       console.log('Curseur a changer de couleur')
   },
 
+  /**
+   * Fonction appelée lorsque le curseur quitte la zone de l'élément.
+   * @param {Event} evt - Événement mouseleave.
+   */
   onLeave : function(evt){
       const cursor = evt.detail.cursorEl;
       if (cursor.getAttribute('raycaster').showLine) {
@@ -97,11 +111,13 @@ AFRAME.registerComponent('touch', {
       }
   },
 
+  /**
+   * Fonction de suppression du composant.
+   */
   remove: function () {
       this.el.removeEventListener('mouseenter', this.onEnter);
-      this.el.removeEventListener('mouseleave', this.onLeave);
-      // clearInterval(this.raycasterInterval);
-      
+      this.el.removeEventListener('mouseleave', this.onLeave);  
+      // this.el.removeEventListener('raycaster-intersected', this.onLeave);   
   },
 })
 
