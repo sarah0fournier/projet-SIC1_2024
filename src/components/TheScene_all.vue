@@ -25,7 +25,7 @@
         <p>Score : <span id="score">{{ score }}</span></p>
         <p>Level : <span id="Level">{{ levelParam }}</span></p>
         <button @click="togglePause">{{ isPaused ? 'Play' : 'Pause' }}</button>
-        <!-- Ajotuer router pour faire revenire a la page TheHome-vue -->
+        <!-- Ajouter router pour faire revenir a la page TheHome-vue -->
         <button @click="goHome">GoHome</button> 
     </div>
   
@@ -40,31 +40,37 @@
       <a-asset-item id="Cat-glb" src="../assets/Cat.glb"></a-asset-item>
     </a-assets>
 
-    <a-gltf-model src="#HotBalloon-glb" position="0 -0.8 0" gltf-model="../assets/HotBalloon.glb" scale="0.5 0.7 0.5"></a-gltf-model>
-    <a-gltf-model src="#Fire-glb" animation-mixer position="0 3.1 0" gltf-model="../assets/Fire.glb" scale="0.25 0.25 0.25"></a-gltf-model>
-    <a-gltf-model src="#Cat-glb" animation-mixer=""  gltf-model="../assets/Cat.glb" 
-    position="0.28564 -0.11067 -0.26652" scale="0.02 0.02 0.02" rotation="0 -150 0" 
-    sound="src: ../assets/Cat.mp3; autoplay:false"
+    <!-- Initialisation des GLB décoratives -->
+    <a-gltf-model v-if="allAssetsLoaded" src="#HotBalloon-glb" gltf-model="../assets/HotBalloon.glb" position="0 -0.8 0" scale="0.5 0.7 0.5"></a-gltf-model>
+    
+    <a-gltf-model v-if="allAssetsLoaded" touch_sound code ='5'src="#Fire-glb" animation-mixer position="0 3.1 0" gltf-model="../assets/Fire.glb" scale="0.25 0.25 0.25"
+      sound="src: ../assets/Fire.mp3; autoplay:false"
     ></a-gltf-model>
-    <!-- sound="src: ../assets/Cat.mp3; autoplay:false" -->
 
-    <!-- <a-gltf-model src="#Naye-glb" gltf-model="../assets/Naye_GLB.glb" position="200 -600 0"></a-gltf-model>    -->
+    <a-gltf-model v-if="allAssetsLoaded" touch_sound code ='5' src="#Cat-glb" animation-mixer=""  gltf-model="../assets/Cat.glb" 
+      position="0.28564 -0.11067 -0.26652" scale="0.02 0.02 0.02" rotation="0 -150 0" 
+      sound="src: ../assets/Cat.mp3; autoplay:false"
+    ></a-gltf-model>
+
+    <!-- Initialisation des GLB de paysages -->
     <a-gltf-model v-if="allAssetsLoaded"  src="#Naye-glb" :gltf-model="'../assets/' + this.nameGDB" :position="this.positionGDB"></a-gltf-model> 
   
+     <!-- Son global -->
+    <a-sound id="touch-sound" src="../assets/touch.mp3" autoplay="false" volume="1.0"></a-sound>
 
     <!-- Ajoutez 1 hit box à trouver-->
     <a-entity v-if="this.nameGDB">
-      <a-plane clickable v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" color="gray" rotation="0 -140 0" position="132.8 -134.1 121.7" width="40" height="20" visible="false" ></a-plane>
-      <!-- clickable -->
+      <a-plane clickable v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
+        color="gray" rotation="0 -140 0" position="132.8 -134.1 121.7" width="40" height="20" visible="false" 
+      ></a-plane>
     </a-entity>
     
 
     <!-- Popup de gagnant v-if="isWin"-->
-    <!-- Remarque : Si position met position="0 1.5 -5" au lieu de position="0 1.5 -3" sa ne fonctionne plus -->
     <a-plane v-if="isWin" :isWin="isWin" color="grey" opacity="0.5" width="10" height="6" position="0 1.5 -3">
-      <a-text value="Felicitiation tu m'as trouver" color="black" align="center" position="0 2.5 0"></a-text>
+      <a-text value="Felicitiation tu m'as trouvé" color="black" align="center" position="0 2.5 0"></a-text>
           
-      <!-- Texte recuperer de requete API suisse tourisme -->
+      <!-- Texte recuperé de requete API suisse tourisme -->
       <a-text v-if="this.attractions[0]['name']" :value="this.attractions[0]['name']" color="black" align="center" position="0 2.0 0"></a-text>
       <a-text v-if="this.attractions[0]['name']" :value="this.attractions[0]['abstract']" color="black" align="center" position="0 1.5 0"></a-text>
 
@@ -72,7 +78,6 @@
 
       <!-- bouton -->
       <!-- :paused="isPaused" a mettre si definit dans le if de clikable que jeu peut etre en pause aussi quand on voit info level... -->
-      <!-- <a-plane clickable code="3" :paused="isPaused" color="grey" width="5" height="1" align="center" position="0 -1 0" > -->
       <a-plane clickable code="3" :paused="isPaused" color="grey" width="5" height="1" align="center" position="0 -1 0" >
         <a-text :value="'Prochain level :' + this.levelNext" color="black" position="0 0 0"  align="center"></a-text>
       </a-plane>
@@ -80,8 +85,8 @@
 
     <!-- Point que les ennemis devront viser -> orientation (ne concerne pas les déplacements) -->
     <a-entity id="POI" position="0 1.5 0" visible="false"></a-entity>
-    <a-plane touch_sound code="5" color="green" position="0 1.5 -3" ></a-plane>
 
+    <!-- Ciel (echelle à adapté en fonction taille des tuiles) -->
     <a-sky src="../assets/sky.jpeg"  scale="5 5 5"></a-sky>
 
   </a-scene>
@@ -95,41 +100,52 @@
   import '../aframe/touch_sound.js';
   import '../aframe/touch.js';
 
-
+  // Constantes globales de l'état du jeu
   const allAssetsLoaded = ref(false);
-  const isPaused = ref(false); // Gestions pause du jeu
-  const isWin = ref(false); // Bloc a ete trouver 
+  const isPaused = ref(false); // Mise en pause
+  const isWin = ref(false); // Hit-box trouvée 
   
-  // Fonction pour ajouter un nouveau cube à la scène
+  // Fonction pour ajouter un nouveau ennemi à la scène
   function addFoe() {   
-    // Ajouter un cube si pas encore gagner et si jeu pas en pause
+    // Ajout d'un cube si pas encore gagner et si jeu pas en pause
     if (isWin.value === false && isPaused.value === false) {
       console.log('Un fantome a été ajouté : ', intervalCounter);
       const scene = document.querySelector('a-scene');
       const newCube = document.createElement('a-gltf-model');
 
       const x = getRandomNumberInRange(-10, 10);
-      const y = getRandomNumberInRange(-6, 3); // Garder une hauteur constante
+      const y = getRandomNumberInRange(-3, 4); // Garder une hauteur constante
       const z = getRandomNumberInRange(-10, 10);
      
       newCube.setAttribute('src', '#Ghost-glb')
       newCube.setAttribute('position', `${x} ${y} ${z}`); // Position aléatoire du nouveau cube
       newCube.setAttribute('scale', '0.35 0.35 0.35'); // Couleur du nouveau cube
       newCube.setAttribute('look-at', '#POI'); // orientation des ennemi vers la camera
-
-
-      // Animation du nouveau cube
-      const t = getRandomNumberInRange(2000, 5000);
-      console.log('Valeur de t :', t);
-      newCube.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`);
-      newCube.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`);
-      newCube.setAttribute('touch', '');
+      newCube.setAttribute('sound', 'src: ../assets/Ghost.mp3; autoplay: true;');// Son de l'ennemi
+      newCube.setAttribute('touch', ''); 
       newCube.setAttribute('code', '2');
       newCube.setAttribute('paused', 'false');
       newCube.setAttribute('id', "foe-" + intervalCounter); // Id du cube
+
+      // Animation du nouveau cube
+      const t = getRandomNumberInRange(3500, 6000);
+      console.log('Valeur de t :', t);
+      newCube.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`);
+      newCube.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`);
       
-      
-      scene.appendChild(newCube); // Ajouter le nouveau cube à la scène
+      // Ajout événement pour arrêter le son après la disparition
+      newCube.addEventListener('animationcomplete__disappear', () => {
+        const soundComponent = newCube.components.sound;
+        if (soundComponent) {
+          soundComponent.stopSound();
+        }
+      });
+
+      // Ajout événement pour mettre en pause le son après la disparition
+  
+
+      // Ajouter le nouveau cube à la scène
+      scene.appendChild(newCube); 
       intervalCounter ++;
 
       // Lancez le délai pour vérifier si le fantome est mort après la durée de l'animation
@@ -155,12 +171,12 @@
   }
 
 
-
+  // Variables pour les fantomes
   let intervalCounter = 100; // Commencer intervalle numerotation a 100
   let intervalId; // Variable pour stocker l'ID de l'intervalle
   
   // Appeler la fonction addFoe toutes les x secondes
-  let intervalTime = getRandomNumberInRange(3500, 7000)
+  let intervalTime = getRandomNumberInRange(4000, 8000)
   intervalId = setInterval(() => {
     addFoe(); // Appel de la fonction pour ajouter un cube
   }, intervalTime);

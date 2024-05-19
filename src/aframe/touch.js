@@ -29,7 +29,8 @@ AFRAME.registerComponent('touch', {
   onRaycasterIntersected: function (evt) {
 
     // Récupérez le temps actuel
-    var currentTime = performance.now(); // Temps general pas propre a entiter donc peut pas deleter 2 fantomes en moins de 1 sec ?? 1 sec bon entre deux va pas reussir a tuer 2 fantome en ce temps de toute facon ?
+    var currentTime = performance.now(); 
+    // Temps general pas propre a entiter donc peut pas deleter 2 fantomes en moins de 1 sec ?? 1 sec bon entre deux va pas reussir a tuer 2 fantome en ce temps de toute facon ?
     // console.log('currentTime ', currentTime)
 
     // Vérifiez si suffisamment de temps s'est écoulé depuis le dernier déclenchement (eviter de delete 2 fois le meme fantomes) (intervalle temps entre declenchement)
@@ -55,6 +56,18 @@ AFRAME.registerComponent('touch', {
           let monElement = document.querySelector(`#${idElement}`);
           monElement.removeAttribute('touch');
           console.log('Suppression interaction sur ennemi : ', idElement)
+
+          // Stopper le son du fantome 
+          const soundComponent = this.el.components.sound;
+            if (soundComponent) {
+              soundComponent.stopSound();
+          }
+
+          const globalSound = document.querySelector('#touch-sound');
+          console.log(globalSound)
+            if (globalSound) {
+              globalSound.components.sound.playSound();
+          }
         }     
       }
     }

@@ -48,7 +48,7 @@
         id="hand-left"
         hand-controls="hand: left"
         laser-controls="hand: left"
-        raycaster="far: 15; objects: [touch]; showLine: true; lineColor: red"
+        raycaster="far: 15; objects: [touch] , [touch_sound] ; showLine: true; lineColor: red"
         position="0 1.5 0"
       >
       </a-entity>
@@ -57,7 +57,7 @@
         id="hand-right"
         hand-controls="hand: right"
         laser-controls="hand: right"
-        raycaster="far: 4000; objects: [clickable] ; showLine: true; lineColor: blue"
+        raycaster="far: 4000; objects: [clickable], [touch_sound]  ; showLine: true; lineColor: blue"
         position="0 1.5 0"
       >
       </a-entity>

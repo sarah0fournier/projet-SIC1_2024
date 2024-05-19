@@ -2,7 +2,7 @@
 
 AFRAME.registerComponent('touch_sound', {
   schema: {
-      color : {type : "color", default : "red"},
+      color : {type : "color", default : "green"},
       code: { type: 'int', default: '0'}, 
       paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
     },
@@ -21,12 +21,16 @@ AFRAME.registerComponent('touch_sound', {
   },
 
   onRaycasterIntersected: function (evt) {
-    console.log('qqqqq')
-
     // Rayon emis par curseur entre en colision avec element de la scene (bloc creer auto) 
     if (this.el.getAttribute('code') === '5') {
-      console.log('QQQQ')  
+      var sound = this.el.components.sound;
+      if (sound) {
+        sound.playSound();
+      } else {
+        console.warn('Sound component not found');
       }
+
+    }
   },
 
   onEnter : function (evt) {
