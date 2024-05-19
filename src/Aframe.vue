@@ -21,8 +21,7 @@
 <!-- Possible de gerer le temps avant de passer a une page (eg. curseur doit rester min 2 sec sur le bouton pour que sa change de page)-->
 
 <!-- Score disparait si met en mode VR  -->
-<!-- -> A essayer en isntallant package  'aframe-html-shader' puis donc three mais sans succes -->
-<!-- Quand on tue un fantome cela nous rajoute 2 pts alors que cela devrait en rajouter que un ? -->
+<!-- -> A essayer en installant package  'aframe-html-shader' puis donc three mais sans succes -->
 
 <!-- General -->
 <!-- Router pas sure de faire tout juste et chaque besoin de creer des scripts scripts setup - cheni tous sa -->
@@ -35,7 +34,7 @@
 
 <!-- Scene -->
 <!-- Faudrait deplacer les fonctions dans fichier js et etre coherent dans code entre vue ou non -->
-<!-- Faudrait faire un fichier js pour tout ce qui est déplacement de fantome, NG a pas réussi, je comprends rien à quel lien il faut faire ou? -->
+
 
 <!-- RESTE A FAIRE  -->
 <!-- faire une deuxiéme scène -> NG  1GLB FME et 1 GLBBlOSM  --> 
@@ -47,6 +46,16 @@
 <!-- cube = FOE -->
 <!-- Mettre au propre le code ? -->
 
+
+<!-- PROPOSITION DE QUESTION POUR MARDI 21.05.24 -->
+<!-- Afficher score VR -->
+<!-- Gestion du trigger + test sur ordi -->
+<!-- Pbl avec gestion score - pbl de liaison entre fichier -->
+<!-- THEORIQUE : Utilisation des vues dans a-frame (script VS script setup) -->
+<!-- THEORIQUE : Utilisation API comment gerer les accents -->
+
+
+
 <!-- A DEMANDER  -->
 <!-- Gérer le le clic manette ???? -->
 <!-- Comment ça fontionne pas compris l'exemple  -->
@@ -55,7 +64,6 @@
 <!-- exemple concret simple ? vide si possible ? -->
 <!-- Mardi après midi dispo -->
 
-<!-- Afficher les scores dans la VR -->
 
 
 
@@ -73,7 +81,6 @@
 <!-- Vue pour passer a une autre scene : apres chaque scene on affiche InfoLevel qui dit le prochain element a chercher -->
 
 <!-- DEBUT TODO (en plus de gerer problemes) -->
-<!-- Avoir des blocs qui vont contre utilisateur puis quand atterit sur utilisateur adapter le score (actuelement score sur le nbr bloc démoli) -->
 <!-- Creer une autre gdb -->
 <!-- Adapter la positon des primitives a trouver en fonction des gdb -->
 <!-- Interaction avec un autre bouton eg pour pouvoir mettre pause -->

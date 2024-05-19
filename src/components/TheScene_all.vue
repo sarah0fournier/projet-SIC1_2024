@@ -58,7 +58,7 @@
     <a-gltf-model v-if="allAssetsLoaded"  src="#Naye-glb" :gltf-model="'../assets/' + this.nameGDB" :position="this.positionGDB"></a-gltf-model> 
   
     <!-- Ciel (echelle à adapté en fonction taille des tuiles) -->
-    <a-sky src="../assets/sky.jpeg"  :scale="this.scaleSky"></a-sky>
+    <a-sky :src="'../assets/' + this.nameSky" :scale="this.scaleSky"></a-sky>
 
      <!-- Son global -->
     <a-sound id="touch-sound" src="../assets/touch.mp3" autoplay="false" volume="1.0"></a-sound>
@@ -104,104 +104,39 @@
   import '../aframe/clickable.js';
   import '../aframe/touch_sound.js';
   import '../aframe/touch.js';
+  import {addFoe, getRandomNumberInRange} from '../aframe/foe.js'; // Interaction fantome
+
 
   // Constantes globales de l'état du jeu
   const allAssetsLoaded = ref(false);
   const isPaused = ref(false); // Mise en pause
   const isWin = ref(false); // Hit-box trouvée 
-  
-  // Fonction pour ajouter un nouveau ennemi à la scène
-  function addFoe() {   
-    // Ajout d'un ennemis si pas encore gagner et si jeu pas en pause
-    if (isWin.value === false && isPaused.value === false) {
-      console.log('Un fantome a été ajouté : ', intervalCounter);
-      const scene = document.querySelector('a-scene');
-      const newCube = document.createElement('a-gltf-model');
-
-      const x = getRandomNumberInRange(-10, 10);
-      const y = getRandomNumberInRange(-3, 4); // Garder une hauteur constante
-      const z = getRandomNumberInRange(-10, 10);
-     
-      newCube.setAttribute('src', '#Ghost-glb')
-      newCube.setAttribute('position', `${x} ${y} ${z}`); // Position aléatoire du nouvel ennemi
-      newCube.setAttribute('scale', '0.35 0.35 0.35'); // Couleur du nouveau cube
-      newCube.setAttribute('look-at', '#POI'); // Orientation des ennemis vers la camera
-      newCube.setAttribute('sound', 'src: ../assets/Ghost.mp3; autoplay: true;');// Son de l'ennemi
-      newCube.setAttribute('touch', ''); 
-      newCube.setAttribute('code', '2');
-      newCube.setAttribute('paused', 'false');
-      newCube.setAttribute('id', "foe-" + intervalCounter); // Id de ennemi
-
-      // Animation du nouveau ennemi
-      const t = getRandomNumberInRange(3500, 6000);
-      console.log('Valeur de t :', t);
-      newCube.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`);
-      newCube.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`);
-      
-      // Ajout événement pour arrêter le son après la disparition
-      newCube.addEventListener('animationcomplete__disappear', () => {
-        const soundComponent = newCube.components.sound;
-        if (soundComponent) {
-          soundComponent.stopSound();
-        }
-      });
-
-      // Ajout événement pour mettre en pause le son après la disparition
-  
-
-      // Ajouter le nouvel ennemi à la scène
-      scene.appendChild(newCube); 
-      intervalCounter ++;
-
-      // Lancez le délai pour vérifier si le fantome est mort après la durée de l'animation
-      const cubeCheckTimeout = setTimeout(() => {
-        isFoeDead(intervalCounter);
-      }, t-100); 
-    }
-  }
-
-  // Fonction utilitaire pour générer un nombre aléatoire dans un intervalle donné
-  function getRandomNumberInRange(min, max) {
-    return Math.random() * (max - min) + min;
-  }
+  const score = ref(0);   // Gestions score
 
 
-  // Fonctions pour vérifier si le fantome a été supprimé 
-  function isFoeDead(intervalCounter) {
-    const cubeId = "foe-" + (intervalCounter-1); 
-    const cube = document.getElementById(cubeId);
-    if (cube && cube.hasAttribute('touch')) {
-      updateScore(-1);
-    }
-  }
-
+  // ?????????????????? Si utilise updateScoreFoe au lieu de updateScore dans la partie scene tout en haut sa pause pbl error comprend pas pk doit avoir un cheni entre les scores avec ces variables
+  // Score est independant des scenes --> idealement faudrait essayer de les ajouter dans un dictionaire de stockage de resultat
+  function updateScore(pt){
+      score.value += pt;
+  };
 
   // Variables pour les fantomes
-  let intervalCounter = 100; // Commencer intervalle numerotation a 100
+  let intervalCounter = ref(100); // Commencer intervalle numerotation a 100
   let intervalId; // Variable pour stocker l'ID de l'intervalle
   
   // Appeler la fonction addFoe toutes les x secondes
   let intervalTime = getRandomNumberInRange(4000, 8000)
   intervalId = setInterval(() => {
-    addFoe(); // Appel de la fonction pour ajouter un cube
+    addFoe(isWin, isPaused, intervalCounter, score); // Appel de la fonction pour ajouter un fantome
   }, intervalTime);
-
-
 
   // Surveiller le changement de isWin (quand niveau reussi veut plus ajouter de cube donc sort ajout cube intervalle)
   watch(isWin, (newValue) => {
     if (newValue) {
-      // Si isWin devient true, arrêter ajouter intervalle de cube
+      // Si isWin devient true, arrêter ajouter intervalle de fantome
       clearInterval(intervalId);
     }
   });
-
-
-  // Gestions score
-  const score = ref(0);
-  function updateScore(pt){
-      score.value += pt;
-  };
 
   // Changer etat du bouton pause
   function togglePause() {
@@ -218,10 +153,8 @@
 
 <!-- script setup new synthaxe dans Vue 3 : Si met si dessous dans script setup j'ai plus accès au curseur (seulement main souris). Script setup permet pas exportemenr directement module ES -->
 <script>
-  // API Suisse tourisme
-  import {fetchDataAttraction} from '../aframe/requeteAPI.js';
+  import {fetchDataAttraction} from '../aframe/requeteAPI.js'; 
   import { levels } from '../aframe/parametreScene.js';
-
 
   export default {
 
@@ -260,7 +193,7 @@
         attractions: null,
         scaleSky: null,
         positionPopup: null,
-
+        nameSky: null,
       }},
   
   mounted(){
@@ -278,6 +211,7 @@
 
     this.positionGDB = levels[this.levelIndex]['positionGDB']
     this.scaleSky = levels[this.levelIndex]['scaleSky']
+    this.nameSky = levels[this.levelIndex]['nameSky']
     this.positionPopup = levels[this.levelIndex]['positionPopup']
     
     // Appeler la fonction pour récupérer les données API swissTourisme dès que le composant est monté

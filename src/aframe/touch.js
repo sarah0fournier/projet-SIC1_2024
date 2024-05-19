@@ -8,12 +8,12 @@
 
 AFRAME.registerComponent('touch', {
   schema: {
-      color : {type : "color", default : "red"},
-      code: { type: 'int', default: '0'}, 
-      paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
+    color : {type : "color", default : "red"},
+    code: { type: 'int', default: '0'}, 
+    paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
     },
   init: function () {
-    console.log('initialisation touch')
+    // console.log('initialisation touch')
     this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
     this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
     this.onEnter = this.onEnter.bind(this);

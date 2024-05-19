@@ -6,18 +6,18 @@
 
 AFRAME.registerComponent('touch_sound', {
   schema: {
-      color : {type : "color", default : "green"},
-      code: { type: 'int', default: '0'}, 
-      paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
+    color : {type : "color", default : "green"},
+    code: { type: 'int', default: '0'}, 
+    paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
     },
   init: function () {
-    console.log('initialisation touchSound')
-      this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
-      this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
-      this.onEnter = this.onEnter.bind(this);
-      this.el.addEventListener('mouseenter', this.onEnter);
-      this.onLeave = this.onLeave.bind(this);
-      this.el.addEventListener('mouseleave', this.onLeave);
+    // console.log('initialisation touchSound')
+    this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
+    this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
+    this.onEnter = this.onEnter.bind(this);
+    this.el.addEventListener('mouseenter', this.onEnter);
+    this.onLeave = this.onLeave.bind(this);
+    this.el.addEventListener('mouseleave', this.onLeave);
   },
 
   update: function (oldData) {
