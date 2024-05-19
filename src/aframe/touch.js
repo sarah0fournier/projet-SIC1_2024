@@ -87,7 +87,7 @@ AFRAME.registerComponent('touch', {
   remove: function () {
       this.el.removeEventListener('mouseenter', this.onEnter);
       this.el.removeEventListener('mouseleave', this.onLeave);
-      clearInterval(this.raycasterInterval);
+      // clearInterval(this.raycasterInterval);
       
   },
 })
