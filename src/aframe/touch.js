@@ -42,7 +42,7 @@ AFRAME.registerComponent('touch', {
         let idElement = this.el.getAttribute('id');
         let monElement = document.querySelector(`#${idElement}`);
         monElement.removeAttribute('touch');
-        console.log('Suppression interaction sur bloc : ', idElement)
+        console.log('Suppression interaction sur ennemi : ', idElement)
       }     
     }
   },

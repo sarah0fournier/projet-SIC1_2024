@@ -101,10 +101,10 @@
   const isWin = ref(false); // Bloc a ete trouver 
   
   // Fonction pour ajouter un nouveau cube à la scène
-  function addCube() {   
+  function addFoe() {   
     // Ajouter un cube si pas encore gagner et si jeu pas en pause
     if (isWin.value === false && isPaused.value === false) {
-      console.log('Le cube a été ajouté : ', intervalCounter);
+      console.log('Un fantome a été ajouté : ', intervalCounter);
       const scene = document.querySelector('a-scene');
       const newCube = document.createElement('a-gltf-model');
 
@@ -126,15 +126,15 @@
       newCube.setAttribute('touch', '');
       newCube.setAttribute('code', '2');
       newCube.setAttribute('paused', 'false');
-      newCube.setAttribute('id', "box-" + intervalCounter); // Id du cube
+      newCube.setAttribute('id', "foe-" + intervalCounter); // Id du cube
       
       
       scene.appendChild(newCube); // Ajouter le nouveau cube à la scène
       intervalCounter ++;
 
-      // Lancez le délai pour vérifier si le cube est mort après la durée de l'animation
+      // Lancez le délai pour vérifier si le fantome est mort après la durée de l'animation
       const cubeCheckTimeout = setTimeout(() => {
-        isCubeDead(intervalCounter);
+        isFoeDead(intervalCounter);
       }, t-100); 
     }
   }
@@ -145,9 +145,9 @@
   }
 
 
-  // Fonctions pour vérifier si le cube a été supprimé 
-  function isCubeDead(intervalCounter) {
-    const cubeId = "box-" + (intervalCounter-1); 
+  // Fonctions pour vérifier si le fantome a été supprimé 
+  function isFoeDead(intervalCounter) {
+    const cubeId = "foe-" + (intervalCounter-1); 
     const cube = document.getElementById(cubeId);
     if (cube && cube.hasAttribute('touch')) {
       updateScore(-1);
@@ -159,10 +159,10 @@
   let intervalCounter = 100; // Commencer intervalle numerotation a 100
   let intervalId; // Variable pour stocker l'ID de l'intervalle
   
-  // Appeler la fonction addCube toutes les x secondes
+  // Appeler la fonction addFoe toutes les x secondes
   let intervalTime = getRandomNumberInRange(3500, 7000)
   intervalId = setInterval(() => {
-    addCube(); // Appel de la fonction pour ajouter un cube
+    addFoe(); // Appel de la fonction pour ajouter un cube
   }, intervalTime);
 
 
