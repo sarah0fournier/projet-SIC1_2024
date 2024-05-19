@@ -1,6 +1,9 @@
 <!--
-Ce composant représente information sur la rechercher un emplacement spécifique en Suisse.
+    =======================================================================================
+    Ce composant représente information sur la rechercher un emplacement spécifique en Suisse.
+    =======================================================================================
 -->
+
 
 <script setup>
     import { ref } from 'vue';

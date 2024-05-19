@@ -1,3 +1,9 @@
+<!--
+    =======================================================================================
+    Ce composant représente les parametres de la camera
+    =======================================================================================
+-->
+
 <script setup>
   import '../aframe/disable-in-vr.js';
   import '../aframe/hide-in-vr.js';

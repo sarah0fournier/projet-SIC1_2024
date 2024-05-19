@@ -1,5 +1,7 @@
 <!--
-Ce composant représente la page de depart ou l utilisateur peuvent commencer a lancer le jeu
+    =======================================================================================
+    Ce composant représente la page de depart ou l utilisateur peuvent commencer a lancer le jeu
+    =======================================================================================
 -->
 
 <script setup>

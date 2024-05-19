@@ -1,3 +1,9 @@
+/**
+ * =======================================================================================
+ * Configuration du router Vue.js pour gérer la navigation au sein de l'application.
+ * =======================================================================================
+ */
+
 import { createRouter, createWebHistory } from 'vue-router';
 import TheOnboarding from '../components/TheOnboarding.vue';
 import Home from '../components/TheHome.vue';
@@ -19,12 +25,12 @@ const routes = [
     component: Home,
   },
   {
-    path: '/scene:level',  //1 vue pour toute les scenes
+    path: '/scene:level',  //Realiser une vue pour toutes les scenes
     name: 'Scene',
     component: Scene,
   },
   {
-    path: '/InfoLevel:level',
+    path: '/InfoLevel:level', //Realiser une vue pour tous les levels
     name: 'InfoLevel',
     component: InfoLevel,
   },
