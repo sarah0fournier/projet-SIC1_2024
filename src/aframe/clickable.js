@@ -18,7 +18,7 @@
  */
 AFRAME.registerComponent('clickable', {
   schema: {
-      color : {type : "color", default : "red"},
+      color : {type : "color", default : "green"},
       code: { type: 'int', default: '0'}, 
       paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
   },
@@ -48,9 +48,19 @@ AFRAME.registerComponent('clickable', {
   onRaycasterIntersected: function (evt) {
 
     // Aller dans une prochaine vue via la methode nextPage
-    if(this.el.getAttribute('code') === '3'){
-      this.el.emit('nextPage');
-      console.log('Passage dans une prochaine scene / vue')
+    if (this.el.getAttribute('code') === '3') {
+      const globalSound = document.querySelector('#clickable-sound');
+      console.log(globalSound);
+      if (globalSound) {
+        // Jouer le son
+        globalSound.components.sound.playSound();
+      }
+      
+      // Attendre 1 seconde avant d'émettre l'événement nextPage
+      setTimeout(() => {
+        this.el.emit('nextPage');
+        console.log('Passage dans une prochaine scène / vue');
+      }, 100); // 
     }
 
     // Vérifier si le jeu n'est pas en pause (isPaused is 'true' => interaction en pause pour rehercher lieu,...)
@@ -59,9 +69,13 @@ AFRAME.registerComponent('clickable', {
       if(this.el.getAttribute('code') === '1'){
         console.log('Bravo vous avez trouver le lieu indiquer')
 
+        const finSound = document.querySelector('#fin-sound');
+        if (finSound) {
+          // Jouer le son
+          finSound.components.sound.playSound();
+        }
         // Emettre un evenement pour ouvrir popup
         this.el.emit('win');
-        // console.log('etat pause ', this.el.getAttribute('paused'))
 
         // Delete interaction clickable - Utiliser l'ID pour sélectionner l'élément dans le DOM
         let idElement = this.el.getAttribute('id');

@@ -35,6 +35,16 @@ AFRAME.registerComponent('touch_sound', {
       }
 
     }
+    // if (this.el.getAttribute('code') === '1') {
+    //   var finSound = this.el.components.sound;
+    //   console.log(finSound)
+    //   if ( finSound) {
+    //     finSound.playSound();
+    //   } else {
+    //     console.warn('Sound component not found');
+    //   }
+
+    // }
   },
 
   onEnter : function (evt) {

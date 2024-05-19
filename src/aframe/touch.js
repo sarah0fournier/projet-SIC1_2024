@@ -1,14 +1,13 @@
 /**
  * =======================================================================================
  * Composant A-Frame pour rendre un élément cliquable et réagir aux interactions utilisateur.
- * Ce composant clikacble est utiliser pour eliminer les fantomes au clicage. 
+ * Ce composant touch est utiliser pour eliminer les fantomes au passage du rayon  
  * =======================================================================================
  */
 
 
 AFRAME.registerComponent('touch', {
   schema: {
-    color : {type : "color", default : "red"},
     code: { type: 'int', default: '0'}, 
     paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
     },
@@ -26,9 +25,6 @@ AFRAME.registerComponent('touch', {
     
   },
   
-  // update: function (oldData) {
-
-  // },
 
   /**
    * Fonction appelée lorsqu'un rayon entre en intersection avec l'élément.
@@ -71,7 +67,6 @@ AFRAME.registerComponent('touch', {
           }
 
           const globalSound = document.querySelector('#touch-sound');
-          console.log(globalSound)
             if (globalSound) {
               globalSound.components.sound.playSound();
           }
@@ -87,15 +82,7 @@ AFRAME.registerComponent('touch', {
    * @param {Event} evt - Événement mouseenter.
    */
   onEnter : function (evt) {
-      const cursor = evt.detail.cursorEl;
-      if (cursor.getAttribute('raycaster').showLine) {
-      this.savedColor = cursor.getAttribute('raycaster').lineColor;
-      cursor.setAttribute('raycaster', 'lineColor', this.data.color);
-      } else {
-      this.savedColor = cursor.getAttribute('material').color;
-      cursor.setAttribute('material', 'color', this.data.color);
-      }
-      console.log('Curseur a changer de couleur')
+      
   },
 
   /**
@@ -103,12 +90,7 @@ AFRAME.registerComponent('touch', {
    * @param {Event} evt - Événement mouseleave.
    */
   onLeave : function(evt){
-      const cursor = evt.detail.cursorEl;
-      if (cursor.getAttribute('raycaster').showLine) {
-      cursor.setAttribute('raycaster', 'lineColor', this.savedColor);
-      } else {
-      cursor.setAttribute('material', 'color', this.savedColor);
-      }
+      
   },
 
   /**
@@ -117,7 +99,7 @@ AFRAME.registerComponent('touch', {
   remove: function () {
       this.el.removeEventListener('mouseenter', this.onEnter);
       this.el.removeEventListener('mouseleave', this.onLeave);  
-      // this.el.removeEventListener('raycaster-intersected', this.onLeave);   
+      this.el.removeEventListener('raycaster-intersected', this.onLeave);   
   },
 })
 

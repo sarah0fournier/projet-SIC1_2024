@@ -39,8 +39,11 @@
         `"
         @nextPage = "nextPage"
         >
-
+    
     <TheCameraRig />
+    
+    <!-- Son global -->
+    <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0"></a-sound>
     
         <!-- Plan pour afficher les informations de bienvenue et le bouton de démarrage du jeu -->
         <a-plane color="white"  width="10" height="6" position="0 1.5 -5">

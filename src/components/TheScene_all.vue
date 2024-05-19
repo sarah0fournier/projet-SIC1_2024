@@ -38,6 +38,11 @@
       <a-asset-item id="HotBalloon-glb" src="../assets/HotBalloon.glb"></a-asset-item>
       <a-asset-item id="Fire-glb" src="../assets/Fire.glb"></a-asset-item>
       <a-asset-item id="Cat-glb" src="../assets/Cat.glb"></a-asset-item>
+
+      <!-- Son global -->
+      <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0" poolSize="10"></a-sound>
+      <a-sound id="touch-sound" src="../assets/touch.mp3" autoplay="false" volume="1.0" poolSize="10"></a-sound>
+      <a-sound id="fin-sound" src="../assets/fin.mp3" autoplay="false" volume="1.0" poolSize="10"></a-sound>
     </a-assets>
 
 
@@ -51,7 +56,7 @@
 
     <a-gltf-model v-if="allAssetsLoaded" touch_sound code ='5' src="#Cat-glb" animation-mixer=""  gltf-model="../assets/Cat.glb" 
       position="0.28564 -0.11067 -0.26652" scale="0.02 0.02 0.02" rotation="0 -150 0" 
-      sound="src: ../assets/Cat.mp3; autoplay:false"
+      sound="src: ../assets/Cat.mp3; autoplay:false "
     ></a-gltf-model>
 
     <!-- Initialisation des GLB de paysages -->
@@ -60,13 +65,9 @@
     <!-- Ciel (echelle à adapté en fonction taille des tuiles) -->
     <a-sky :src="'../assets/' + this.nameSky" :scale="this.scaleSky"></a-sky>
 
-     <!-- Son global -->
-    <a-sound id="touch-sound" src="../assets/touch.mp3" autoplay="false" volume="1.0"></a-sound>
-
-
     <!-- Ajoutez 1 hit box à trouver-->
     <a-entity v-if="this.nameGDB">
-      <a-plane clickable v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
+      <a-plane  clickable v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
         color="gray" rotation="0 -140 0" position="132.8 -134.1 121.7" width="40" height="20" visible="false" 
       ></a-plane>
     </a-entity>

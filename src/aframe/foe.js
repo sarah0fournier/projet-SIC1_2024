@@ -1,16 +1,14 @@
 /**
  * =======================================================================================
- * Fichier de fonction pour ajout de fantomes 
+ * Fichier de fonction pour ajout de fantômes 
  * =======================================================================================
  */
-
 
 // Fonction pour ajouter un nouveau ennemi à la scène
 export function addFoe(isWin, isPaused, intervalCounter, score) {  
 
-    // Ajout d'un fantome si pas encore gagner et si jeu pas en pause
-    if (isWin.value === false && isPaused.value === false) {
-        console.log('Un fantome a été ajouté : ', intervalCounter.value);
+    // Ajout d'un fantôme si pas encore gagné et si le jeu n'est pas en pause
+    if (!isWin.value && !isPaused.value) {
         const scene = document.querySelector('a-scene');
         const newFoe = document.createElement('a-gltf-model');
 
@@ -18,41 +16,40 @@ export function addFoe(isWin, isPaused, intervalCounter, score) {
         const y = getRandomNumberInRange(-3, 4); // Garder une hauteur constante
         const z = getRandomNumberInRange(-10, 10);
         
-        newFoe.setAttribute('src', '#Ghost-glb')
+        newFoe.setAttribute('src', '#Ghost-glb');
         newFoe.setAttribute('position', `${x} ${y} ${z}`); // Position aléatoire du nouvel ennemi
-        newFoe.setAttribute('scale', '0.35 0.35 0.35'); // Couleur du nouveau cube
-        newFoe.setAttribute('look-at', '#POI'); // Orientation des ennemis vers la camera
-        newFoe.setAttribute('sound', 'src: ../assets/Ghost.mp3; autoplay: true;');// Son de l'ennemi
+        newFoe.setAttribute('scale', '0.35 0.35 0.35'); // Taille du nouveau fantôme
+        newFoe.setAttribute('look-at', '#POI'); // Orientation des fantômes vers la caméra
+        newFoe.setAttribute('sound', 'src: ../assets/Ghost.mp3; autoplay: true;'); // Son du fantôme
         newFoe.setAttribute('touch', ''); 
         newFoe.setAttribute('code', '2');
         newFoe.setAttribute('paused', 'false');
-        newFoe.setAttribute('id', "foe-" + intervalCounter.value); // Id de ennemi
+        newFoe.setAttribute('id', "foe-" + intervalCounter.value); // ID de l'ennemi
 
-        // Animation du nouveau ennemi
+        // Animation du nouveau fantôme
         const t = getRandomNumberInRange(3500, 6000);
-        console.log('Valeur de t :', t);
         newFoe.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`);
         newFoe.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`);
         
-        // Ajout événement pour arrêter le son après la disparition
+        // Ajout d'un événement pour arrêter le son après la disparition
         newFoe.addEventListener('animationcomplete__disappear', () => {
-        const soundComponent = newFoe.components.sound;
-        if (soundComponent) {
-            soundComponent.stopSound();
-        }
+            const soundComponent = newFoe.components.sound;
+            if (soundComponent) {
+                soundComponent.stopSound();
+            }
         });
-
-        // Ajout événement pour mettre en pause le son après la disparition
-
 
         // Ajouter le nouvel ennemi à la scène
         scene.appendChild(newFoe); 
-        intervalCounter.value ++;
+        intervalCounter.value++;
 
-        // Lancez le délai pour vérifier si le fantome est mort après la durée de l'animation
+        // Lancer le délai pour vérifier si le fantôme est mort après la durée de l'animation
         const cubeCheckTimeout = setTimeout(() => {
-        isFoeDead(score, intervalCounter);
-        }, t-100); 
+            isFoeDead(score, intervalCounter);
+        }, t - 100); 
+        
+        // Mettre à jour le son en fonction de l'état de pause du jeu -> fonctionne pas
+        updateSoundState(isPaused.value, newFoe);
     }
 }
 
@@ -61,17 +58,29 @@ export function getRandomNumberInRange(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-// Fonctions pour vérifier si le fantome a été supprimé 
+// Fonction pour vérifier si le fantôme a été touché
 export function isFoeDead(score, intervalCounter) {
-    const foeId = "foe-" + (intervalCounter.value-1); 
+    const foeId = "foe-" + (intervalCounter.value - 1); 
     const foe = document.getElementById(foeId);
     if (foe && foe.hasAttribute('touch')) {
-        // console.log('Mise a jour du score')
         updateScoreFoe(score, -1);
     }
 }
     
-export function updateScoreFoe(score, pt){
+// Fonction pour mettre à jour le score en fonction des points
+export function updateScoreFoe(score, pt) {
     score.value += pt;
-    console.log('Etat du score : ' , score.value)
-};
+    console.log('Etat du score : ' , score.value);
+}
+
+// Fonction pour mettre à jour le son en fonction de l'état de pause du jeu
+function updateSoundState(isPaused, newFoe) {
+    const soundComponent = newFoe.components.sound;
+    if (soundComponent) {
+        if (isPaused) {
+            soundComponent.pauseSound();
+        } else {
+            soundComponent.playSound();
+        }
+    }
+}

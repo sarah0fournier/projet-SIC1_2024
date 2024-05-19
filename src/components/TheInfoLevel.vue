@@ -71,6 +71,9 @@
 
         <TheCameraRig />
 
+        <!-- Son global -->
+        <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0"></a-sound>
+
         <!-- Popup du prochain level -->
         <a-plane v-if="gameStarted" color="white"  width="10" height="6" position="0 1.5 -5">
             <a-text :value="'Level ' + (currentLevel + 1).toString()" color="black" position="0 2 0" align='center' scale="1.5 1.5 1.5"></a-text>
