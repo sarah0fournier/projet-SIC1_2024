@@ -1,26 +1,50 @@
-// Passe a la page apres 
+/**
+ * =======================================================================================
+ * Composant A-Frame pour rendre un élément cliquable et réagir aux interactions utilisateur.
+ * Ce composant clikacble est utiliser pour passer a une autre page.
+ * =======================================================================================
+ */
 
+
+/**
+ * Composant A-Frame pour rendre un élément cliquable et réagir aux interactions utilisateur.
+ * @module clickable
+ * @param {object} schema - Schéma du composant.
+ * @param {string} schema.color - Couleur par défaut du curseur lorsqu'il survole l'élément.
+ * @param {number} schema.code - Code associé à l'élément pour déclencher des actions spécifiques.
+ *                               code = 3 : Curseur passer sur un bouton pour aller a une prochaine page
+ *                               code = 1 : Curseur passer sur le lieu a trouver
+ * @param {boolean} schema.paused - État du jeu (en pause ou non).
+ */
 AFRAME.registerComponent('clickable', {
   schema: {
       color : {type : "color", default : "red"},
       code: { type: 'int', default: '0'}, 
       paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
-    },
+  },
+
+  /**
+   * Fonction d'initialisation du composant.
+  */
   init: function () {
-    console.log('initialisation clickable')
-
-      this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
-      this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
-      this.onEnter = this.onEnter.bind(this);
-      this.el.addEventListener('mouseenter', this.onEnter);
-      this.onLeave = this.onLeave.bind(this);
-      this.el.addEventListener('mouseleave', this.onLeave);
+    // console.log('Initialisation clickable')
+    this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
+    this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
+    this.onEnter = this.onEnter.bind(this);
+    this.el.addEventListener('mouseenter', this.onEnter);
+    this.onLeave = this.onLeave.bind(this);
+    this.el.addEventListener('mouseleave', this.onLeave);
   },
 
-  update: function (oldData) {
+  // update: function (oldData) {
 
-  },
+  // },
 
+
+  /**
+   * Fonction appelée lorsqu'un rayon entre en intersection avec l'élément.
+   * @param {Event} evt - Événement raycaster-intersected.
+   */
   onRaycasterIntersected: function (evt) {
 
     // Aller dans une prochaine vue via la methode nextPage
@@ -29,9 +53,7 @@ AFRAME.registerComponent('clickable', {
       console.log('Passage dans une prochaine scene / vue')
     }
 
-    // Vérifier si le jeu n'est pas en pause (Si en pause veut pas interaction de tuer des bloc, chercher lieu,...)
-    // Si jeu en pause interaction changement couleur curseur fonctionne tjrs mais pas les autres actions 
-    // Mettre paused aussi pour code 3 ??? Si met aussi pour code 3 alors vaut mettre paused dans les autres vue aussi --> faire popup qui est tranmis de vue en vue ?
+    // Vérifier si le jeu n'est pas en pause (isPaused is 'true' => interaction en pause pour rehercher lieu,...)
     if (this.el.getAttribute('paused') === 'false') { 
 
       if(this.el.getAttribute('code') === '1'){
@@ -39,7 +61,8 @@ AFRAME.registerComponent('clickable', {
 
         // Emettre un evenement pour ouvrir popup
         this.el.emit('win');
-        console.log('etat pause ', this.el.getAttribute('paused'))
+        // console.log('etat pause ', this.el.getAttribute('paused'))
+
         // Delete interaction clickable - Utiliser l'ID pour sélectionner l'élément dans le DOM
         let idElement = this.el.getAttribute('id');
         let monElement = document.querySelector(`#${idElement}`);
@@ -49,6 +72,10 @@ AFRAME.registerComponent('clickable', {
     }
   },
 
+  /**
+   * Fonction appelée lorsque le curseur entre dans la zone de l'élément.
+   * @param {Event} evt - Événement mouseenter.
+   */
   onEnter : function (evt) {
       const cursor = evt.detail.cursorEl;
       if (cursor.getAttribute('raycaster').showLine) {
@@ -61,6 +88,10 @@ AFRAME.registerComponent('clickable', {
       console.log('Curseur a changer de couleur')
   },
 
+  /**
+   * Fonction appelée lorsque le curseur quitte la zone de l'élément.
+   * @param {Event} evt - Événement mouseleave.
+   */
   onLeave : function(evt){
       const cursor = evt.detail.cursorEl;
       if (cursor.getAttribute('raycaster').showLine) {
@@ -70,10 +101,13 @@ AFRAME.registerComponent('clickable', {
       }
   },
 
+  /**
+   * Fonction de suppression du composant.
+   */
   remove: function () {
       this.el.removeEventListener('mouseenter', this.onEnter);
       this.el.removeEventListener('mouseleave', this.onLeave);
-      
+      this.el.removeEventListener('raycaster-intersected', this.onLeave);
   },
 })
 

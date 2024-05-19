@@ -192,7 +192,7 @@
 <!-- script setup new synthaxe dans Vue 3 : Si met si dessous dans script setup j'ai plus accès au curseur (seulement main souris). Script setup permet pas exportemenr directement module ES -->
 <script>
   // API Suisse tourisme
-  import {getDynamicBoundingBox} from '../aframe/requeteAPI.js';
+  import {fetchDataAttraction} from '../aframe/requeteAPI.js';
   import { levels } from '../aframe/parametreScene.js';
 
 
@@ -215,7 +215,7 @@
       try {
         // Récupérer les données '46.44124, 6.98694,46.41935, 6.95736'
         console.log(levels[this.levelIndex]['position'])
-        const data = await getDynamicBoundingBox(levels[this.levelIndex]['position']);
+        const data = await fetchDataAttraction(levels[this.levelIndex]['position']);
         // Mettre à jour la valeur de la variable réactive avec les nouvelles données
         this.attractions = data;
         } catch (error) {
