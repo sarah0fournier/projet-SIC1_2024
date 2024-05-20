@@ -51,7 +51,7 @@
             <a-text value="But du jeu : Trouver l'emplacement de la location mentionner"  color="black" align="center" position="0 0.5 0"></a-text>
 
             <!-- Bouton de démarrage du jeu -->
-            <a-plane clickable code="3" color="grey" width="5" height="1" align="center" position="0 -1 0" opacity="0.5">
+            <a-plane clickable code="3" color="grey" width="5" height="1" align="center" position="0 -1 0.1" opacity="0.5">
                 <a-text value="Commencer le jeu !" color="black" position="-1 0 0">
                 </a-text>
             </a-plane>

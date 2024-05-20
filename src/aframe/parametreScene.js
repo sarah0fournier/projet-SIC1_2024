@@ -28,8 +28,8 @@ const levels = [
     { name: "Rocher de Naye (VD)", number: 1, position:'46.44124, 6.98694,46.41935, 6.95736', data:'Naye_GLB.glb', 
         positionGDB: "200 -600 0", scaleSky: "5 5 5", nameSky:"sky.jpeg", positionPopup:"0 0.5 -3" },
         
-    { name: "Autre lieu du niveau a definir", number: 2, position:'	46.41912, 6.91848,46.41027, 6.93335', data:'Naye_GLB.glb', 
-        positionGDB: "200 -600 0", scaleSky: "5 5 5", nameSky:"Sunset_Panorama_by_JohnnySasaki20.jpg", positionPopup:"0 1.5 -3"   },
+    { name: "Autre lieu du niveau a def", number: 2, position:'	46.41912, 6.91848,46.41027, 6.93335', data:'Bellinzone.glb', 
+        positionGDB: "300 -300 -300", scaleSky: "5 5 5", nameSky:"sky.jpeg", positionPopup:"0 1.5 -3"   },
         
     { name: "Autre lieu du niveau a definir 3", number: 3, position:'	46.41912, 6.91848,46.41027, 6.93335', data:'Naye_GLB.glb', 
         positionGDB: "200 -600 0", scaleSky: "5 5 5", nameSky:"sky.jpeg",  positionPopup:"0 1.5 -3"   },

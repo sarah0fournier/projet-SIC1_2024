@@ -80,7 +80,7 @@
             <a-text :value="'Emplacement a rechercher : ' + levels[currentLevel].name" color="black" position="0 1 0"align='center'></a-text>
 
             <!-- Bouton de démarrage du niveau -->
-            <a-plane clickable code="3" color="grey" width="5" height="1" align="center" position="0 -1 0" opacity="0.5">
+            <a-plane clickable code="3" color="grey" width="5" height="1" align="center" position="0 -1 0.1" opacity="0.5">
                 <a-text value="C'est parti !" color="black" position="0 0 0" align='center'></a-text>
             </a-plane>
         </a-plane>

@@ -89,7 +89,7 @@
 
       <!-- Bouton  passage au prochaine level-->
       <!-- :paused="isPaused" a mettre si definit dans le if de clikable que jeu peut etre en pause aussi quand on voit info level... -->
-      <a-plane clickable code="3" :paused="isPaused" color="grey" width="2" height="0.25" align="center" position="0 -1 0">
+      <a-plane clickable code="3" :paused="isPaused" color="grey" width="2" height="0.25" align="center" position="0 -1 0.1">
         <a-text :value="'Prochain level :' + this.levelNext" color="black" position="0 0 0"  align="center" scale="0.5 0.5 0.5"></a-text>
       </a-plane>
     </a-plane>
