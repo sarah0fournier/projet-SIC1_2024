@@ -72,6 +72,7 @@ AFRAME.registerComponent('clickable', {
         this.el.emit('win');
 
         // Delete interaction clickable - Utiliser l'ID pour sélectionner l'élément dans le DOM
+        // A NG : Permet enelver interaction sur le hit-box Si oui adapter les comm car c'est pas coeherent la (attention avec les copier coller entre file js)??????
         let idElement = this.el.getAttribute('id');
         let monElement = document.querySelector(`#${idElement}`);
         monElement.removeAttribute('clickable');
