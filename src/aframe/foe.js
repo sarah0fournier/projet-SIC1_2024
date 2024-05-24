@@ -21,15 +21,21 @@ export function addFoe(isWin, isPaused, intervalCounter, score) {
         newFoe.setAttribute('scale', '0.35 0.35 0.35'); // Taille du nouveau fantôme
         newFoe.setAttribute('look-at', '#POI'); // Orientation des fantômes vers la caméra
         newFoe.setAttribute('sound', 'src: ../assets/Ghost.mp3; autoplay: true;'); // Son du fantôme
-        newFoe.setAttribute('touch', ''); 
+        newFoe.setAttribute('touch', '');  // Enlever pour eviter les conflits avec "killable"
+        // newFoe.setAttribute('killable', '');
         newFoe.setAttribute('code', '2');
         newFoe.setAttribute('paused', 'false');
         newFoe.setAttribute('id', "foe-" + intervalCounter.value); // ID de l'ennemi
 
         // Animation du nouveau fantôme
         const t = getRandomNumberInRange(3500, 6000);
-        newFoe.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`);
-        newFoe.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`);
+        newFoe.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`); // move : se deplace
+        newFoe.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`); 
+            // Param : 
+                // to :  0 0 0 : taile final de element sur tous les axes (rendra invisible)
+                // dur : duree animation
+                // delay : delait avant commencer animation 
+                // disappear : disparait
         
         // Ajout d'un événement pour arrêter le son après la disparition
         newFoe.addEventListener('animationcomplete__disappear', () => {
@@ -70,7 +76,7 @@ export function isFoeDead(score, intervalCounter) {
 // Fonction pour mettre à jour le score en fonction des points
 export function updateScoreFoe(score, pt) {
     score.value += pt;
-    console.log('Etat du score : ' , score.value);
+    // console.log('Etat du score : ' , score.value);
 }
 
 // Fonction pour mettre à jour le son en fonction de l'état de pause du jeu

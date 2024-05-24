@@ -4,11 +4,10 @@
     =======================================================================================
 -->
 
-
 <script setup>
     import { ref } from 'vue';
     import TheCameraRig from './TheCameraRig.vue';
-    const loaded = ref(false);
+    const loaded = ref(false); // Inutile, peut delete ?
 </script>
 
 <script>
@@ -17,46 +16,45 @@
     export default {
         data() {
             return {
-            gameStarted: false,
-            currentLevel: 0, // Indice du niveau actuel dans le tableau
+                gameStarted: false,
+                currentLevel: 0, // Indice du niveau actuel dans le tableau
         }},
-    methods: {
-        nextPage() {
-            // Aller a la scene du level
-            if(this.gameStarted){
-                console.log("Bienvenue sur " + levels[this.currentLevel].name + " Level : " + levels[this.currentLevel].number);
-                let level = levels[this.currentLevel].number
-                this.$router.push({ name: 'Scene', params: { level: ":" + level } });           
+        methods: {
+            nextPage() {
+                // Aller a la scene du level
+                if(this.gameStarted){
+                    // console.log("Bienvenue sur " + levels[this.currentLevel].name + " Level : " + levels[this.currentLevel].number);
+                    let level = levels[this.currentLevel].number
+                    this.$router.push({ name: 'Scene', params: { level: ":" + level } });           
+                }
+                // Aller a la page home
+                else{
+                    // console.log('Fin du jeux')
+                    this.$router.push({ name: 'Home'});          
+                }
             }
-            // Aller a la page home
+        },
+        
+        mounted() {
+            // Récupérer le level à partir des paramètres de l'URL
+            let levelParam = this.$route.params.level.slice(1); // eg. :2 --> garder 2
+
+            // Trouver l'indice du niveau dans le tableau des niveaux
+            let levelNumber = parseInt(levelParam);
+            let levelIndex = levels.findIndex(level => level.number === levelNumber);
+
+            if (levelIndex !== -1) {
+                this.currentLevel = levelIndex;
+                // Démarrer le jeu une fois que le niveau a été initialisé
+                this.gameStarted = true;
+            }
             else{
-                console.log('Fin du jeux')
-                this.$router.push({ name: 'Home'});          
-            }
-        }
-    },
-    
-    mounted() {
-        // Récupérer le level à partir des paramètres de l'URL
-        let levelParam = this.$route.params.level.slice(1); // eg. :2 --> garder 2
-
-        // Trouver l'indice du niveau dans le tableau des niveaux
-        let levelNumber = parseInt(levelParam);
-        let levelIndex = levels.findIndex(level => level.number === levelNumber);
-
-
-        if (levelIndex !== -1) {
-            this.currentLevel = levelIndex;
-            // Démarrer le jeu une fois que le niveau a été initialisé
-            this.gameStarted = true;
-        }
-        else{
-            this.currentLevel = levelParam;
-            // Index ne se trouve pas dans la liste des scenes levels
-            this.gameStarted = false;
-        } 
-    },
-  };
+                this.currentLevel = levelParam;
+                // Index ne se trouve pas dans la liste des scenes levels
+                this.gameStarted = false;
+            } 
+        },
+    };
 </script>
 
 <template>
@@ -87,7 +85,7 @@
 
         <!-- Popup de la fin des levels -->
         <a-plane v-if="!gameStarted" color="white"  width="10" height="6" position="0 1.5 -5">
-            <a-text value="Bravo vous a terminer les levels" color="black" position="0 2 0" align='center' scale="1.5 1.5 1.5"></a-text>
+            <a-text value="Bravo vous avez terminer le jeux ! " color="black" position="0 2 0" align='center' scale="1.5 1.5 1.5"></a-text>
             
             <!-- Bouton de retour à la page d'accueil -->
             <a-plane clickable code="3" color="grey" width="5" height="1" align="center" position="0 -1 0" opacity="0.5">
@@ -97,8 +95,3 @@
         
     </a-scene>
 </template>
-
-<style>
-
-
-</style>

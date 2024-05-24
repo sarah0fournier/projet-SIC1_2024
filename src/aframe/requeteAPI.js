@@ -32,7 +32,7 @@ export async function get(lang, bbox, path) {
         'x-api-key': API_KEY
       }
     });
-    console.log('Repose requete : ', response)
+    // console.log('Repose requete : ', response)
     return response.data;
   } catch (error) {
     console.error('Erreur lors de la récupération des données :', error);
@@ -91,30 +91,6 @@ export async function parsingData(jsonData) {
   });
 
   const totalAttractions = attractions.length;
-  console.log(`Nombre total d'attractions : ${totalAttractions}`);
+  // console.log(`Nombre total d'attractions : ${totalAttractions}`);
   return attractions
 }
-
-
-
-
-
-
-// A DELETE CE QUI EST DESSOUS ?
-  /**
- * Récupère les tours touristiques dans une certaine langue et une certaine zone géographique.
- * 
- * @param {string} lang - Langue de la requête ('fr-CH', 'de-CH', etc.).
- * @param {string} bbox - Coordonnee geographique de la boundingBox pour API Switzerland Tourisme 
- *                        avec les coins N-O et S-E aux format 'latitude_N0, longitude_N0, latitude2_SE, longitude2_SE'
- * @returns {Promise<Object[]>} - Les données des attractions touristiques.
- */
-// export async function fetchTours(lang, bbox) {
-//   const data = await get(lang, bbox,'tours')
-//   return data
-// }
-
-// export async function getDynamicBoundingBox(bbox){
-//   let data_json = await fetchDataAttraction(bbox); 
-//   return data_json
-// }

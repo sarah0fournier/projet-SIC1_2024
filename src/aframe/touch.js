@@ -9,10 +9,9 @@
 AFRAME.registerComponent('touch', {
   schema: {
     code: { type: 'int', default: '0'}, 
-    paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
+    paused: { type: 'boolean', default: 'false'}, // Par defaut jeu pas en pause
     },
   init: function () {
-    // console.log('initialisation touch')
     this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
     this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
     this.onEnter = this.onEnter.bind(this);
@@ -34,7 +33,6 @@ AFRAME.registerComponent('touch', {
 
     // Récupérez le temps actuel
     var currentTime = performance.now(); 
-    // console.log('currentTime ', currentTime)
 
     // Vérifiez si suffisamment de temps s'est écoulé depuis le dernier déclenchement (eviter de delete 2 fois le meme fantomes) (intervalle temps entre declenchement)
     if (currentTime - this.lastRaycasterEventTime < 1000) { // 1000 milliseconds = 1 secondes
@@ -46,7 +44,7 @@ AFRAME.registerComponent('touch', {
 
         // Rayon emis par curseur entre en colision avec element de la scene (bloc creer auto) 
         if (this.el.getAttribute('code') === '2') {
-          console.log('Bravo vous supprimez des blocs')
+          // console.log('Bravo vous supprimez des blocs')
 
           // Faites disparaître la boîte en ajustant sa propriété `visible` à `false`
           this.el.setAttribute('visible', 'false');
@@ -58,7 +56,7 @@ AFRAME.registerComponent('touch', {
           let idElement = this.el.getAttribute('id');
           let monElement = document.querySelector(`#${idElement}`);
           monElement.removeAttribute('touch');
-          console.log('Suppression interaction sur ennemi : ', idElement)
+          // console.log('Suppression interaction sur ennemi : ', idElement)
 
           // Stopper le son du fantome 
           const soundComponent = this.el.components.sound;
@@ -97,9 +95,9 @@ AFRAME.registerComponent('touch', {
    * Fonction de suppression du composant.
    */
   remove: function () {
-      this.el.removeEventListener('mouseenter', this.onEnter);
-      this.el.removeEventListener('mouseleave', this.onLeave);  
-      this.el.removeEventListener('raycaster-intersected', this.onLeave);   
+    this.el.removeEventListener('mouseenter', this.onEnter);
+    this.el.removeEventListener('mouseleave', this.onLeave);  
+    this.el.removeEventListener('raycaster-intersected', this.onLeave);   
   },
 })
 

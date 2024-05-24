@@ -27,7 +27,6 @@ AFRAME.registerComponent('clickable', {
    * Fonction d'initialisation du composant.
   */
   init: function () {
-    // console.log('Initialisation clickable')
     this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
     this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
     this.onEnter = this.onEnter.bind(this);
@@ -35,10 +34,6 @@ AFRAME.registerComponent('clickable', {
     this.onLeave = this.onLeave.bind(this);
     this.el.addEventListener('mouseleave', this.onLeave);
   },
-
-  // update: function (oldData) {
-
-  // },
 
 
   /**
@@ -50,7 +45,6 @@ AFRAME.registerComponent('clickable', {
     // Aller dans une prochaine vue via la methode nextPage
     if (this.el.getAttribute('code') === '3') {
       const globalSound = document.querySelector('#clickable-sound');
-      console.log(globalSound);
       if (globalSound) {
         // Jouer le son
         globalSound.components.sound.playSound();
@@ -59,7 +53,7 @@ AFRAME.registerComponent('clickable', {
       // Attendre 1 seconde avant d'émettre l'événement nextPage
       setTimeout(() => {
         this.el.emit('nextPage');
-        console.log('Passage dans une prochaine scène / vue');
+        // console.log('Passage dans une prochaine scène / vue');
       }, 100); // 
     }
 
@@ -67,7 +61,7 @@ AFRAME.registerComponent('clickable', {
     if (this.el.getAttribute('paused') === 'false') { 
 
       if(this.el.getAttribute('code') === '1'){
-        console.log('Bravo vous avez trouver le lieu indiquer')
+        // console.log('Bravo vous avez trouver le lieu indiquer')
 
         const finSound = document.querySelector('#fin-sound');
         if (finSound) {
@@ -81,7 +75,7 @@ AFRAME.registerComponent('clickable', {
         let idElement = this.el.getAttribute('id');
         let monElement = document.querySelector(`#${idElement}`);
         monElement.removeAttribute('clickable');
-        console.log('Suppression interaction sur bloc : ', idElement)
+        // console.log('Suppression interaction sur bloc : ', idElement)
       }
     }
   },
@@ -91,15 +85,14 @@ AFRAME.registerComponent('clickable', {
    * @param {Event} evt - Événement mouseenter.
    */
   onEnter : function (evt) {
-      const cursor = evt.detail.cursorEl;
-      if (cursor.getAttribute('raycaster').showLine) {
+    const cursor = evt.detail.cursorEl;
+    if (cursor.getAttribute('raycaster').showLine) {
       this.savedColor = cursor.getAttribute('raycaster').lineColor;
       cursor.setAttribute('raycaster', 'lineColor', this.data.color);
-      } else {
+    } else {
       this.savedColor = cursor.getAttribute('material').color;
       cursor.setAttribute('material', 'color', this.data.color);
-      }
-      console.log('Curseur a changer de couleur')
+    }
   },
 
   /**
@@ -107,20 +100,20 @@ AFRAME.registerComponent('clickable', {
    * @param {Event} evt - Événement mouseleave.
    */
   onLeave : function(evt){
-      const cursor = evt.detail.cursorEl;
-      if (cursor.getAttribute('raycaster').showLine) {
+    const cursor = evt.detail.cursorEl;
+    if (cursor.getAttribute('raycaster').showLine) {
       cursor.setAttribute('raycaster', 'lineColor', this.savedColor);
-      } else {
+    } else {
       cursor.setAttribute('material', 'color', this.savedColor);
-      }
+    }
   },
 
   /**
    * Fonction de suppression du composant.
    */
   remove: function () {
-      this.el.removeEventListener('mouseenter', this.onEnter);
-      this.el.removeEventListener('mouseleave', this.onLeave);
+    this.el.removeEventListener('mouseenter', this.onEnter);
+    this.el.removeEventListener('mouseleave', this.onLeave);
   },
 })
 

@@ -1,6 +1,6 @@
 <!--
     =======================================================================================
-    Ce composant représente la page de depart ou l utilisateur peuvent commencer a lancer le jeu
+    Ce composant représente la page de depart ou l utilisateur peut commencer a lancer le jeu
     =======================================================================================
 -->
 
@@ -12,21 +12,21 @@
     import '../aframe/touch.js';
 
     // Indique si la scène est chargée
-    const loaded = ref(false);
+    const loaded = ref(false); // Inutile, peut delete ?
 </script>
 
 <script>
     export default {
         data() {
             return {
-            gameStarted: false // Indique si le jeu a commencé
+            gameStarted: false
         }},
-    methods: {
-        // Gérer le démarrage du jeu
-        nextPage() {
-            this.gameStarted = true;
-            this.$router.push({ name: 'InfoLevel', params: { level: ":1" } });           
-        }
+        methods: {
+            // Gérer le démarrage du jeu
+            nextPage() {
+                this.gameStarted = true;
+                this.$router.push({ name: 'InfoLevel', params: { level: ":1" } });           
+            }
     }};
 </script>
 
@@ -40,10 +40,11 @@
         @nextPage = "nextPage"
         >
     
-    <TheCameraRig />
+        <TheCameraRig />
     
-    <!-- Son global -->
-    <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0"></a-sound>
+        <!-- Son global -->
+        <!-- param autoplay : son commence pas des le chargement de audio -->
+        <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0"></a-sound>
     
         <!-- Plan pour afficher les informations de bienvenue et le bouton de démarrage du jeu -->
         <a-plane color="white"  width="10" height="6" position="0 1.5 -5">
@@ -52,15 +53,9 @@
 
             <!-- Bouton de démarrage du jeu -->
             <a-plane clickable code="3" color="grey" width="5" height="1" align="center" position="0 -1 0.1" opacity="0.5">
-                <a-text value="Commencer le jeu !" color="black" position="-1 0 0">
-                </a-text>
+                <a-text value="Commencer le jeu !" color="black" position="-1 0 0"></a-text>
             </a-plane>
         </a-plane>
 
     </a-scene>
 </template>
-
-<style>
-
-
-</style>

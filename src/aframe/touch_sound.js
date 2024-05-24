@@ -11,7 +11,6 @@ AFRAME.registerComponent('touch_sound', {
     paused: { type: 'boolean', default: 'false'}, // Jeu par defaut pas en pause
     },
   init: function () {
-    // console.log('initialisation touchSound')
     this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
     this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
     this.onEnter = this.onEnter.bind(this);
@@ -21,7 +20,7 @@ AFRAME.registerComponent('touch_sound', {
   },
 
   update: function (oldData) {
-    console.log('touchSound update', oldData, this.data);
+    // console.log('touchSound update', oldData, this.data);
   },
 
   onRaycasterIntersected: function (evt) {
@@ -48,26 +47,23 @@ AFRAME.registerComponent('touch_sound', {
   },
 
   onEnter : function (evt) {
-    console.log('mouseenter event');
-      const cursor = evt.detail.cursorEl;
-      if (cursor.getAttribute('raycaster').showLine) {
+    const cursor = evt.detail.cursorEl;
+    if (cursor.getAttribute('raycaster').showLine) {
       this.savedColor = cursor.getAttribute('raycaster').lineColor;
       cursor.setAttribute('raycaster', 'lineColor', this.data.color);
-      } else {
+    } else {
       this.savedColor = cursor.getAttribute('material').color;
       cursor.setAttribute('material', 'color', this.data.color);
-      }
-      console.log('Curseur a changer de couleur')
+    }
   },
 
   onLeave : function(evt){
-    console.log('mouseleave event');
-      const cursor = evt.detail.cursorEl;
-      if (cursor.getAttribute('raycaster').showLine) {
+    const cursor = evt.detail.cursorEl;
+    if (cursor.getAttribute('raycaster').showLine) {
       cursor.setAttribute('raycaster', 'lineColor', this.savedColor);
-      } else {
+    } else {
       cursor.setAttribute('material', 'color', this.savedColor);
-      }
+    }
   },
 
   remove: function () {
