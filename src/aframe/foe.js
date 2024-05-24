@@ -51,7 +51,7 @@ export function addFoe(isWin, isPaused, intervalCounter, score) {
 
         // Lancer le délai pour vérifier si le fantôme est mort après la durée de l'animation
         const cubeCheckTimeout = setTimeout(() => {
-            isFoeDead(score, intervalCounter);
+            isFoeDead(score, intervalCounter, isPaused);
         }, t - 100); 
         
         // Mettre à jour le son en fonction de l'état de pause du jeu -> fonctionne pas
@@ -65,18 +65,20 @@ export function getRandomNumberInRange(min, max) {
 }
 
 // Fonction pour vérifier si le fantôme a été touché
-export function isFoeDead(score, intervalCounter) {
+export function isFoeDead(score, intervalCounter, isPaused) {
     const foeId = "foe-" + (intervalCounter.value - 1); 
     const foe = document.getElementById(foeId);
     if (foe && foe.hasAttribute('touch')) {
-        updateScoreFoe(score, -1);
+        updateScoreFoe(score, -1, isPaused);
     }
 }
     
 // Fonction pour mettre à jour le score en fonction des points
-export function updateScoreFoe(score, pt) {
-    score.value += pt;
-    // console.log('Etat du score : ' , score.value);
+export function updateScoreFoe(score, pt, isPaused) {
+    if (!isPaused.value){
+        score.value += pt;
+        // console.log('Etat du score : ' , score.value);
+    }
 }
 
 // Fonction pour mettre à jour le son en fonction de l'état de pause du jeu
@@ -90,3 +92,15 @@ function updateSoundState(isPaused, newFoe) {
         }
     }
 }
+
+// Fonction pour recuperer les id des fantomes dans la scene actuelle
+export function getFoeIds() {
+    var elements = document.querySelectorAll('[id^="foe-"]');
+    var ids = [];
+    elements.forEach(function(element) {
+        ids.push(element.id);
+    });
+    return ids;
+}
+
+

@@ -11,7 +11,7 @@
       requiredFeatures: local-floor;
       referenceSpaceType: local-floor;
     `"
-    @block-removed="updateScorePlus(1)"
+    @block-removed="updateScorePlus(1, isPaused)"
     @pause-game="togglePause"
     @win="affcihePopup"
     @nextPage = "nextPage"
@@ -118,8 +118,10 @@
   const isWin = ref(false); // Hit-box trouvée 
   const score = ref(0);   // Gestions score
 
-  function updateScorePlus(pt){
+  function updateScorePlus(pt, isPaused){
+    if (!isPaused){
       score.value += pt;
+    }
   };
 
   function togglePause() {
@@ -145,6 +147,7 @@
     if (newValue) {
       // Si isWin = true -> arrêter ajouter intervalle de fantome
       clearInterval(intervalId);
+      // Fantome en cours doit changer etat aussi 
     }
   });
 

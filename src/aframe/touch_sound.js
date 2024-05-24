@@ -24,7 +24,9 @@ AFRAME.registerComponent('touch_sound', {
   },
 
   onRaycasterIntersected: function (evt) {
-    // Rayon emis par curseur entre en colision avec element de la scene (bloc creer auto) 
+    // Rayon emis par curseur entre en colision avec element de la scene (bloc creer auto)
+
+    // A NG : Sert a quoi le code ici (dans clikable il y avait un code car il y avait differente interaction dans meme file) Si les primitves qui ont touch doivent automatiquement faire ce qui est dessous code 2 sert a rien a mon avis. 
     if (this.el.getAttribute('code') === '5') {
       var sound = this.el.components.sound;
       if (sound) {
@@ -32,8 +34,8 @@ AFRAME.registerComponent('touch_sound', {
       } else {
         console.warn('Sound component not found');
       }
-
     }
+    
     // if (this.el.getAttribute('code') === '1') {
     //   var finSound = this.el.components.sound;
     //   console.log(finSound)

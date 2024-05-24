@@ -37,14 +37,13 @@ AFRAME.registerComponent('touch', {
     // Vérifiez si suffisamment de temps s'est écoulé depuis le dernier déclenchement (eviter de delete 2 fois le meme fantomes) (intervalle temps entre declenchement)
     if (currentTime - this.lastRaycasterEventTime < 1000) { // 1000 milliseconds = 1 secondes
       
-      // Vérifier si le jeu n'est pas en pause (Si en pause veut pas interaction de tuer des bloc, chercher lieu,...)
-      // Si jeu en pause interaction changement couleur curseur fonctionne tjrs mais pas les autres actions 
-      // Mettre paused aussi pour code 3 ??? Si met aussi pour code 3 alors vaut mettre paused dans les autres vue aussi --> faire popup qui est tranmis de vue en vue ?
+      // Si jeu en pause -> pas interaction de tuer des fantome 
       if (this.el.getAttribute('paused') === 'false') { 
 
         // Rayon emis par curseur entre en colision avec element de la scene (bloc creer auto) 
+        // A NG : Sert a quoi le code ici (dans clikable il y avait un code car il y avait differente interaction dans meme file) Si les primitves qui ont touch doivent automatiquement faire ce qui est dessous code 2 sert a rien a mon avis.  
         if (this.el.getAttribute('code') === '2') {
-          // console.log('Bravo vous supprimez des blocs')
+          // console.log('Bravo vous supprimez un fantome')
 
           // Faites disparaître la boîte en ajustant sa propriété `visible` à `false`
           this.el.setAttribute('visible', 'false');
@@ -56,7 +55,7 @@ AFRAME.registerComponent('touch', {
           let idElement = this.el.getAttribute('id');
           let monElement = document.querySelector(`#${idElement}`);
           monElement.removeAttribute('touch');
-          // console.log('Suppression interaction sur ennemi : ', idElement)
+          // console.log('Suppression interaction sur fantome : ', idElement)
 
           // Stopper le son du fantome 
           const soundComponent = this.el.components.sound;
@@ -64,6 +63,7 @@ AFRAME.registerComponent('touch', {
               soundComponent.stopSound();
           }
 
+          // NG : Sa fait quoi le sector ci dessous ? Sa recupere quoi ? 
           const globalSound = document.querySelector('#touch-sound');
             if (globalSound) {
               globalSound.components.sound.playSound();

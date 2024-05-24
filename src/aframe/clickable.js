@@ -16,6 +16,9 @@
  *                               code = 1 : Curseur passer sur le lieu a trouver
  * @param {boolean} schema.paused - État du jeu (en pause ou non).
  */
+
+import {getFoeIds} from './foe.js';
+
 AFRAME.registerComponent('clickable', {
   schema: {
       color : {type : "color", default : "green"},
@@ -57,7 +60,7 @@ AFRAME.registerComponent('clickable', {
       }, 100); // 
     }
 
-    // Vérifier si le jeu n'est pas en pause (isPaused is 'true' => interaction en pause pour rehercher lieu,...)
+    // Vérifier si le jeu n'est pas en pause (isPaused is 'true' => interaction en pause pour rechercher lieu,...)
     if (this.el.getAttribute('paused') === 'false') { 
 
       if(this.el.getAttribute('code') === '1'){
@@ -72,10 +75,22 @@ AFRAME.registerComponent('clickable', {
         this.el.emit('win');
 
         // Delete interaction clickable - Utiliser l'ID pour sélectionner l'élément dans le DOM
+        // A NG : Permet enelver interaction sur le hit-box Si oui adapter les comm car c'est pas coeherent la (attention avec les copier coller entre file js)??????        let idElement = this.el.getAttribute('id');
         let idElement = this.el.getAttribute('id');
         let monElement = document.querySelector(`#${idElement}`);
         monElement.removeAttribute('clickable');
         // console.log('Suppression interaction sur bloc : ', idElement)
+
+        // Delete interaction touch / son / visibilite sur le fantome qui bougent apres reussite    
+        var foeIds = getFoeIds();
+        foeIds.forEach(function(id) {
+            let element = document.querySelector(`#${id}`);
+            if (element) {
+                element.removeAttribute('touch');
+                element.setAttribute('visible', 'false');
+                element.removeAttribute('sound');
+            }
+        });        
       }
     }
   },
