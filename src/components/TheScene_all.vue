@@ -99,7 +99,7 @@
         <a-text :value="'Prochain level :' + this.levelNext" color="black" position="0 0 0"  align="center" scale="0.5 0.5 0.5"></a-text>
       </a-plane>
     </a-plane>
-
+  
   </a-scene>
 </template>
   
@@ -150,6 +150,8 @@
       // Fantome en cours doit changer etat aussi 
     }
   });
+
+
 </script> 
 
 <!-- Pourquoi 2 script ?? -->

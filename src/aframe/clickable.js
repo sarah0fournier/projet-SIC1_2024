@@ -22,7 +22,6 @@ AFRAME.registerComponent('clickable', {
   init: function () {
     this.onClick = this.onClick.bind(this);
     this.el.addEventListener('click', this.onClick);
-    console.log(this.onClick.bind(this))
   },
 
   /**

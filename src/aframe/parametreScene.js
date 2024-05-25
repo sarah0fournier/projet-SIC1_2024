@@ -30,8 +30,6 @@ const levels = [
         
     { name: "Pilatus", number: 2, position:'46.98392, 8.24913, 46.97525, 8.25936', data:'Pilatus.glb', 
         positionGDB: "200 -1000 0", scaleSky: "5.5 5.5 5.5", nameSky:"sky2.jpg", positionPopup:"0.2 0.5 4"   },
-        
-    // A rajouter si d'autres lieux
 
     // Ajoutez d'autres level au besoin
     ]
