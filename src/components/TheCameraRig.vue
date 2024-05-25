@@ -27,31 +27,26 @@
     },
     watch:{
       nameLocation(newValue){
-        // console.log('TheCameraRig mounted with location:', newValue);
       },
       score(newValue){
-        // console.log('TheCameraRig mounted with score:', newValue);
       },
       level(newValue){
-        // console.log('TheCameraRig mounted with level:', newValue);
       }
     },
 
     mounted(){
-      // console.log('TheCameraRig mounted location :', this.nameLocation );
-      // console.log('TheCameraRig mounted score :', this.score );
-      // console.log('TheCameraRig mounted level :', this.level );
     }
   }
 </script>
 
 <template>
+  <!-- Camera assignée à la tête = suit les mouvement de la tête-->
   <a-entity
     id="camera-rig"
     movement-controls="camera: #head;"
     disable-in-vr="component: movement-controls;"
   >
-
+    <!-- Tête à 1.65  -->
     <a-entity
       id="head"
       look-controls="pointerLockEnabled: true"
@@ -83,7 +78,9 @@
           width="0.15"
       ></a-text>
 
-      <!-- Curseur qu on voit sur ordi ??????????  -->
+      <!-- Entité pour gérer quand on est pas en VR  -->
+      <!-- Curseur qu on voit sur ordi l'ordi par exemple  -->
+      <!-- Toutes les méthodes sont assignée au rayon  -->
       <a-entity
         geometry="primitive: circle; radius: 0.0005;"
         material="shader: flat; color : blue; "
@@ -94,7 +91,7 @@
         hide-in-vr="hideInAR: false"
       ></a-entity>
 
-      <!-- Sert a quoi ?  -->
+      <!-- Sert a quoi ??  -->
       <a-entity
         id="dummy-hand-right"
         position="0.3 -0.4 -0.5"
@@ -108,6 +105,7 @@
 
     <!-- Parametre de la main gauche -->
     <!-- far : distance maximale qui peut etre detecter par rayon [unites] -->
+    <!-- Rayon rouge  -->
     <a-entity
       id="hand-left"
       hand-controls="hand: left"
@@ -118,6 +116,7 @@
     </a-entity>
     
     <!-- Parametre de la main droite -->
+    <!-- Rayon bleu -->
     <a-entity
       id="hand-right"
       hand-controls="hand: right"

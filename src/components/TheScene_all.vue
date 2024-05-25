@@ -22,7 +22,7 @@
     <!-- Bouton pause + Affichage score -->
     <!-- Actuellement bouton donc c'est un autre système que le passage du curseur ? Vraiment ????? -->
     <div id="fixed-text" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
-        <!-- A delete socre et level si on met dans lunette ??? -->
+        <!-- A delete score et level si on met dans lunette ??? -->
           <!-- <p>Score : <span id="score">{{ score }}</span></p> -->
           <!-- <p>Level : <span id="Level">{{ levelParam }}</span></p> -->
         <button @click="togglePause">{{ isPaused ? 'Play' : 'Pause' }}</button>
@@ -39,17 +39,16 @@
       <a-asset-item id="Cat-glb" src="../assets/Cat.glb"></a-asset-item>
 
       <!-- Son global -->
-      <!-- param poolSize : nbr de copie du son charge en memeoie (utile si son jouer plusieurs fois, permet de réduire delai chargement son) -->
-      <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0" poolSize="10"></a-sound>
+      <!-- param poolSize : nbr de copie du son charge en memoire (utile si son jouer plusieurs fois, permet de réduire delai chargement son) -->
       <a-sound id="touch-sound" src="../assets/touch.mp3" autoplay="false" volume="1.0" poolSize="10"></a-sound>
-      <a-sound id="fin-sound" src="../assets/fin.mp3" autoplay="false" volume="1.0" poolSize="10"></a-sound>
     </a-assets>
 
 
     <!-- Initialisation des GLB décoratives -->
     <a-gltf-model v-if="allAssetsLoaded" src="#HotBalloon-glb" gltf-model="../assets/HotBalloon.glb" position="0 -0.8 0" scale="0.5 0.7 0.5"></a-gltf-model>
     
-    <!-- param : animation-mixer permet de voire le chat bouger  -->
+    <!-- param : animation-mixer permet de voir la GLBbouger  -->
+    <!-- sound : assignation d'un son  -->
     <a-gltf-model v-if="allAssetsLoaded" touch_sound code ='5'src="#Fire-glb" animation-mixer position="0 3.1 0" gltf-model="../assets/Fire.glb" 
       scale="0.25 0.25 0.25"
       sound="src: ../assets/Fire.mp3; autoplay:false"
@@ -63,7 +62,7 @@
     <!-- Initialisation des GLB de paysages -->
     <a-gltf-model v-if="allAssetsLoaded"  src="#Lieu-glb" :gltf-model="'../assets/' + this.nameGDB" :position="this.positionGDB"></a-gltf-model> 
   
-    <!-- Ciel (echelle à adapté en fonction taille des tuiles) -->
+    <!-- Ciel (type de ciel et echelle à adapté en fonction taille des tuiles) -->
     <a-sky :src="'../assets/' + this.nameSky" :scale="this.scaleSky"></a-sky>
 
     <!-- Ajoutez 1 hit box à trouver-->
@@ -126,7 +125,6 @@
 
   function togglePause() {
     isPaused.value = !isPaused.value;
-    // console.log("Etat du jeu est en pause ? ", isPaused.value)
   }
 
   function affcihePopup() {
@@ -150,9 +148,9 @@
       // Fantome en cours doit changer etat aussi 
     }
   });
-
 </script> 
 
+<!-- Pourquoi 2 script ?? -->
 <script>
   import {fetchDataAttraction} from '../aframe/requeteAPI.js'; 
   import { levels } from '../aframe/parametreScene.js';
@@ -170,7 +168,6 @@
 
       // Changer de scene (retour a TheInfoLevel.vue mais pour le niveau 2) 
       nextPage() {
-        // console.log("Bienvenue dans InfoLevel ", this.levelNext);
         this.$router.push({ name: 'InfoLevel', params: { level: ":" + this.levelNext} });        
       },
 
@@ -187,6 +184,7 @@
       }
     },
 
+    // Pourquoi que des null ???
     data(){
       return {
         levelParam: null,
@@ -206,14 +204,12 @@
       // Récupérer le level à partir des paramètres de l'URL
       this.levelParam = this.$route.params.level.slice(1); // eg. :2 --> garder 2
       this.levelNext =  parseInt(this.levelParam) + 1
-      // console.log("Nous sommes dans la scene du level : " , this.levelParam)
 
       // Trouver l'indice du niveau dans le tableau des niveaux
       let levelNumber = parseInt(this.levelParam);
       this.levelIndex = levels.findIndex(level => level.number === levelNumber);
 
       this.nameGDB = levels[this.levelIndex]['data']
-      // console.log("Nom de la GDB en cours : " , this.nameGDB)
       this.nameLocation = levels[this.levelIndex]['name']
       this.positionGDB = levels[this.levelIndex]['positionGDB']
       this.scaleSky = levels[this.levelIndex]['scaleSky']

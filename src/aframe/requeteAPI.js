@@ -11,7 +11,10 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://opendata.myswitzerland.io/v1/';
-const API_KEY = 'zbrLBtYCsk1G5zt3OOGZY1Aqnr9uHcv69N2KGBXd'; // CONFIDENTIEL MERCI !!!
+const API_KEY = 'bPcxLOMJmU03eaPZpwqK4n4X0rz1308S1dhmyMb0'; 
+// login compte :
+// projet_sic1@maildrop.cc
+// projet_sic1_2024
 
 /**
  * Requête HTTP GET à l'API Switzerland Tourisme.
@@ -32,7 +35,6 @@ export async function get(lang, bbox, path) {
         'x-api-key': API_KEY
       }
     });
-    // console.log('Repose requete : ', response)
     return response.data;
   } catch (error) {
     console.error('Erreur lors de la récupération des données :', error);
@@ -91,6 +93,5 @@ export async function parsingData(jsonData) {
   });
 
   const totalAttractions = attractions.length;
-  // console.log(`Nombre total d'attractions : ${totalAttractions}`);
   return attractions
 }

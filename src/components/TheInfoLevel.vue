@@ -7,7 +7,7 @@
 <script setup>
     import { ref } from 'vue';
     import TheCameraRig from './TheCameraRig.vue';
-    const loaded = ref(false); // Inutile, peut delete ?
+    const loaded = ref(false); // Inutile, peut delete ??
 </script>
 
 <script>
@@ -23,13 +23,11 @@
             nextPage() {
                 // Aller a la scene du level
                 if(this.gameStarted){
-                    // console.log("Bienvenue sur " + levels[this.currentLevel].name + " Level : " + levels[this.currentLevel].number);
                     let level = levels[this.currentLevel].number
                     this.$router.push({ name: 'Scene', params: { level: ":" + level } });           
                 }
                 // Aller a la page home
                 else{
-                    // console.log('Fin du jeux')
                     this.$router.push({ name: 'Home'});          
                 }
             }
@@ -70,7 +68,7 @@
         <TheCameraRig />
 
         <!-- Son global -->
-        <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0"></a-sound>
+        <!-- <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0"></a-sound> -->
 
         <!-- Popup du prochain level -->
         <a-plane v-if="gameStarted" color="white"  width="10" height="6" position="0 1.5 -5">

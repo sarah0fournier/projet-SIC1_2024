@@ -13,11 +13,10 @@
     methods: {
       // Fonction pour entrer dans la scène
       enterScene() {
-        // this.showOnboarding.value = false;
         showOnboarding.value = false;
 
+        // Qu'est-ce que l'on fait ici ?
         if (AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()) {
-                // document.querySelector('a-scene').enterVR();
                 this.$router.push({ name: 'Home' }).then(() => {
                   // Entrer en VR une fois que la navigation est terminée
                   document.querySelector('a-scene').enterVR();

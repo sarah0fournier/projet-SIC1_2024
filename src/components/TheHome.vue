@@ -12,7 +12,7 @@
     import '../aframe/touch.js';
 
     // Indique si la scène est chargée
-    const loaded = ref(false); // Inutile, peut delete ?
+    const loaded = ref(false); // Inutile, peut delete ??
 </script>
 
 <script>
@@ -41,11 +41,7 @@
         >
     
         <TheCameraRig />
-    
-        <!-- Son global -->
-        <!-- param autoplay : son commence pas des le chargement de audio -->
-        <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0"></a-sound>
-    
+        
         <!-- Plan pour afficher les informations de bienvenue et le bouton de démarrage du jeu -->
         <a-plane color="white"  width="10" height="6" position="0 1.5 -5">
             <a-text value="Bienvenue a la decouverte de la Suisse !" scale="1.5 1.5 1.5" align="center" color="black" position="0 2 0"></a-text>

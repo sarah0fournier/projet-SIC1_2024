@@ -29,13 +29,14 @@ export function addFoe(isWin, isPaused, intervalCounter, score) {
 
         // Animation du nouveau fantôme
         const t = getRandomNumberInRange(3500, 6000);
-        newFoe.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`); // move : se deplace
+        newFoe.setAttribute('animation__move', `property: position; to: 0 1 0; dur: ${t}; easing: linear;`); 
         newFoe.setAttribute('animation__disappear', `property: scale; to: 0 0 0; dur: 1; delay: ${t}; easing: linear;`); 
             // Param : 
-                // to :  0 0 0 : taile final de element sur tous les axes (rendra invisible)
+                // to :  0 0 0 : taille final de element sur tous les axes (rendra invisible)
                 // dur : duree animation
-                // delay : delait avant commencer animation 
+                // delay : delais avant de commencer animation 
                 // disappear : disparait
+                // move : se deplace
         
         // Ajout d'un événement pour arrêter le son après la disparition
         newFoe.addEventListener('animationcomplete__disappear', () => {
@@ -77,7 +78,6 @@ export function isFoeDead(score, intervalCounter, isPaused) {
 export function updateScoreFoe(score, pt, isPaused) {
     if (!isPaused.value){
         score.value += pt;
-        // console.log('Etat du score : ' , score.value);
     }
 }
 
