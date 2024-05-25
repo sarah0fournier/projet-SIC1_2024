@@ -74,18 +74,6 @@
             <a href="https://github.com/c-frame/aframe-extras/blob/master/LICENSE" target="_blank">MIT License</a>
           </dd>
 
-          <dt>
-            <a href="https://github.com/jure/aframe-blink-controls/" target="_blank">aframe-blink-controls</a>
-          </dt><dd>
-            <a href="https://github.com/jure/aframe-blink-controls/blob/main/LICENSE" target="_blank">MIT License</a>
-          </dd>
-
-          <dt>
-            <a href=" https://github.com/AdaRoseCannon/aframe-xr-boilerplate" target="_blank">simple-navmesh-constraint</a>
-          </dt><dd>
-            By Ada Rose Cannon under MIT License
-          </dd>
-
         </dl>
       </div>
     </div>

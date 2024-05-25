@@ -13,7 +13,7 @@ export function addFoe(isWin, isPaused, intervalCounter, score) {
         const newFoe = document.createElement('a-gltf-model');
 
         const x = getRandomNumberInRange(-10, 10);
-        const y = getRandomNumberInRange(-3, 4); // Garder une hauteur constante
+        const y = getRandomNumberInRange(-3, 5); // Garder une hauteur constante
         const z = getRandomNumberInRange(-10, 10);
         
         newFoe.setAttribute('src', '#Ghost-glb');

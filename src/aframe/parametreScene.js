@@ -25,14 +25,13 @@
 
 const levels = [ 
     // Tableau des niveaux avec leurs noms associés
-    { name: "Rocher de Naye (VD)", number: 1, position:'46.44124, 6.98694, 46.41935, 6.95736', data:'Naye_GLB.glb', 
-        positionGDB: "200 -600 0", scaleSky: "5 5 5", nameSky:"sky.jpeg", positionPopup:"0 0.5 -3" },
+    { name: "Rocher de Naye (VD)", number: 1, position:'46.44124, 6.98694, 46.41935, 6.95736', data:'Naye.glb', 
+        positionGDB: "200 -600 0", scaleSky: "5 5 5", nameSky:"sky1.jpeg", positionPopup:"4 0.5 1.8" },
         
     { name: "Pilatus", number: 2, position:'46.98392, 8.24913, 46.97525, 8.25936', data:'Pilatus.glb', 
-        positionGDB: "200 -1000 0", scaleSky: "5 5 5", nameSky:"sky.jpeg", positionPopup:"0 0.5 -3"   },
+        positionGDB: "200 -1000 0", scaleSky: "5.5 5.5 5.5", nameSky:"sky2.jpg", positionPopup:"0.2 0.5 4"   },
         
-    // { name: "Autre lieu du niveau a definir 3", number: 3, position:'	46.41912, 6.91848, 46.41027, 6.93335', data:'Naye_GLB.glb', 
-    //     positionGDB: "200 -600 0", scaleSky: "5 5 5", nameSky:"sky.jpeg",  positionPopup:"0 1.5 -3"   },
+    // A rajouter si d'autres lieux
 
     // Ajoutez d'autres level au besoin
     ]

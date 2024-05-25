@@ -63,17 +63,18 @@
     <!-- Ciel (type de ciel et echelle à adapté en fonction taille des tuiles) -->
     <a-sky :src="'../assets/' + this.nameSky" :scale="this.scaleSky"></a-sky>
 
-    <!-- Ajoutez 1 hit box à trouver-->
+    <!-- Ajoute des hit box à trouver-->
     <a-entity v-if="this.nameGDB">
       <a-plane v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
-        clickable ray_color
-        color="gray" rotation="0 -140 0" position="132.8 -134.1 121.7" width="40" height="20" visible="false" 
+        clickable ray_color look-at ='#POI'
+        color="gray" position="132.8 -134.1 121.7" width="40" height="20" visible="false" 
       ></a-plane>
 
       <a-plane v-if="this.nameGDB.includes('Pilatus')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
-        clickable ray_color
-        color="gray" rotation="0 -140 0" position="132.8 -134.1 121" width="40" height="20" visible="true" 
+        clickable ray_color look-at ='#POI'
+        color="gray"  position="-102 -481 568" width="70" height="50" visible="false" 
       ></a-plane>
+   
       <!-- A completer si autre level de hit box -->
     </a-entity>
 
@@ -82,7 +83,7 @@
     
 
     <!-- Popup de gagnant -->
-    <a-plane v-if="isWin" :isWin="isWin" color="grey" opacity="0.5" width="3" height="2.5" :position="this.positionPopup">
+    <a-plane v-if="isWin" :isWin="isWin" look-at ='#POI' color="grey" opacity="0.5" width="3" height="2.5" :position="this.positionPopup">
       <a-text value="Felicitiation tu m'as trouve" color="black" align="center" position="0 0.75 0" scale="0.5 0.5 0.5"></a-text>
 
       <a-text :value="'Scores : ' + score" color="black" align="center" position="0 0.5 0" scale="0.5 0.5 0.5"></a-text>
@@ -175,7 +176,6 @@
       // Requete a swissTourisme en fonction du level en cours
       async fetchAttractions() {
         try {
-          // console.log("Boudingbox en cours : " , levels[this.levelIndex]['position'])
           const data = await fetchDataAttraction(levels[this.levelIndex]['position']);
           // Mettre à jour la valeur de la variable avec les nouvelles données
           this.attractions = data;

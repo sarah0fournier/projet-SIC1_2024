@@ -85,7 +85,7 @@
         geometry="primitive: circle; radius: 0.0005;"
         material="shader: flat; color : blue; "
         cursor
-        raycaster="far: 300; objects: [touch], [clickable], [ray_sound], [ray] ; showLine: false;"
+        raycaster="far: 1000000; objects: [touch], [clickable], [ray_sound], [ray] ; showLine: false;"
         position="0 0 -0.1"
         disable-in-vr="component: raycaster; disableInAR: false;"
         hide-in-vr="hideInAR: false"
