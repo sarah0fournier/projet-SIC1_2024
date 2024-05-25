@@ -67,8 +67,6 @@
 
         <TheCameraRig />
 
-        <!-- Son global -->
-        <!-- <a-sound id="clickable-sound" src="../assets/clickable.mp3" autoplay="false" volume="1.0"></a-sound> -->
 
         <!-- Popup du prochain level -->
         <a-plane v-if="gameStarted" color="white"  width="10" height="6" position="0 1.5 -5">
@@ -76,7 +74,7 @@
             <a-text :value="'Emplacement a rechercher : ' + levels[currentLevel].name" color="black" position="0 1 0"align='center'></a-text>
 
             <!-- Bouton de démarrage du niveau -->
-            <a-plane clickable code="3" color="grey" width="5" height="1" align="center" position="0 -1 0.1" opacity="0.5">
+            <a-plane clickable ray_color code="3" color="grey" width="5" height="1" align="center" position="0 -1 0.1" opacity="0.5">
                 <a-text value="C'est parti !" color="black" position="0 0 0" align='center'></a-text>
             </a-plane>
         </a-plane>
@@ -86,7 +84,7 @@
             <a-text value="Bravo vous avez terminer le jeux ! " color="black" position="0 2 0" align='center' scale="1.5 1.5 1.5"></a-text>
             
             <!-- Bouton de retour à la page d'accueil -->
-            <a-plane clickable code="3" color="grey" width="5" height="1" align="center" position="0 -1 0" opacity="0.5">
+            <a-plane clickable ray_color code="3" color="grey" width="5" height="1" align="center" position="0 -1 0" opacity="0.5">
                 <a-text value="Retour a la page home !" color="black" position="0 0 0" align='center'></a-text>
             </a-plane>
         </a-plane>

@@ -85,7 +85,7 @@
         geometry="primitive: circle; radius: 0.0005;"
         material="shader: flat; color : blue; "
         cursor
-        raycaster="far: 300; objects: [touch], [clickable], [touch_sound] ; showLine: false;"
+        raycaster="far: 300; objects: [touch], [clickable], [ray_sound], [ray] ; showLine: false;"
         position="0 0 -0.1"
         disable-in-vr="component: raycaster; disableInAR: false;"
         hide-in-vr="hideInAR: false"
@@ -110,7 +110,7 @@
       id="hand-left"
       hand-controls="hand: left"
       laser-controls="hand: left"
-      raycaster="far: 15; objects: [killable], [touch] , [touch_sound] ; showLine: true; lineColor: red"
+      raycaster="far: 15; objects: [touch] , [ray_sound], [ray_color]; showLine: true; lineColor: red"
       position="0 1.5 0"
     >
     </a-entity>
@@ -121,7 +121,7 @@
       id="hand-right"
       hand-controls="hand: right"
       laser-controls="hand: right"
-      raycaster="far: 4000; objects: [clickable], [touch_sound]  ; showLine: true; lineColor: blue"
+      raycaster="far: 4000; objects: [clickable], [ray_sound], [ray_color]; showLine: true; lineColor: blue"
       position="0 1.5 0"
     >
     </a-entity>

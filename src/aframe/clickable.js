@@ -1,7 +1,16 @@
-// Import des sons
-import finSoundSrc from "C:/Users/nonog/Documents/Lecon_HES-SO/S2/SIC1/99_Projet/projet-SIC1_2024/public/assets/fin.mp3" 
-import clicSoundSrc from "C:/Users/nonog/Documents/Lecon_HES-SO/S2/SIC1/99_Projet/projet-SIC1_2024/public/assets/clickable.mp3"
-import {getFoeIds} from 'C:/Users/nonog/Documents/Lecon_HES-SO/S2/SIC1/99_Projet/projet-SIC1_2024/src/aframe/foe.js';
+/**
+ * =======================================================================================
+ * Composant A-Frame pour CLIQUER sur un objet
+ * Marche avec les 2 mains même si attribuer que à une seule dans la CameraRig
+ * Tien compte de la distance 
+ * Conséquence : on peut cliquer sur le bouton avec les 2 mains, mais sur la hit box que avec la droite.
+ * =======================================================================================
+ */
+
+// Import des sons et du script des ennemis
+import finSoundSrc from "../sounds/fin.mp3" ;
+import clicSoundSrc from "../sounds/clickable.mp3" ;
+import {getFoeIds} from './foe.js';
 
 AFRAME.registerComponent('clickable', {
   schema: {
@@ -13,6 +22,7 @@ AFRAME.registerComponent('clickable', {
   init: function () {
     this.onClick = this.onClick.bind(this);
     this.el.addEventListener('click', this.onClick);
+    console.log(this.onClick.bind(this))
   },
 
   /**
@@ -34,7 +44,7 @@ AFRAME.registerComponent('clickable', {
         // Attendre 1 seconde avant d'émettre l'événement nextPage
         setTimeout(() => {
           this.el.emit('nextPage');
-        }, 1000);
+        }, 500);
       }
 
       // Action spécifique pour le code 1: Jouer un son, émettre un événement win et nettoyer les interactions
@@ -51,9 +61,6 @@ AFRAME.registerComponent('clickable', {
         // Émettre un événement pour ouvrir popup
         this.el.emit('win');
 
-        // Permet d'enlever l'interaction sur la hit-box 
-        this.el.removeAttribute('clickable');
-
         // Supprimer l'interaction touch / son / visibilité sur les ennemis qui bougent après réussite
         var foeIds = getFoeIds();
         foeIds.forEach(function(id) {
@@ -65,6 +72,10 @@ AFRAME.registerComponent('clickable', {
           }
         });
       }
+
+     // Permet d'enlever l'interaction sur la hit-box et le bouton 
+     this.el.removeAttribute('clickable');
+
     }
   },
 

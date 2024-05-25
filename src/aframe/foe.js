@@ -21,8 +21,7 @@ export function addFoe(isWin, isPaused, intervalCounter, score) {
         newFoe.setAttribute('scale', '0.35 0.35 0.35'); // Taille du nouveau fantôme
         newFoe.setAttribute('look-at', '#POI'); // Orientation des fantômes vers la caméra
         newFoe.setAttribute('sound', 'src: ../assets/Ghost.mp3; autoplay: true;'); // Son du fantôme
-        newFoe.setAttribute('touch', '');  // Enlever pour eviter les conflits avec "killable"
-        // newFoe.setAttribute('killable', '');
+        newFoe.setAttribute('touch', '');  
         newFoe.setAttribute('code', '2');
         newFoe.setAttribute('paused', 'false');
         newFoe.setAttribute('id', "foe-" + intervalCounter.value); // ID de l'ennemi

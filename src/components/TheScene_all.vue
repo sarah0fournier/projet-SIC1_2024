@@ -37,10 +37,6 @@
       <a-asset-item id="HotBalloon-glb" src="../assets/HotBalloon.glb"></a-asset-item>
       <a-asset-item id="Fire-glb" src="../assets/Fire.glb"></a-asset-item>
       <a-asset-item id="Cat-glb" src="../assets/Cat.glb"></a-asset-item>
-
-      <!-- Son global -->
-      <!-- param poolSize : nbr de copie du son charge en memoire (utile si son jouer plusieurs fois, permet de réduire delai chargement son) -->
-      <a-sound id="touch-sound" src="../assets/touch.mp3" autoplay="false" volume="1.0" poolSize="10"></a-sound>
     </a-assets>
 
 
@@ -49,12 +45,14 @@
     
     <!-- param : animation-mixer permet de voir la GLBbouger  -->
     <!-- sound : assignation d'un son  -->
-    <a-gltf-model v-if="allAssetsLoaded" touch_sound code ='5'src="#Fire-glb" animation-mixer position="0 3.1 0" gltf-model="../assets/Fire.glb" 
+    <a-gltf-model v-if="allAssetsLoaded" ray_sound ray_color animation-mixer
+      code ='5'src="#Fire-glb"  position="0 3.1 0" gltf-model="../assets/Fire.glb" 
       scale="0.25 0.25 0.25"
       sound="src: ../assets/Fire.mp3; autoplay:false"
     ></a-gltf-model>
 
-    <a-gltf-model v-if="allAssetsLoaded" touch_sound code ='5' src="#Cat-glb" animation-mixer  gltf-model="../assets/Cat.glb" 
+    <a-gltf-model v-if="allAssetsLoaded" ray_sound ray_color animation-mixer 
+      code ='5' src="#Cat-glb"  gltf-model="../assets/Cat.glb" 
       position="0.28564 -0.11067 -0.26652" scale="0.02 0.02 0.02" rotation="0 -150 0" 
       sound="src: ../assets/Cat.mp3; autoplay:false "
     ></a-gltf-model>
@@ -67,11 +65,13 @@
 
     <!-- Ajoutez 1 hit box à trouver-->
     <a-entity v-if="this.nameGDB">
-      <a-plane  clickable v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
+      <a-plane v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
+        clickable ray_color
         color="gray" rotation="0 -140 0" position="132.8 -134.1 121.7" width="40" height="20" visible="false" 
       ></a-plane>
 
-      <a-plane  clickable v-if="this.nameGDB.includes('Pilatus')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
+      <a-plane v-if="this.nameGDB.includes('Pilatus')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
+        clickable ray_color
         color="gray" rotation="0 -140 0" position="132.8 -134.1 121" width="40" height="20" visible="true" 
       ></a-plane>
       <!-- A completer si autre level de hit box -->
@@ -94,7 +94,7 @@
 
       <!-- Bouton  passage au prochaine level-->
       <!-- :paused="isPaused" a mettre si definit dans le if de clikable que jeu peut etre en pause aussi quand on voit info level... -->
-      <a-plane clickable code="3" :paused="isPaused" color="grey" width="2" height="0.25" align="center" position="0 -1 0.1">
+      <a-plane clickable ray_color code="3" :paused="isPaused" color="grey" width="2" height="0.25" align="center" position="0 -1 0.1">
         <a-text :value="'Prochain level :' + this.levelNext" color="black" position="0 0 0"  align="center" scale="0.5 0.5 0.5"></a-text>
       </a-plane>
     </a-plane>
@@ -107,7 +107,8 @@
   import { ref, watch } from 'vue';
   import TheCameraRig from './TheCameraRig.vue';
   import '../aframe/clickable.js';
-  import '../aframe/touch_sound.js';
+  import '../aframe/ray_color.js';
+  import '../aframe/ray_sound.js';
   import '../aframe/touch.js';
   import {addFoe, getRandomNumberInRange} from '../aframe/foe.js';
 

@@ -5,6 +5,8 @@
  * SANS CLIC   
  * =======================================================================================
  */
+// Import du son
+import touchSoundSrc from "../sounds/touch.mp3" ;
 
 AFRAME.registerComponent('touch', {
   schema: {
@@ -55,10 +57,11 @@ AFRAME.registerComponent('touch', {
         }
 
         // Jouer le son global de touch (clic lors de la suppression d'un fantôme)
-        const globalSound = document.querySelector('#touch-sound');
-        if (globalSound) {
-          globalSound.components.sound.playSound();
-        }
+        const touchSound = document.createElement('audio');
+        touchSound.setAttribute('id', 'clic-sound');
+        touchSound.setAttribute('src', touchSoundSrc);
+        document.body.appendChild(touchSound);
+        touchSound.play();
       }
     }
 
