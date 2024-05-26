@@ -26,10 +26,10 @@ AFRAME.registerComponent('ray_color', {
   getColorFromCode: function (code) {
     switch (code) {
       case "1": 
-        return 'yellow'; //hit box à trouver
+        return 'yellow'; // Hit box à trouver
       case "3":
-        return 'yellow'; //bouton pour passer à la page d'après
-      case "5": //objets décoratifs (chat, feu)
+        return 'yellow'; //Bouton pour passer à la page d'après
+      case "5": // Objets décoratifs (chat, feu)
         return 'purple';
     }
   },
@@ -50,6 +50,7 @@ AFRAME.registerComponent('ray_color', {
     const raycaster = cursor.getAttribute('raycaster');
     const material = cursor.getAttribute('material');
     
+    // QQQ fait quoi raycaster ?
     if (raycaster && raycaster.showLine) {
       // Sauvegarde la couleur actuelle du rayon
       this.savedColor = raycaster.lineColor;

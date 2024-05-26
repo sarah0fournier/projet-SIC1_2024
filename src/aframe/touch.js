@@ -72,6 +72,7 @@ AFRAME.registerComponent('touch', {
    * Fonction appelée lorsque le curseur entre dans la zone de l'élément.
    * @param {Event} evt - Événement mouseenter.
    */
+  // QQQ : Peut delete ?
   onEnter: function (evt) {
   },
 
@@ -79,6 +80,7 @@ AFRAME.registerComponent('touch', {
    * Fonction appelée lorsque le curseur quitte la zone de l'élément.
    * @param {Event} evt - Événement mouseleave.
    */
+  // QQQ : Peut delete ?
   onLeave: function (evt) {
   },
 

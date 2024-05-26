@@ -16,6 +16,7 @@ AFRAME.registerComponent('ray_sound', {
   },
 
   // Méthode appelée lorsque les données du composant sont mises à jour
+  // QQQ : Peut delete ??
   update: function (oldData) {
   },
 

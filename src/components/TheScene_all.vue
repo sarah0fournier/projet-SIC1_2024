@@ -17,16 +17,15 @@
     @nextPage = "nextPage"
     >
 
-    <TheCameraRig :nameLocation=this.nameLocation :score=score :level=levelParam />
+    <TheCameraRig :nameLocation=this.nameLocation />
 
     <!-- Bouton pause + Affichage score -->
-    <!-- Actuellement bouton donc c'est un autre système que le passage du curseur ? Vraiment ????? -->
+    <!-- QQQ : Button autre systeme que passage cureseur (sur ordi oui clique voit souris) -->
     <div id="fixed-text" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
-        <!-- A delete score et level si on met dans lunette ??? -->
-          <!-- <p>Score : <span id="score">{{ score }}</span></p> -->
-          <!-- <p>Level : <span id="Level">{{ levelParam }}</span></p> -->
+          <p>Score : <span id="score">{{ score }}</span></p>
+          <p>Level : <span id="Level">{{ levelParam }}</span></p>
         <button @click="togglePause">{{ isPaused ? 'Play' : 'Pause' }}</button>
-        <!-- Ajouter router pour faire revenir a la page TheHome-vue -->
+        <!-- Ajouter router pour faire revenir a la page TheHome.vue -->
         <button @click="goHome">GoHome</button> 
     </div>
   
@@ -94,7 +93,6 @@
 
 
       <!-- Bouton  passage au prochaine level-->
-      <!-- :paused="isPaused" a mettre si definit dans le if de clikable que jeu peut etre en pause aussi quand on voit info level... -->
       <a-plane clickable ray_color code="3" :paused="isPaused" color="grey" width="2" height="0.25" align="center" position="0 -1 0.1">
         <a-text :value="'Prochain level :' + this.levelNext" color="black" position="0 0 0"  align="center" scale="0.5 0.5 0.5"></a-text>
       </a-plane>

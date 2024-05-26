@@ -28,8 +28,11 @@ AFRAME.registerComponent('clickable', {
    * Fonction appelée lorsque l'utilisateur clique sur l'élément.
    */
   onClick: function () {
+
     // Vérifier si le jeu n'est pas en pause
-    if (!this.data.paused) {
+    if (this.el.getAttribute('paused') === 'false') {
+    // QQQ : Condition ci dessous fonctionne pas du coup, pk ?
+    // if (!this.data.paused) {
 
       // Action spécifique pour le code 3 = boutons : Jouer un son et passer à la page suivante
       if (this.el.getAttribute('code') === '3') {

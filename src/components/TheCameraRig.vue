@@ -18,24 +18,7 @@
         required : false,
         type: String, 
       },
-      score : { 
-        required : false,
-      },
-      level : { 
-        required : false,
-      }
     },
-    watch:{
-      nameLocation(newValue){
-      },
-      score(newValue){
-      },
-      level(newValue){
-      }
-    },
-
-    mounted(){
-    }
   }
 </script>
 
@@ -54,29 +37,15 @@
       position="0 1.65 0"
     >
       <!-- Texte qui suit mouvement de la tete  -->
-      <a-text 
-        :value="nameLocation"
-        position="0 0.1 -0.15" 
-        align="center" 
-        color="white"
-        width="0.3"
-      ></a-text>
-
-      <a-text 
-        v-if="typeof score !== 'undefined'" 
-          :value="'Score : ' + score"
-          position="0.2 0.1 -0.15" 
-          color="white"
-          width="0.15"
-      ></a-text>
-
-      <a-text 
-        v-if="typeof level !== 'undefined'"
-          :value="'Level : ' + level"
-          position="0.2 0.085 -0.15" 
-          color="white"
-          width="0.15"
-      ></a-text>
+      <a-plane v-if="typeof nameLocation !== 'undefined'"  color="white" width="0.10" height="0.02" align="center" position="0 0.1 -0.15" opacity="0.5">
+        <a-text 
+          :value="nameLocation"
+          position="0 0.1 -0.15" 
+          align="center" 
+          color="black"
+          width="0.3"
+        ></a-text>            
+      </a-plane>
 
       <!-- Entité pour gérer quand on est pas en VR  -->
       <!-- Curseur qu on voit sur ordi l'ordi par exemple  -->
@@ -91,7 +60,7 @@
         hide-in-vr="hideInAR: false"
       ></a-entity>
 
-      <!-- Sert a quoi ??  -->
+      <!-- QQQ : Sert a quoi ??  -->
       <a-entity
         id="dummy-hand-right"
         position="0.3 -0.4 -0.5"

@@ -5,20 +5,24 @@
 -->
 
 <script setup>
-    import { ref } from 'vue';
-    import TheCameraRig from './TheCameraRig.vue';
-    const loaded = ref(false); // Inutile, peut delete ??
+    // import { ref } from 'vue'; // QQQ : Inutile, peut delete (lie au ref ci dessous) ??
+    // import TheCameraRig from './TheCameraRig.vue'; // QQQ : Deplacer dans script vue 2
+    // const loaded = ref(false); // QQQ : Inutile, peut delete ??
 </script>
 
 <script>
     import { levels } from '../aframe/parametreScene.js';
+    import TheCameraRig from './TheCameraRig.vue';
 
+    // QQQ : Pk pas importer clickable.js et ray_color.js ? Car deja importer dans TheHome.vue ? Alors pk on importe pas tous les files js dans sorte page accueil ?
     export default {
         data() {
             return {
                 gameStarted: false,
                 currentLevel: 0, // Indice du niveau actuel dans le tableau
+                isPaused: false,
         }},
+
         methods: {
             nextPage() {
                 // Aller a la scene du level
@@ -67,14 +71,13 @@
 
         <TheCameraRig />
 
-
         <!-- Popup du prochain level -->
         <a-plane v-if="gameStarted" color="white"  width="10" height="6" position="0 1.5 -5">
             <a-text :value="'Level ' + (currentLevel + 1).toString()" color="black" position="0 2 0" align='center' scale="1.5 1.5 1.5"></a-text>
             <a-text :value="'Emplacement a rechercher : ' + levels[currentLevel].name" color="black" position="0 1 0"align='center'></a-text>
 
             <!-- Bouton de démarrage du niveau -->
-            <a-plane clickable ray_color code="3" color="grey" width="5" height="1" align="center" position="0 -1 0.1" opacity="0.5">
+            <a-plane clickable ray_color :paused="isPaused" code="3" color="grey" width="5" height="1" align="center" position="0 -1 0.1" opacity="0.5">
                 <a-text value="C'est parti !" color="black" position="0 0 0" align='center'></a-text>
             </a-plane>
         </a-plane>
@@ -84,7 +87,7 @@
             <a-text value="Bravo vous avez terminer le jeux ! " color="black" position="0 2 0" align='center' scale="1.5 1.5 1.5"></a-text>
             
             <!-- Bouton de retour à la page d'accueil -->
-            <a-plane clickable ray_color code="3" color="grey" width="5" height="1" align="center" position="0 -1 0" opacity="0.5">
+            <a-plane clickable ray_color :paused="isPaused" code="3" color="grey" width="5" height="1" align="center" position="0 -1 0" opacity="0.5">
                 <a-text value="Retour a la page home !" color="black" position="0 0 0" align='center'></a-text>
             </a-plane>
         </a-plane>
