@@ -5,10 +5,10 @@
  */
 
 // Fonction pour ajouter un nouveau ennemi à la scène
-export function addFoe(isWin, isPaused, intervalCounter, score) {  
+export function addFoe(isWin, isPaused, intervalCounter, callback) {  
 
     // Ajout d'un fantôme si pas encore gagné et si le jeu n'est pas en pause
-    if (!isWin.value && !isPaused.value) {
+    if (!isWin && !isPaused) {
         const scene = document.querySelector('a-scene');
         const newFoe = document.createElement('a-gltf-model');
 
@@ -24,7 +24,7 @@ export function addFoe(isWin, isPaused, intervalCounter, score) {
         newFoe.setAttribute('touch', '');  
         newFoe.setAttribute('code', '2');
         newFoe.setAttribute('paused', 'false');
-        newFoe.setAttribute('id', "foe-" + intervalCounter.value); // ID de l'ennemi
+        newFoe.setAttribute('id', "foe-" + intervalCounter); // ID de l'ennemi
 
         // Animation du nouveau fantôme
         const t = getRandomNumberInRange(3500, 6000);
@@ -47,15 +47,16 @@ export function addFoe(isWin, isPaused, intervalCounter, score) {
 
         // Ajouter le nouvel ennemi à la scène
         scene.appendChild(newFoe); 
-        intervalCounter.value++;
 
         // Lancer le délai pour vérifier si le fantôme est mort après la durée de l'animation
         const cubeCheckTimeout = setTimeout(() => {
-            isFoeDead(score, intervalCounter, isPaused);
+            isFoeDead(intervalCounter, isPaused, (point) => {
+                    callback(point); // retourne point quand la fct isFoeDead est terminer 
+            });
         }, t - 100); 
         
         // Mettre à jour le son en fonction de l'état de pause du jeu -> fonctionne pas
-        updateSoundState(isPaused.value, newFoe);
+        updateSoundState(isPaused, newFoe);
     }
 }
 
@@ -65,20 +66,20 @@ export function getRandomNumberInRange(min, max) {
 }
 
 // Fonction pour vérifier si le fantôme a été touché
-export function isFoeDead(score, intervalCounter, isPaused) {
-    const foeId = "foe-" + (intervalCounter.value - 1); 
+export function isFoeDead(intervalCounter, isPaused, callback) {
+    const foeId = "foe-" + (intervalCounter); 
     const foe = document.getElementById(foeId);
+
+    let point = 0 // Defini la valeur du point
     if (foe && foe.hasAttribute('touch')) {
-        updateScoreFoe(score, -1, isPaused);
+        if (!isPaused){
+            point += -1;   // Si enemi pas eliminer
+        }
     }
-}
+    // Retourner la variable point avec un callback 
+    callback(point);
+    }
     
-// Fonction pour mettre à jour le score en fonction des points
-export function updateScoreFoe(score, pt, isPaused) {
-    if (!isPaused.value){
-        score.value += pt;
-    }
-}
 
 // Fonction pour mettre à jour le son en fonction de l'état de pause du jeu
 function updateSoundState(isPaused, newFoe) {

@@ -50,7 +50,7 @@ AFRAME.registerComponent('ray_color', {
     const raycaster = cursor.getAttribute('raycaster');
     const material = cursor.getAttribute('material');
     
-    // QQQ fait quoi raycaster ?
+    // QQQ : fait quoi raycaster ?
     if (raycaster && raycaster.showLine) {
       // Sauvegarde la couleur actuelle du rayon
       this.savedColor = raycaster.lineColor;

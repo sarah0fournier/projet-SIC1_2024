@@ -2,7 +2,7 @@
   import { ref } from 'vue';
   import router from './router';
   
-  const loaded = ref(false); // Sert a quoi ? 
+  const loaded = ref(false); // QQQ : Sert a quoi ? 
 </script>
 
 <template>

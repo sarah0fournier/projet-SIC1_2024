@@ -11,7 +11,7 @@
       requiredFeatures: local-floor;
       referenceSpaceType: local-floor;
     `"
-    @block-removed="updateScorePlus(1, isPaused)"
+    @block-removed="updateScore(1)"
     @pause-game="togglePause"
     @win="affcihePopup"
     @nextPage = "nextPage"
@@ -24,7 +24,7 @@
     <div id="fixed-text" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
           <p>Score : <span id="score">{{ score }}</span></p>
           <p>Level : <span id="Level">{{ levelParam }}</span></p>
-        <button @click="togglePause">{{ isPaused ? 'Play' : 'Pause' }}</button>
+        <button @click="togglePause">{{ this.isPaused ? 'Play' : 'Pause' }}</button>
         <!-- Ajouter router pour faire revenir a la page TheHome.vue -->
         <button @click="goHome">GoHome</button> 
     </div>
@@ -64,12 +64,12 @@
 
     <!-- Ajoute des hit box à trouver-->
     <a-entity v-if="this.nameGDB">
-      <a-plane v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
+      <a-plane v-if="this.nameGDB.includes('Naye')" id="plane-1" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
         clickable ray_color look-at ='#POI'
         color="gray" position="132.8 -134.1 121.7" width="40" height="20" visible="false" 
       ></a-plane>
 
-      <a-plane v-if="this.nameGDB.includes('Pilatus')" id="plane-1" code="1"  :isWin="isWin" :paused="isPaused" 
+      <a-plane v-if="this.nameGDB.includes('Pilatus')" id="plane-1" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
         clickable ray_color look-at ='#POI'
         color="gray"  position="-102 -481 568" width="70" height="50" visible="false" 
       ></a-plane>
@@ -82,10 +82,10 @@
     
 
     <!-- Popup de gagnant -->
-    <a-plane v-if="isWin" :isWin="isWin" look-at ='#POI' color="grey" opacity="0.5" width="3" height="2.5" :position="this.positionPopup">
+    <a-plane v-if="this.isWin" :isWin="this.isWin" look-at ='#POI' color="grey" opacity="0.5" width="3" height="2.5" :position="this.positionPopup">
       <a-text value="Felicitiation tu m'as trouve" color="black" align="center" position="0 0.75 0" scale="0.5 0.5 0.5"></a-text>
 
-      <a-text :value="'Scores : ' + score" color="black" align="center" position="0 0.5 0" scale="0.5 0.5 0.5"></a-text>
+      <a-text :value="'Scores : ' + this.score" color="black" align="center" position="0 0.5 0" scale="0.5 0.5 0.5"></a-text>
 
       <!-- Recuperé de requete API suisse tourisme -->
       <a-text v-if="this.attractions[0]['name']" :value="this.attractions[0]['name']" color="black" align="center" position="0 0.25 0" scale="0.5 0.5 0.5"></a-text>
@@ -93,7 +93,7 @@
 
 
       <!-- Bouton  passage au prochaine level-->
-      <a-plane clickable ray_color code="3" :paused="isPaused" color="grey" width="2" height="0.25" align="center" position="0 -1 0.1">
+      <a-plane clickable ray_color code="3" :paused="this.isPaused" color="grey" width="2" height="0.25" align="center" position="0 -1 0.1">
         <a-text :value="'Prochain level :' + this.levelNext" color="black" position="0 0 0"  align="center" scale="0.5 0.5 0.5"></a-text>
       </a-plane>
     </a-plane>
@@ -103,52 +103,16 @@
   
 
 <script setup>
-  import { ref, watch } from 'vue';
-  import TheCameraRig from './TheCameraRig.vue';
-  import '../aframe/clickable.js';
-  import '../aframe/ray_color.js';
-  import '../aframe/ray_sound.js';
-  import '../aframe/touch.js';
-  import {addFoe, getRandomNumberInRange} from '../aframe/foe.js';
+  import { ref } from 'vue';
+  // import TheCameraRig from './TheCameraRig.vue';
+  // import '../aframe/clickable.js';
+  // import '../aframe/ray_color.js';
+  // import '../aframe/ray_sound.js';
+  // import '../aframe/touch.js';
+  // import {addFoe, getRandomNumberInRange} from '../aframe/foe.js';
 
   // Constantes globales de l'état du jeu
   const allAssetsLoaded = ref(false);
-  const isPaused = ref(false); // Mise en pause
-  const isWin = ref(false); // Hit-box trouvée 
-  const score = ref(0);   // Gestions score
-
-  function updateScorePlus(pt, isPaused){
-    if (!isPaused){
-      score.value += pt;
-    }
-  };
-
-  function togglePause() {
-    isPaused.value = !isPaused.value;
-  }
-
-  function affcihePopup() {
-    isWin.value = true // Level reussi
-  }
-
-  // Variables pour les fantomes
-  let intervalCounter = ref(100);
-  let intervalId; 
-  
-  // Appeler addFoe() toutes les x secondes
-  let intervalTime = getRandomNumberInRange(4000, 8000)
-  intervalId = setInterval(() => {
-    addFoe(isWin, isPaused, intervalCounter, score);
-  }, intervalTime);
-
-  watch(isWin, (newValue) => {
-    if (newValue) {
-      // Si isWin = true -> arrêter ajouter intervalle de fantome
-      clearInterval(intervalId);
-      // Fantome en cours doit changer etat aussi 
-    }
-  });
-
 
 </script> 
 
@@ -156,6 +120,15 @@
 <script>
   import {fetchDataAttraction} from '../aframe/requeteAPI.js'; 
   import { levels } from '../aframe/parametreScene.js';
+
+  // import { ref, watch } from 'vue';
+  import TheCameraRig from './TheCameraRig.vue';
+  import '../aframe/clickable.js';
+  import '../aframe/ray_color.js';
+  import '../aframe/ray_sound.js';
+  import '../aframe/touch.js';
+  import {addFoe, getRandomNumberInRange} from '../aframe/foe.js';
+
 
   export default {
     components: {
@@ -166,6 +139,7 @@
       // Gérer le démarrage du jeu
       goHome() {
         this.$router.push({ name: 'Home' });
+        this.isWin = true // Pas optimale de dire isWin = true mais sa permet de sortir de intervale d ajout de fantome
       },
 
       // Changer de scene (retour a TheInfoLevel.vue mais pour le niveau 2) 
@@ -182,12 +156,34 @@
         } catch (error) {
           console.error('Erreur lors de la récupération des données :', error);
         }
+      },
+
+      updateScore(pt){
+        if (!this.isPaused){
+          this.score += pt;
+        }
+      },
+
+      togglePause() {
+        this.isPaused = !this.isPaused;
+      },
+
+      affcihePopup() {
+        this.isWin = true // Level reussi
       }
+
     },
+
 
     // Pourquoi que des null ???
     data(){
       return {
+        isPaused: false, // Mise en pause
+        isWin: false,  // Hit-box trouvée 
+        score: 0,  // Gestions score
+        intervalCounter: 100,   // Variables pour les fantomes
+        intervalId: null,   // Variables pour les fantomes
+        intervalTime: getRandomNumberInRange(4000, 8000),
         levelParam: null,
         levelNext: null,
         levelIndex: null,
@@ -218,7 +214,28 @@
       this.positionPopup = levels[this.levelIndex]['positionPopup']
       
       this.fetchAttractions();
-    }
-  };
+
+      // Appeler addFoe() toutes les x secondes
+      this.intervalId = setInterval(() => {
+        if (!this.isWin && !this.isPaused) {
+          // Ajoute +1 au compteur intervalle fantome
+          this.intervalCounter ++
+
+          addFoe(this.isWin, this.isPaused, this.intervalCounter, (point) => {
+            this.updateScore(point)
+          })
+        };
+      }, this.intervalTime);
+    },
+      
+    watch:{
+      isWin(newValue)  {
+        if (newValue) {
+          // Si isWin = true -> arrêter ajouter intervalle de fantome
+          clearInterval(this.intervalId);
+          // Fantome en cours doit changer etat aussi 
+      }}
+    },
+  }
 </script>
 
