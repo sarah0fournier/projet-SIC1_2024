@@ -39,7 +39,7 @@ AFRAME.registerComponent('ray_color', {
    * @param {Event} evt - Événement mouseenter.
    */
   onEnter: function (evt) {
-    // Récupèration l'élément du curseur
+    // Récupération l'élément du curseur
     const cursor = evt.detail.cursorEl;
 
     // Détermination la couleur en fonction du code
@@ -50,7 +50,6 @@ AFRAME.registerComponent('ray_color', {
     const raycaster = cursor.getAttribute('raycaster');
     const material = cursor.getAttribute('material');
     
-    // QQQ : fait quoi raycaster ?
     if (raycaster && raycaster.showLine) {
       // Sauvegarde la couleur actuelle du rayon
       this.savedColor = raycaster.lineColor;

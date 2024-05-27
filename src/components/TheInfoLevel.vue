@@ -5,16 +5,13 @@
 -->
 
 <script setup>
-    // import { ref } from 'vue'; // QQQ : Inutile, peut delete (lie au ref ci dessous) ??
-    // import TheCameraRig from './TheCameraRig.vue'; // QQQ : Deplacer dans script vue 2
-    // const loaded = ref(false); // QQQ : Inutile, peut delete ??
+    import TheCameraRig from './TheCameraRig.vue';
+    import { levels } from '../aframe/parametreScene.js';
+    import '../aframe/clickable.js'; 
+    import '../aframe/ray_color.js'; 
 </script>
 
 <script>
-    import { levels } from '../aframe/parametreScene.js';
-    import TheCameraRig from './TheCameraRig.vue';
-
-    // QQQ : Pk pas importer clickable.js et ray_color.js ? Car deja importer dans TheHome.vue ? Alors pk on importe pas tous les files js dans sorte page accueil ?
     export default {
         data() {
             return {

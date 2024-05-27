@@ -10,16 +10,11 @@ import touchSoundSrc from "../sounds/touch.mp3" ;
 
 AFRAME.registerComponent('touch', {
   schema: {
-    code: { type: 'int', default: '0'}, 
     paused: { type: 'boolean', default: 'false'}, // Par defaut jeu pas en pause
   },
   init: function () {
     this.onRaycasterIntersected = this.onRaycasterIntersected.bind(this);
     this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
-    this.onEnter = this.onEnter.bind(this);
-    this.el.addEventListener('mouseenter', this.onEnter);
-    this.onLeave = this.onLeave.bind(this);
-    this.el.addEventListener('mouseleave', this.onLeave);
 
     // Enregistrez le moment du dernier déclenchement de l'événement raycaster-intersected
     this.lastRaycasterEventTime = 0;
@@ -69,27 +64,9 @@ AFRAME.registerComponent('touch', {
   },
 
   /**
-   * Fonction appelée lorsque le curseur entre dans la zone de l'élément.
-   * @param {Event} evt - Événement mouseenter.
-   */
-  // QQQ : Peut delete ?
-  onEnter: function (evt) {
-  },
-
-  /**
-   * Fonction appelée lorsque le curseur quitte la zone de l'élément.
-   * @param {Event} evt - Événement mouseleave.
-   */
-  // QQQ : Peut delete ?
-  onLeave: function (evt) {
-  },
-
-  /**
    * Fonction de suppression du composant.
    */
   remove: function () {
-    this.el.removeEventListener('mouseenter', this.onEnter);
-    this.el.removeEventListener('mouseleave', this.onLeave);  
     this.el.removeEventListener('raycaster-intersected', this.onRaycasterIntersected);   
   },
 });

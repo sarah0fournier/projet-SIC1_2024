@@ -20,7 +20,7 @@
     <TheCameraRig :nameLocation=this.nameLocation />
 
     <!-- Bouton pause + Affichage score -->
-    <!-- QQQ : Button autre systeme que passage cureseur (sur ordi oui clique voit souris) -->
+    <!-- Code implémenté en balise HTML : non visible en VR et non selectionnable avec le cursor-raycaster sur l'ordi  -->
     <div id="fixed-text" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
           <p>Score : <span id="score">{{ score }}</span></p>
           <p>Level : <span id="Level">{{ levelParam }}</span></p>
@@ -69,7 +69,7 @@
         color="gray" position="132.8 -134.1 121.7" width="40" height="20" visible="false" 
       ></a-plane>
 
-      <a-plane v-if="this.nameGDB.includes('Pilatus')" id="plane-1" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
+      <a-plane v-if="this.nameGDB.includes('Pilatus')" id="plane-2" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
         clickable ray_color look-at ='#POI'
         color="gray"  position="-102 -481 568" width="70" height="50" visible="false" 
       ></a-plane>
@@ -104,24 +104,14 @@
 
 <script setup>
   import { ref } from 'vue';
-  // import TheCameraRig from './TheCameraRig.vue';
-  // import '../aframe/clickable.js';
-  // import '../aframe/ray_color.js';
-  // import '../aframe/ray_sound.js';
-  // import '../aframe/touch.js';
-  // import {addFoe, getRandomNumberInRange} from '../aframe/foe.js';
-
   // Constantes globales de l'état du jeu
   const allAssetsLoaded = ref(false);
 
 </script> 
 
-<!-- Pourquoi 2 script ?? -->
 <script>
   import {fetchDataAttraction} from '../aframe/requeteAPI.js'; 
   import { levels } from '../aframe/parametreScene.js';
-
-  // import { ref, watch } from 'vue';
   import TheCameraRig from './TheCameraRig.vue';
   import '../aframe/clickable.js';
   import '../aframe/ray_color.js';
@@ -174,8 +164,6 @@
 
     },
 
-
-    // Pourquoi que des null ???
     data(){
       return {
         isPaused: false, // Mise en pause
@@ -233,7 +221,6 @@
         if (newValue) {
           // Si isWin = true -> arrêter ajouter intervalle de fantome
           clearInterval(this.intervalId);
-          // Fantome en cours doit changer etat aussi 
       }}
     },
   }

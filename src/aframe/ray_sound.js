@@ -15,10 +15,6 @@ AFRAME.registerComponent('ray_sound', {
     this.el.addEventListener('raycaster-intersected', this.onRaycasterIntersected);
   },
 
-  // Méthode appelée lorsque les données du composant sont mises à jour
-  // QQQ : Peut delete ??
-  update: function (oldData) {
-  },
 
   // Fonction appelée lorsque l'événement 'raycaster-intersected' est déclenché
   onRaycasterIntersected: function (evt) {

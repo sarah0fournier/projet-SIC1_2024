@@ -90,7 +90,7 @@
       id="hand-right"
       hand-controls="hand: right"
       laser-controls="hand: right"
-      raycaster="far: 4000; objects: [clickable], [ray_sound], [ray_color]; showLine: true; lineColor: blue"
+      raycaster="far: 1000000; objects: [clickable], [ray_sound], [ray_color]; showLine: true; lineColor: blue"
       position="0 1.5 0"
     >
     </a-entity>

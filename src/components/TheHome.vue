@@ -5,25 +5,15 @@
 -->
 
 <script setup>
-    // import { ref } from 'vue'; // QQQ : Inutile, peut delete (lie au ref ci dessous) ??
-    // import TheCameraRig from './TheCameraRig.vue'; // QQQ : Deplacer dans script vue 2
-    // import '../aframe/clickable.js'; // QQQ : Deplacer dans script vue 2
-    // import '../aframe/ray_color.js'; // QQQ : Deplacer dans script vue 2
-    // import '../aframe/ray_sound.js'; // QQQ : Deplacer dans script vue 2
-    // import '../aframe/touch.js'; // QQQ : Deplacer dans script vue 2
-
-    // Indique si la scène est chargée
-    // const loaded = ref(false); // QQQ : Inutile, peut delete ??
-    
-
+    import TheCameraRig from './TheCameraRig.vue';
+    import '../aframe/clickable.js'; 
+    import '../aframe/ray_color.js'; 
 </script>
 
 <script>
     import TheCameraRig from './TheCameraRig.vue';
     import '../aframe/clickable.js'; // QQQ : Son du clique gerer dans clickable.js ?
     import '../aframe/ray_color.js';
-    import '../aframe/ray_sound.js'; // QQQ : Pk importer pas utiliser ci dessous ?
-    import '../aframe/touch.js'; // QQQ : Pk importer pas utiliser ci dessous ?
 
     export default {
         data() {

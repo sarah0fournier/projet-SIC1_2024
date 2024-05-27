@@ -31,8 +31,6 @@ AFRAME.registerComponent('clickable', {
 
     // Vérifier si le jeu n'est pas en pause
     if (this.el.getAttribute('paused') === 'false') {
-    // QQQ : Condition ci dessous fonctionne pas du coup, pk ? Comprend pas pk paused est string et non boolean
-    // if (!this.data.paused) {
 
       // Action spécifique pour le code 3 = boutons : Jouer un son et passer à la page suivante
       if (this.el.getAttribute('code') === '3') {
