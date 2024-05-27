@@ -73,6 +73,11 @@
         clickable ray_color look-at ='#POI'
         color="gray"  position="-102 -481 568" width="70" height="50" visible="false" 
       ></a-plane>
+
+      <a-plane v-if="this.nameGDB.includes('Midi')" id="plane-1" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
+        clickable ray_color look-at ='#POI'
+        color="gray"  position="-1120 -27 -58" width="70" height="50" visible="false" 
+      ></a-plane>
    
       <!-- A completer si autre level de hit box -->
     </a-entity>

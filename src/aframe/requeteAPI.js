@@ -55,6 +55,19 @@ export async function fetchAttractions(lang, bbox) {
     return data
 }
 
+/**
+ * Récupère les destinations touristiques dans une certaine langue et une certaine zone géographique.
+ * 
+ * @param {string} lang - Langue de la requête ('fr-CH', 'de-CH', etc.).
+ * @param {string} bbox - Coordonnee geographique de la boundingBox pour API Switzerland Tourisme 
+ *                        avec les coins N-O et S-E aux format 'latitude_N0, longitude_N0, latitude2_SE, longitude2_SE'
+ * @returns {Promise<Object[]>} - Données des attractions touristiques.
+ */
+export async function fetchDestination(lang, bbox) {
+  const data = await get(lang, bbox,'destinations')
+  return data
+}
+
 
 /**
  * Récupère les données + parse des attractions touristiques dans une zone géographique donnée.
@@ -64,8 +77,11 @@ export async function fetchAttractions(lang, bbox) {
  */
 export async function fetchDataAttraction(bbox){
   try {
-      const data = await fetchAttractions('fr-CH', bbox);
-
+      let data = await fetchAttractions('fr-CH', bbox);
+      // Si pas de donner dans attraction faire la requete aupres de la destination
+      if (data.data.length == 0){
+        data = await fetchDestination('fr-CH', bbox);
+      }
       const attractions = parsingData(data)
       return attractions
 
