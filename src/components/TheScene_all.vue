@@ -53,7 +53,7 @@
     <a-gltf-model v-if="allAssetsLoaded" ray_sound ray_color animation-mixer 
       code ='5' src="#Cat-glb"  gltf-model="../assets/Cat.glb" 
       position="0.28564 -0.11067 -0.26652" scale="0.02 0.02 0.02" rotation="0 -150 0" 
-      sound="src: ../assets/Cat.mp3; autoplay:false "
+      sound="src: ../assets/Cat.mp3; autoplay:false"
     ></a-gltf-model>
 
     <!-- Initialisation des GLB de paysages -->
