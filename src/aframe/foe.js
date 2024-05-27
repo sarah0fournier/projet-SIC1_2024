@@ -55,8 +55,6 @@ export function addFoe(isWin, isPaused, intervalCounter, callback) {
             });
         }, t - 100); 
         
-        // Mettre à jour le son en fonction de l'état de pause du jeu -> fonctionne pas
-        updateSoundState(isPaused, newFoe);
     }
 }
 
@@ -79,19 +77,6 @@ export function isFoeDead(intervalCounter, isPaused, callback) {
     // Retourner la variable point avec un callback 
     callback(point);
     }
-    
-
-// Fonction pour mettre à jour le son en fonction de l'état de pause du jeu
-function updateSoundState(isPaused, newFoe) {
-    const soundComponent = newFoe.components.sound;
-    if (soundComponent) {
-        if (isPaused) {
-            soundComponent.pauseSound();
-        } else {
-            soundComponent.playSound();
-        }
-    }
-}
 
 // Fonction pour recuperer les id des fantomes dans la scene actuelle
 export function getFoeIds() {

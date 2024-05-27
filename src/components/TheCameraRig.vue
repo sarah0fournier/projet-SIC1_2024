@@ -37,15 +37,14 @@
       position="0 1.65 0"
     >
       <!-- Texte qui suit mouvement de la tete  -->
-      <a-plane v-if="typeof nameLocation !== 'undefined'"  color="white" width="0.10" height="0.02" align="center" position="0 0.1 -0.15" opacity="0.5">
-        <a-text 
-          :value="nameLocation"
-          position="0 0.1 -0.15" 
-          align="center" 
-          color="black"
-          width="0.3"
-        ></a-text>            
-      </a-plane>
+    <a-text 
+      v-if="typeof nameLocation !== 'undefined'"
+      :value="nameLocation"
+      position="0 0.65 -1" 
+      align="center" 
+      color="black"
+      width="2"
+    ></a-text>
 
       <!-- Entité pour gérer quand on est pas en VR  -->
       <!-- Curseur qu on voit sur ordi l'ordi par exemple  -->
