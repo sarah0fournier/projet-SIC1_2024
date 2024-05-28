@@ -1,4 +1,4 @@
-# Réalité virtuelle - Recherche des localités  SOMMET SUISSE
+# Réalité virtuelle - Recherche des localités
 ## Contexte
 Ce projet de réalité virtuelle a été effectué dans le cours SIC1 du cursus de master MDT de la HES-SO. Il porte avant tout un but éducatif permettant l'utilisation des nouveaux outils tel que la technologie de la réalité virtuelle.
 
