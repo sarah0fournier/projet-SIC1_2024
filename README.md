@@ -40,7 +40,7 @@ Lors de projet l'objectif était notamment de géréer :
 ## Installation
 Premier téléchargement 
 ```
-git clone git@github.com:sarah0fournier/projet-gio1_v2.git
+git clone git@github.com:sarah0fournier/projet-SIC1_2024.git
 ```
 Ensuite, ouvrez le dossier dans votre ligne de commande et installez les dépendances nécessaires :
 ```
