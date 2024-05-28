@@ -69,16 +69,21 @@
         color="gray" position="132.8 -134.1 121.7" width="40" height="20" visible="false" 
       ></a-plane>
 
-      <a-plane v-if="this.nameGDB.includes('Pilatus')" id="plane-2" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
+      <a-plane v-if="this.nameGDB.includes('Midi')" id="plane-2" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
+        clickable ray_color look-at ='#POI'
+        color="gray"  position="-1120 -27 -58" width="70" height="70" visible="false" 
+      ></a-plane>
+      
+      <a-plane v-if="this.nameGDB.includes('Pilatus')" id="plane-3" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
         clickable ray_color look-at ='#POI'
         color="gray"  position="-102 -481 568" width="70" height="50" visible="false" 
       ></a-plane>
 
-      <a-plane v-if="this.nameGDB.includes('Midi')" id="plane-1" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
+      <a-plane v-if="this.nameGDB.includes('Combin')" id="plane-4" code="1"  :isWin="this.isWin" :paused="this.isPaused" 
         clickable ray_color look-at ='#POI'
-        color="gray"  position="-1120 -27 -58" width="70" height="50" visible="false" 
+        color="gray"  position="346 -48 1110" width="90" height="50" visible="false" 
       ></a-plane>
-   
+
       <!-- A completer si autre level de hit box -->
     </a-entity>
 

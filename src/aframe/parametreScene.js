@@ -26,14 +26,17 @@
 const levels = [ 
     // Tableau des niveaux avec leurs noms associés
     { name: "Rocher de Naye (VD)", number: 1, position:'46.44124, 6.98694, 46.41935, 6.95736', data:'Naye.glb', 
-        positionGDB: "200 -600 0", scaleSky: "5 5 5", nameSky:"sky1.jpeg", positionPopup:"4 0.5 1.8" },
+        positionGDB: "200 -600 0", scaleSky: "5 5 5", nameSky:"sky1.jpeg", positionPopup:"4 0.5 1.8"},
         
-    { name: "Pilatus", number: 2, position:'46.98392, 8.24913, 46.97525, 8.25936', data:'Pilatus.glb', 
-        positionGDB: "200 -1000 0", scaleSky: "5.5 5.5 5.5", nameSky:"sky2.jpg", positionPopup:"0.2 0.5 4"   },
+    { name: "Haute Cime (Massif des Dents du Midi VS)", number: 2, position:'46.16267, 6.92557, 46.17349, 6.95098', data:'Midi.glb', 
+    positionGDB: "-100 -900 -300", scaleSky: "6.5 6.5 6.5", nameSky:"sky2.jpg", positionPopup:"-2.5 -0.1 -1.2"},
 
-    { name: "Haute Cime (Massifs des Dents du Midi VS)", number: 3, position:'46.16267, 6.92557, 46.17349, 6.95098', data:'Midi_GLB.glb', 
-    positionGDB: "-100 -900 -300", scaleSky: "5.5 5.5 5.5", nameSky:"sky2.jpg", positionPopup:"0.2 0.5 4"   },
+    { name: "Pilatus (OW & NW)", number: 3, position:'46.98392, 8.24913, 46.97525, 8.25936', data:'Pilatus.glb', 
+        positionGDB: "200 -1000 0", scaleSky: "5.5 5.5 5.5", nameSky:"sky5.jpg", positionPopup:"0.2 0.5 4"},
     
+    { name: "Grand Combin de Grafeneire (VS)", number: 4, position:'46.0, 7.3, 45.9, 7.2', data:'Combin.glb', 
+        positionGDB: "200 -800 0", scaleSky: "5.5 5.5 5.5", nameSky:"sky6.jpg", positionPopup:"0.2 0.5 4"},
+
     // Ajoutez d'autres level au besoin
     ]
 
