@@ -3,10 +3,9 @@
 Ce projet de réalité virtuelle a été effectué dans le cours SIC1 du cursus de master MDT de la HES-SO. Il porte avant tout un but éducatif permettant l'utilisation des nouveaux outils tel que la technologie de la réalité virtuelle.
 
 Il a été développé par Mesdames Sarah Fournier et Noémie Görisch, étudiantes au MDT.
-
 Les Professeurs encadrants sont Mdamae Dubois, Messieurs Olivier Ertz et Bertrand Canelle. 
 
-Ce projet a été développé sur la base du template "boilerplate" fourni lors des cours par Mme Dubois, celui-ci peut être télcéagrgé [ici]([https://github.com/sarah0fournier/projet-gio1](https://github.com/Meryl-D/a-frame-vite-vue-boilerplate/tree/main))
+Ce projet a été développé sur la base du template "boilerplate" fourni lors des cours par Mme Dubois, celui-ci peut être télcéagrgé [ici]([https://github.com/Meryl-D/a-frame-vite-vue-boilerplate/tree/main])
 
 ## Problématique
 Créer un mini-jeu en réalité virtuelle qui permet de découvrir le patrimoine culturel bâti ou naturel de la Suisse. 
