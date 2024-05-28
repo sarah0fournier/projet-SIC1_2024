@@ -51,11 +51,22 @@ npm install
 ```
 npm run dev
 ```
-## Run VR
+## Notes for local dev on VR headset
+1. Check that your development device and your VR headset are connected on **the same network**.
+2. Expose you local development:
 ```
 npm run dev-expose
 ```
+3. In your VR headset, browse to the local development adress `[ip]:[port]`.
 
+> [!NOTE]
+> The certificate is self-signed, so you will probably have to confirm access to the resource in your browser.
+
+---
+
+## License
+
+![MIT License](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge&color=%23262626)
 
 
 
