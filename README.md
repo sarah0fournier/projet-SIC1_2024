@@ -12,9 +12,8 @@ Le but est de créer un mini-jeu en réalité virtuelle qui permet de découvrir
 Son but du jeu est de trouver le site dans le paysage et de le pointer pour passer au lieu suivant, tout en évitant de se faire attaquer par des ennemis qui s’approchent de l’utilisateur. 
 
 <p align="center">
-    <img src="./Naye.PNG" alt="Exemple Rocher Naye" align="center"/>
+    <img src="./Naye.PNG" alt="Exemple Rocher Naye" scale="0.5" align="center"/>
 </p>
-<h1 align="center">Vue + A-Frame + Vite boilerplate</h1>
 
 ## Technologie
 ### Framework / Package
