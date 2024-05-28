@@ -15,7 +15,6 @@
       enterScene() {
         showOnboarding.value = false;
 
-        // Qu'est-ce que l'on fait ici ?
         if (AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()) {
                 this.$router.push({ name: 'Home' }).then(() => {
                   // Entrer en VR une fois que la navigation est terminée

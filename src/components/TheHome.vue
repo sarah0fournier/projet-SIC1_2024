@@ -11,10 +11,6 @@
 </script>
 
 <script>
-    import TheCameraRig from './TheCameraRig.vue';
-    import '../aframe/clickable.js'; // QQQ : Son du clique gerer dans clickable.js ?
-    import '../aframe/ray_color.js';
-
     export default {
         data() {
             return {
@@ -40,8 +36,7 @@
         `"
         @nextPage = "nextPage"
         >
-        <!-- QQQ : Param requiredFeatures et referenceSpaceType ? -->
-        
+
         <TheCameraRig />
         
         <!-- Plan pour afficher les informations de bienvenue et le bouton de démarrage du jeu -->

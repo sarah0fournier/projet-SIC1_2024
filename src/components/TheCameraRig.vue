@@ -59,7 +59,6 @@
         hide-in-vr="hideInAR: false"
       ></a-entity>
 
-      <!-- QQQ : Sert a quoi ??  -->
       <a-entity
         id="dummy-hand-right"
         position="0.3 -0.4 -0.5"

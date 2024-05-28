@@ -96,7 +96,6 @@
       <a-text v-if="this.attractions[0]['name']" :value="this.attractions[0]['name']" color="black" align="center" position="0 0.25 0" scale="0.5 0.5 0.5"></a-text>
       <a-text v-if="this.attractions[0]['name']" :value="this.attractions[0]['abstract']" color="black" align="center" position="0 -0.25 0" scale="0.5 0.5 0.5"></a-text>
 
-
       <!-- Bouton  passage au prochaine level-->
       <a-plane clickable ray_color code="3" :paused="this.isPaused" color="grey" width="2" height="0.25" align="center" position="0 -1 0.1">
         <a-text :value="'Prochain level :' + this.levelNext" color="black" position="0 0 0"  align="center" scale="0.5 0.5 0.5"></a-text>
@@ -134,7 +133,7 @@
       // Gérer le démarrage du jeu
       goHome() {
         this.$router.push({ name: 'Home' });
-        this.isWin = true // Pas optimale de dire isWin = true mais sa permet de sortir de intervale d ajout de fantome
+        this.isWin = true // isWin = true mais sa permet de sortir de intervale d ajout de fantome
       },
 
       // Changer de scene (retour a TheInfoLevel.vue mais pour le niveau 2) 
