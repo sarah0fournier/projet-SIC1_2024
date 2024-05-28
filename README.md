@@ -11,7 +11,7 @@ Ce projet a été développé sur la base du template "boilerplate" fourni lors 
 Le but est de créer un mini-jeu en réalité virtuelle qui permet de découvrir le patrimoine culturel bâti ou naturel de la Suisse. 
 Son but du jeu est de trouver le site dans le paysage et de le pointer pour passer au lieu suivant, tout en évitant de se faire attaquer par des ennemis qui s’approchent de l’utilisateur. 
 
-## Technollogie
+## Technologie
 ### Framework / Package
 - Vue.js 3.4.5
 - A-frame 0.0.0
