@@ -12,9 +12,11 @@ Le but est de créer un mini-jeu en réalité virtuelle qui permet de découvrir
 Son but du jeu est de trouver le site dans le paysage et de le pointer pour passer au lieu suivant, tout en évitant de se faire attaquer par des ennemis qui s’approchent de l’utilisateur. 
 
 ## Technollogie
-### Framework
-- Vue.js
-- A-frame
+### Framework / Package
+- Vue.js 3.4.5
+- A-frame 0.0.0
+- Vue-router 4.3.2
+- Axios 1.6.8
 
 ### API utilité 
 - Switerland Tourisme
